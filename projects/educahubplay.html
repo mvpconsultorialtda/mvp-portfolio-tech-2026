@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EducaHubPlay — MVP Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<style>
+  :root {
+    --pink: #ff006e;
+    --yellow: #ffd60a;
+    --purple: #8338ec;
+    --cyan: #06b6d4;
+    --lime: #a3e635;
+    --ink: #0a0a0f;
+    --bg: #fff8f0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  .display { font-family: 'DM Serif Display', serif; }
+  /* Blobs animados */
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none; opacity: 0.6; }
+  @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-30px) scale(1.1)} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,40px) scale(0.9)} }
+  .blob-1 { background: var(--pink); animation: float1 8s ease-in-out infinite; }
+  .blob-2 { background: var(--yellow); animation: float2 10s ease-in-out infinite; }
+  .blob-3 { background: var(--purple); animation: float1 12s ease-in-out infinite reverse; }
+
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 9vw, 8rem); line-height: 0.95; letter-spacing: -0.02em; }
+
+  .btn-primary {
+    background: var(--ink); color: var(--bg);
+    padding: 1rem 2rem; border-radius: 999px;
+    font-weight: 700; font-size: 1.05rem;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    text-decoration: none;
+    border: 3px solid var(--ink);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .btn-primary:hover { background: var(--pink); border-color: var(--pink); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+    padding: 1rem 2rem; border-radius: 999px;
+    font-weight: 700; font-size: 1.05rem;
+    text-decoration: none;
+    border: 3px solid var(--ink);
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--bg); }
+
+  .label { display: inline-block; background: var(--ink); color: var(--bg); padding: 0.35rem 1rem; border-radius: 999px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  .label-pink { background: var(--pink); color: white; }
+  .label-yellow { background: var(--yellow); color: var(--ink); }
+
+  .quiz-card {
+    background: white; border-radius: 20px; padding: 1.5rem 2rem;
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .quiz-card:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--pink); }
+
+  .format-badge {
+    display: inline-block; padding: 0.3rem 0.9rem;
+    border-radius: 999px; border: 2px solid var(--ink);
+    font-weight: 700; font-size: 0.75rem;
+    background: white;
+  }
+  .badge-p { background: var(--pink); color: white; border-color: var(--pink); }
+  .badge-y { background: var(--yellow); }
+  .badge-c { background: var(--cyan); color: white; border-color: var(--cyan); }
+  .badge-l { background: var(--lime); }
+  .badge-pu { background: var(--purple); color: white; border-color: var(--purple); }
+
+  .device-frame {
+    border: 8px solid var(--ink);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 12px 12px 0 var(--purple);
+    background: white;
+  }
+  a { color: inherit; text-decoration: none; }
+  .reveal { opacity: 0; transform: translateY(30px); }
+</style>
+</head>
+<body>
+  <nav class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center relative z-10">
+    <a href="../index.html" class="font-bold flex items-center gap-2" style="font-size: 1rem;">← MVP · Portfolio</a>
+    <a href="https://educahubplay.vercel.app" target="_blank" class="format-badge badge-p">Ver ao vivo →</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="max-w-7xl mx-auto px-8 py-16 relative">
+    <div class="blob blob-1" style="width: 350px; height: 350px; top: 10%; right: -10%;"></div>
+    <div class="blob blob-2" style="width: 300px; height: 300px; bottom: 5%; left: -10%;"></div>
+    <div class="blob blob-3" style="width: 250px; height: 250px; top: 40%; right: 30%;"></div>
+
+    <div class="label mb-8 reveal">CAPES · InovaEDUCAÇÃO · UNEB</div>
+    <h1 class="hero-title reveal relative z-10">
+      <em>Aprender</em> jogando <br />
+      <span style="background: var(--yellow); padding: 0 0.15em; display: inline-block; transform: rotate(-2deg); border-radius: 12px;">quizzes.</span>
+    </h1>
+    <p class="mt-10 max-w-2xl text-xl reveal relative z-10" style="line-height: 1.5;">
+      Uma plataforma colaborativa onde professor cria seu próprio quiz em cinco minutos — e o aluno joga, evolui, coleciona.
+    </p>
+    <div class="mt-12 flex flex-wrap gap-4 reveal relative z-10">
+      <a href="https://educahubplay.vercel.app" target="_blank" class="btn-primary">Ver plataforma ao vivo →</a>
+      <a href="#stack" class="btn-outline">Stack técnica</a>
+    </div>
+  </section>
+
+  <!-- Screenshot -->
+  <section class="max-w-7xl mx-auto px-8 py-16">
+    <div class="device-frame reveal">
+      <img src="../assets/screenshots/educahubplay.png" alt="EducaHubPlay tela inicial" class="w-full block" onerror="this.style.height='500px'; this.style.background='linear-gradient(135deg, #ff006e 0%, #ffd60a 50%, #8338ec 100%)';" />
+    </div>
+  </section>
+
+  <!-- Números -->
+  <section class="max-w-7xl mx-auto px-8 py-24">
+    <div class="label label-pink mb-6 reveal">Escala</div>
+    <h2 class="display text-5xl md:text-6xl mb-16 reveal" style="line-height: 1.05; letter-spacing: -0.02em;">
+      22 quizzes ativos. <br />5 formatos de jogo. <br />10 disciplinas.
+    </h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-16 reveal">
+      <div class="format-badge badge-p text-center py-3">Clássico</div>
+      <div class="format-badge badge-y text-center py-3">Show do Milhão</div>
+      <div class="format-badge badge-c text-center py-3">Perfil</div>
+      <div class="format-badge badge-l text-center py-3">Adivinha</div>
+      <div class="format-badge badge-pu text-center py-3">Trilha</div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="quiz-card reveal">
+        <div class="display text-4xl mb-3" style="color: var(--pink);">Professor cria em 5min.</div>
+        <p class="text-lg leading-relaxed">Editor visual, arrastar-e-soltar. Sem código, sem curva de aprendizado. Do rascunho ao publicado em cinco minutos.</p>
+      </div>
+      <div class="quiz-card reveal">
+        <div class="display text-4xl mb-3" style="color: var(--purple);">IA sugere pela BNCC.</div>
+        <p class="text-lg leading-relaxed">Assistente pedagógico alinha o quiz às habilidades da Base Nacional Comum Curricular. Sugere dificuldade por turma.</p>
+      </div>
+      <div class="quiz-card reveal">
+        <div class="display text-4xl mb-3" style="color: var(--cyan);">Modo offline nativo.</div>
+        <p class="text-lg leading-relaxed">Roda sem internet. Compatível com a realidade de conectividade das escolas públicas municipais.</p>
+      </div>
+      <div class="quiz-card reveal">
+        <div class="display text-4xl mb-3" style="color: #059669;">Painel analítico.</div>
+        <p class="text-lg leading-relaxed">Métricas em tempo real por turma, por aluno, por questão. O professor vê onde precisa reforçar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section id="stack" class="max-w-7xl mx-auto px-8 py-24">
+    <div class="label mb-6 reveal">Stack</div>
+    <h2 class="display text-5xl md:text-6xl mb-12 reveal" style="line-height: 1;">Debaixo do capô.</h2>
+    <div class="flex flex-wrap gap-3 reveal">
+      <span class="format-badge badge-p">Next.js 15</span>
+      <span class="format-badge">React 19</span>
+      <span class="format-badge">TypeScript</span>
+      <span class="format-badge">Tailwind CSS 4</span>
+      <span class="format-badge badge-y">Firebase Auth</span>
+      <span class="format-badge">Cloud Firestore</span>
+      <span class="format-badge badge-c">OpenAI GPT-4o</span>
+      <span class="format-badge">Vercel</span>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-7xl mx-auto px-8 py-24">
+    <div class="rounded-3xl p-12 md:p-20 relative overflow-hidden" style="background: var(--ink); color: var(--bg);">
+      <div class="blob blob-1" style="width: 300px; height: 300px; top: -10%; right: -5%; opacity: 0.4;"></div>
+      <div class="display text-5xl md:text-6xl mb-6 relative z-10" style="line-height: 1.05;">
+        Precisa de plataforma <br />
+        <em style="color: var(--yellow); font-style: italic;">assim de flexível?</em>
+      </div>
+      <p class="text-lg max-w-xl mb-10 relative z-10" style="color: #d4d4d8;">
+        A MVP entrega produto pronto — do wireframe ao dashboard do professor, do quiz ao offline mode.
+      </p>
+      <div class="flex flex-wrap gap-4 relative z-10">
+        <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--yellow); color: var(--ink); border-color: var(--yellow);">Escreva pra gente →</a>
+        <a href="../index.html" class="btn-outline" style="color: var(--bg); border-color: var(--bg);">Ver outros projetos</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="max-w-7xl mx-auto px-8 py-12 text-xs uppercase tracking-widest opacity-60 font-bold">
+    MVP Consultoria em Tecnologia — Salvador · Bahia
+  </footer>
+
+  <script>
+    window.addEventListener('load', () => {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.utils.toArray('.reveal').forEach(el => {
+        gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 88%" } });
+      });
+    });
+  </script>
+</body>
+</html>

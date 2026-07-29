@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HQ-Lab — MVP Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bricolage+Grotesque:wght@400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<style>
+  :root {
+    --red: #ef4444;
+    --yellow: #fde047;
+    --blue: #2563eb;
+    --ink: #0a0a0f;
+    --cream: #fef7cd;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  .action { font-family: 'Bangers', 'Impact', sans-serif; letter-spacing: 0.03em; }
+  .display { font-family: 'Bricolage Grotesque', serif; }
+
+  /* Halftone dots pattern */
+  .halftone {
+    background-image: radial-gradient(circle, var(--ink) 1.5px, transparent 1.5px);
+    background-size: 12px 12px;
+  }
+
+  /* Comic burst */
+  .burst {
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    background: var(--yellow);
+    border: 4px solid var(--ink);
+    clip-path: polygon(5% 0%, 15% 15%, 25% 0%, 45% 15%, 65% 0%, 85% 15%, 100% 5%, 95% 25%, 100% 50%, 95% 75%, 100% 95%, 85% 85%, 65% 100%, 45% 85%, 25% 100%, 15% 85%, 5% 100%, 0% 80%, 5% 50%, 0% 20%);
+  }
+
+  .speech {
+    background: white;
+    border: 4px solid var(--ink);
+    border-radius: 30px;
+    padding: 1.5rem 2rem;
+    position: relative;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .speech::before {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 40px;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-right: 4px solid var(--ink);
+    border-bottom: 4px solid var(--ink);
+    transform: rotate(45deg);
+  }
+
+  .panel {
+    background: white;
+    border: 4px solid var(--ink);
+    box-shadow: 10px 10px 0 var(--ink);
+    padding: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .panel:hover {
+    transform: translate(-5px,-5px);
+    box-shadow: 15px 15px 0 var(--red);
+  }
+
+  .btn-primary {
+    background: var(--red); color: white;
+    padding: 1rem 2rem;
+    font-family: 'Bangers', sans-serif;
+    letter-spacing: 0.05em;
+    font-size: 1.4rem;
+    display: inline-block;
+    text-decoration: none;
+    border: 4px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: transform 0.15s;
+  }
+  .btn-primary:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--ink); }
+
+  .btn-outline {
+    background: white; color: var(--ink);
+    padding: 1rem 2rem;
+    font-family: 'Bangers', sans-serif;
+    letter-spacing: 0.05em;
+    font-size: 1.4rem;
+    display: inline-block;
+    text-decoration: none;
+    border: 4px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--yellow);
+    transition: transform 0.15s;
+  }
+  .btn-outline:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--yellow); }
+
+  .hero-title {
+    font-family: 'Bangers', sans-serif;
+    font-size: clamp(4rem, 12vw, 12rem);
+    line-height: 0.85;
+    letter-spacing: 0.02em;
+    text-shadow: 6px 6px 0 var(--ink);
+  }
+
+  .tag {
+    display: inline-block;
+    background: white;
+    border: 3px solid var(--ink);
+    padding: 0.4rem 1rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .tag-red { background: var(--red); color: white; }
+  .tag-yellow { background: var(--yellow); }
+  .tag-blue { background: var(--blue); color: white; }
+
+  .device-frame {
+    border: 6px solid var(--ink);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 14px 14px 0 var(--red);
+    background: white;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  .reveal { opacity: 0; transform: translateY(30px); }
+</style>
+</head>
+<body>
+  <nav class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+    <a href="../index.html" class="font-bold flex items-center gap-2 action" style="font-size: 1.4rem;">← MVP · PORTFOLIO</a>
+    <a href="https://hq-lab.vercel.app" target="_blank" class="tag tag-red">VER AO VIVO →</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="max-w-7xl mx-auto px-8 py-16 relative">
+    <div class="tag tag-blue mb-8 reveal">CAPES + FAPESB + UNEB</div>
+    <h1 class="hero-title reveal" style="color: var(--red);">
+      QUADRINHOS<br />
+      <span style="color: var(--ink);">NA SALA</span><br />
+      <span class="burst action" style="color: var(--ink); font-size: 0.85em;">DE AULA!</span>
+    </h1>
+    <div class="mt-12 max-w-2xl reveal">
+      <div class="speech">
+        <p class="text-xl leading-relaxed">
+          Uma plataforma para criar, publicar e ler HQs educacionais. Único projeto MVP com <strong>tripé de financiamento</strong> — CAPES, FAPESB e UNEB. Coordenação: Profa. Dra. Gerusa Soares Pinheiro.
+        </p>
+      </div>
+    </div>
+    <div class="mt-16 flex flex-wrap gap-4 reveal">
+      <a href="https://hq-lab.vercel.app" target="_blank" class="btn-primary">VER PLATAFORMA →</a>
+      <a href="#stack" class="btn-outline">STACK TÉCNICA</a>
+    </div>
+  </section>
+
+  <!-- Screenshot -->
+  <section class="max-w-7xl mx-auto px-8 py-16">
+    <div class="device-frame reveal">
+      <img src="../assets/screenshots/hq-lab.png" alt="HQ-Lab" class="w-full block" onerror="this.style.height='500px'; this.style.background='linear-gradient(135deg, #ef4444, #fde047, #2563eb);'" />
+    </div>
+  </section>
+
+  <!-- Panels -->
+  <section class="max-w-7xl mx-auto px-8 py-24">
+    <div class="tag tag-yellow mb-6 reveal">PAINÉIS</div>
+    <h2 class="display text-5xl md:text-7xl mb-16 reveal" style="font-weight: 800; line-height: 0.95; letter-spacing: -0.03em;">
+      O que entregamos —<br />painel a painel.
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="panel reveal">
+        <div class="action mb-3" style="color: var(--red); font-size: 2.5rem;">PAINEL 01</div>
+        <div class="display font-bold text-3xl mb-3">Editor de HQ visual.</div>
+        <p class="text-lg leading-relaxed">Sistema de criação com painéis arrastar-e-soltar, balões de fala editáveis, biblioteca de personagens. Professor + aluno criam juntos.</p>
+      </div>
+      <div class="panel reveal">
+        <div class="action mb-3" style="color: var(--blue); font-size: 2.5rem;">PAINEL 02</div>
+        <div class="display font-bold text-3xl mb-3">Biblioteca pública.</div>
+        <p class="text-lg leading-relaxed">HQs publicadas em catálogo aberto. Busca por tema, série, autor. Curadoria por coordenação pedagógica.</p>
+      </div>
+      <div class="panel reveal">
+        <div class="action mb-3" style="color: var(--red); font-size: 2.5rem;">PAINEL 03</div>
+        <div class="display font-bold text-3xl mb-3">Modo leitor imersivo.</div>
+        <p class="text-lg leading-relaxed">Leitura em swipe/tap para desktop e mobile. Full-screen, sem distrações. Compatível com projetor de sala.</p>
+      </div>
+      <div class="panel reveal">
+        <div class="action mb-3" style="color: var(--blue); font-size: 2.5rem;">PAINEL 04</div>
+        <div class="display font-bold text-3xl mb-3">Backend robusto.</div>
+        <p class="text-lg leading-relaxed">API Node dedicada (repositório backend-hq-lab). Escalável, com armazenamento de imagens e versionamento de rascunhos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section id="stack" class="max-w-7xl mx-auto px-8 py-24">
+    <div class="tag mb-6 reveal">STACK</div>
+    <h2 class="display text-5xl md:text-6xl mb-12 reveal" style="font-weight: 800; line-height: 1;">Debaixo do capô.</h2>
+    <div class="flex flex-wrap gap-3 reveal">
+      <span class="tag tag-red">Next.js 15</span>
+      <span class="tag">React 19</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">Tailwind CSS 4</span>
+      <span class="tag tag-yellow">Node.js API</span>
+      <span class="tag tag-blue">Firebase</span>
+      <span class="tag">Vercel</span>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-7xl mx-auto px-8 py-24">
+    <div class="relative p-12 md:p-20 halftone" style="background: var(--ink); color: var(--cream); border: 6px solid var(--red); box-shadow: 16px 16px 0 var(--red);">
+      <div class="action text-6xl md:text-8xl mb-6 relative z-10" style="color: var(--yellow); line-height: 0.9;">
+        POW!
+      </div>
+      <div class="display text-4xl md:text-5xl mb-6 relative z-10" style="font-weight: 800; line-height: 1.05;">
+        Precisa de plataforma com editor visual?
+      </div>
+      <p class="text-lg max-w-xl mb-10 relative z-10" style="color: #fef3c7;">
+        A MVP entrega editor, biblioteca, leitor, backend, deploy — tudo integrado. Escrita técnica e pedagógica pareadas.
+      </p>
+      <div class="flex flex-wrap gap-4 relative z-10">
+        <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary">FALA COM A GENTE →</a>
+        <a href="../index.html" class="btn-outline">VER OUTROS PROJETOS</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="max-w-7xl mx-auto px-8 py-12 action text-sm">
+    MVP CONSULTORIA EM TECNOLOGIA — SALVADOR · BAHIA
+  </footer>
+
+  <script>
+    window.addEventListener('load', () => {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.utils.toArray('.reveal').forEach(el => {
+        gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 88%" } });
+      });
+    });
+  </script>
+</body>
+</html>
