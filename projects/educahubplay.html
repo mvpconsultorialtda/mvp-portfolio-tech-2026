@@ -374,11 +374,10 @@
       <div class="pino-peao" style="top: 343px; left: 287px;"></div>
     </div>
 
-    <!-- Dados coloridos como acentos -->
-    <img src="../assets/brand-refs/educahubplay/dado-verde-14.png" alt="" class="element-decor" style="top: 4%; right: 32%; width: 90px; transform: rotate(15deg);" />
-    <img src="../assets/brand-refs/educahubplay/dado-rosa-09.png" alt="" class="element-decor" style="top: 60%; right: 40%; width: 80px; transform: rotate(-25deg);" />
-    <img src="../assets/brand-refs/educahubplay/livros-08.png" alt="" class="element-decor" style="bottom: 5%; left: 4%; width: 160px; transform: rotate(-5deg);" />
-    <img src="../assets/brand-refs/educahubplay/livros-05.png" alt="" class="element-decor" style="top: 3%; left: 32%; width: 130px; transform: rotate(8deg); opacity: 0.85;" />
+    <!-- Dados coloridos como acentos — reposicionados FORA do texto (top e side, nao no meio) -->
+    <img src="../assets/brand-refs/educahubplay/dado-verde-14.png" alt="" class="element-decor" style="top: 2%; left: 45%; width: 85px; transform: rotate(15deg);" />
+    <img src="../assets/brand-refs/educahubplay/dado-rosa-09.png" alt="" class="element-decor" style="top: 8%; left: 3%; width: 75px; transform: rotate(-25deg);" />
+    <img src="../assets/brand-refs/educahubplay/livros-08.png" alt="" class="element-decor" style="bottom: -2%; left: 2%; width: 150px; transform: rotate(-5deg);" />
 
     <div class="max-w-4xl relative z-10">
       <div class="badge-header mb-6 reveal">
@@ -397,7 +396,9 @@
         Desenvolvida em parceria com a Universidade do Estado da Bahia (UNEB) e financiada pelo Programa InovaEDUCAÇÃO da CAPES. Coordenação: Profa. Dra. Vânia Gonçalves de Brito dos Santos.
       </p>
       <div class="mt-10 flex flex-wrap gap-4 reveal">
-        <a href="https://educahubplay.vercel.app" target="_blank" class="btn-primary">Ver plataforma ao vivo →</a>
+        <div class="btn-primary" style="background: rgba(255, 200, 100, 0.15); border-color: #C08419; color: #825200; cursor: default;">
+          <span>⚠️</span> Plataforma em construção — aguardando lançamento pela UNEB
+        </div>
         <a href="#stack" class="btn-outline">Stack técnica</a>
       </div>
     </div>
@@ -434,8 +435,10 @@
       <div class="casa-tabuleiro casa-lima" style="top: 168px; left: 168px;"></div>
     </div>
 
-    <img src="../assets/brand-refs/educahubplay/dado-branco-06.png" alt="" class="element-decor" style="top: 5%; right: 8%; width: 80px; transform: rotate(20deg);" />
-    <img src="../assets/brand-refs/educahubplay/dado-rosa-08.png" alt="" class="element-decor" style="bottom: 15%; right: 12%; width: 100px; transform: rotate(-10deg);" />
+    <!-- Dados verdes/rosas coloridos (troquei brancos que sumiam no fundo creme) -->
+    <img src="../assets/brand-refs/educahubplay/dado-verde-15.png" alt="" class="element-decor" style="top: 5%; right: 8%; width: 90px; transform: rotate(20deg);" />
+    <img src="../assets/brand-refs/educahubplay/dado-rosa-08.png" alt="" class="element-decor" style="bottom: 8%; right: 4%; width: 95px; transform: rotate(-10deg);" />
+    <img src="../assets/brand-refs/educahubplay/dado-verde-17.png" alt="" class="element-decor" style="bottom: 20%; right: 45%; width: 70px; transform: rotate(35deg);" />
 
     <div class="max-w-4xl relative z-10">
       <div class="eyebrow mb-4 reveal">Nossa filosofia</div>
@@ -568,39 +571,104 @@
 
   <!-- Formatos de jogo -->
   <section class="max-w-7xl mx-auto py-14 md:py-24">
-    <div class="mb-10 reveal">
+    <div class="mb-14 reveal">
       <div class="eyebrow mb-3">Cinco formatos</div>
-      <h2 class="display-subtitle">Um sistema —<br /><span class="highlight-underline">múltiplas mecânicas</span>.</h2>
+      <h2 class="display-subtitle" style="line-height: 1.15;">
+        Um sistema —<br /><span class="highlight-underline">múltiplas mecânicas</span>.
+      </h2>
+      <p class="mt-6 max-w-2xl satoshi" style="color: rgba(35, 35, 35, 0.75); line-height: 1.6;">
+        22 quizzes ativos em 10 disciplinas. Cada formato responde a uma intenção pedagógica diferente — do reforço de conteúdo à construção de percurso.
+      </p>
     </div>
-    <div class="flex flex-wrap gap-3 reveal">
-      <span class="tag tag-azul">Clássico</span>
-      <span class="tag tag-lima">Show do Milhão</span>
-      <span class="tag">Perfil</span>
-      <span class="tag tag-rosa">Adivinha</span>
-      <span class="tag">Trilha</span>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+      <div class="editorial-card reveal">
+        <div class="tag tag-azul mb-4">Clássico</div>
+        <div class="anton mb-3" style="font-size: 1.5rem; color: var(--chumbo-dark); line-height: 1.1;">Pergunta e resposta.</div>
+        <p class="satoshi" style="color: rgba(35, 35, 35, 0.75); font-size: 0.98rem; line-height: 1.55;">
+          Formato quiz tradicional — o professor cria o banco, o aluno responde uma questão por vez. Ideal para revisão de conteúdo antes de prova.
+        </p>
+      </div>
+
+      <div class="editorial-card lima reveal">
+        <div class="tag tag-lima mb-4">Show do Milhão</div>
+        <div class="anton mb-3" style="font-size: 1.5rem; color: var(--chumbo-dark); line-height: 1.1;">Dificuldade progressiva.</div>
+        <p class="satoshi" style="color: rgba(35, 35, 35, 0.75); font-size: 0.98rem; line-height: 1.55;">
+          Perguntas ficam mais difíceis a cada acerto. Cria tensão saudável de "acertar mais uma", com pontuação escalonada e ajudas limitadas.
+        </p>
+      </div>
+
+      <div class="editorial-card reveal">
+        <div class="tag mb-4">Perfil</div>
+        <div class="anton mb-3" style="font-size: 1.5rem; color: var(--chumbo-dark); line-height: 1.1;">Adivinhe pelo dossiê.</div>
+        <p class="satoshi" style="color: rgba(35, 35, 35, 0.75); font-size: 0.98rem; line-height: 1.55;">
+          Dicas são reveladas uma a uma sobre pessoa, evento ou conceito. Quanto antes o aluno adivinhar, mais ponto — trabalha inferência e conexão.
+        </p>
+      </div>
+
+      <div class="editorial-card rosa reveal">
+        <div class="tag tag-rosa mb-4">Adivinha</div>
+        <div class="anton mb-3" style="font-size: 1.5rem; color: var(--chumbo-dark); line-height: 1.1;">Descrever sem dizer.</div>
+        <p class="satoshi" style="color: rgba(35, 35, 35, 0.75); font-size: 0.98rem; line-height: 1.55;">
+          Um aluno vê a palavra-chave e descreve para os colegas sem usar termos-tabu. Vocabulário, síntese e trabalho em grupo em uma só mecânica.
+        </p>
+      </div>
+
+      <div class="editorial-card reveal">
+        <div class="tag mb-4" style="background: #F27F32; color: white; border-color: #F27F32;">Trilha</div>
+        <div class="anton mb-3" style="font-size: 1.5rem; color: var(--chumbo-dark); line-height: 1.1;">Percurso com desafios.</div>
+        <p class="satoshi" style="color: rgba(35, 35, 35, 0.75); font-size: 0.98rem; line-height: 1.55;">
+          Tabuleiro digital com casas de pergunta, desafio e recompensa. Turmas competem em pares ou grupos — o formato mais próximo do jogo de tabuleiro físico.
+        </p>
+      </div>
     </div>
-    <p class="mt-8 max-w-2xl reveal satoshi" style="color: rgba(35, 35, 35, 0.75);">
-      22 quizzes ativos em 10 disciplinas. Cada formato responde a uma intenção pedagógica.
-    </p>
   </section>
 
   <div class="max-w-7xl mx-auto"><div class="divider-line"></div></div>
 
-  <!-- Stack -->
+  <!-- Stack — reformulada em grupos com cabecalho -->
   <section id="stack" class="max-w-7xl mx-auto py-14 md:py-24">
-    <div class="mb-10 reveal">
+    <div class="mb-14 reveal">
       <div class="eyebrow mb-3">Stack técnica</div>
       <h2 class="display-subtitle">Debaixo do capô.</h2>
     </div>
-    <div class="flex flex-wrap gap-3 reveal">
-      <span class="tag tag-azul">Next.js 15</span>
-      <span class="tag">React 19</span>
-      <span class="tag">TypeScript</span>
-      <span class="tag tag-lima">Tailwind CSS 4</span>
-      <span class="tag">Firebase Auth</span>
-      <span class="tag">Cloud Firestore</span>
-      <span class="tag tag-rosa">OpenAI GPT-4o</span>
-      <span class="tag">Vercel</span>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="editorial-card reveal">
+        <div class="eyebrow mb-4" style="color: var(--azul);">Frontend</div>
+        <ul class="satoshi space-y-3" style="color: var(--chumbo);">
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: var(--rosa); font-size: 1.3rem;">◆</span><span><strong>Next.js 15</strong> — framework React com SSR</span></li>
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: var(--rosa); font-size: 1.3rem;">◆</span><span><strong>React 19</strong> + <strong>TypeScript</strong></span></li>
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: var(--rosa); font-size: 1.3rem;">◆</span><span><strong>Tailwind CSS 4</strong> — sistema de design</span></li>
+        </ul>
+      </div>
+
+      <div class="editorial-card lima reveal">
+        <div class="eyebrow mb-4" style="color: var(--azul);">Backend & Dados</div>
+        <ul class="satoshi space-y-3" style="color: var(--chumbo);">
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: var(--azul); font-size: 1.3rem;">■</span><span><strong>Firebase Auth</strong> — login professor/aluno</span></li>
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: var(--azul); font-size: 1.3rem;">■</span><span><strong>Cloud Firestore</strong> — banco em tempo real</span></li>
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: var(--azul); font-size: 1.3rem;">■</span><span><strong>Modo offline</strong> nativo por PWA</span></li>
+        </ul>
+      </div>
+
+      <div class="editorial-card rosa reveal">
+        <div class="eyebrow mb-4" style="color: var(--azul);">Inteligência Artificial</div>
+        <ul class="satoshi space-y-3" style="color: var(--chumbo);">
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: var(--lima); font-size: 1.3rem;">▲</span><span><strong>OpenAI GPT-4o</strong> — assistente pedagógico</span></li>
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: var(--lima); font-size: 1.3rem;">▲</span><span>Alinhamento automático com <strong>BNCC</strong></span></li>
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: var(--lima); font-size: 1.3rem;">▲</span><span>Ajuste de dificuldade por turma</span></li>
+        </ul>
+      </div>
+
+      <div class="editorial-card reveal">
+        <div class="eyebrow mb-4" style="color: var(--azul);">Infra & Deploy</div>
+        <ul class="satoshi space-y-3" style="color: var(--chumbo);">
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: #F27F32; font-size: 1.3rem;">●</span><span><strong>Vercel</strong> — CI/CD automático</span></li>
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: #F27F32; font-size: 1.3rem;">●</span><span><strong>GitHub Actions</strong> — testes + build</span></li>
+          <li class="flex items-baseline gap-3"><span style="font-family: 'Anton', sans-serif; color: #F27F32; font-size: 1.3rem;">●</span><span><strong>Cloudflare</strong> — CDN de assets</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
