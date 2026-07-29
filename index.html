@@ -126,11 +126,18 @@
   }
   .hero-title em {
     font-style: italic;
-    background: linear-gradient(135deg, var(--accent-a) 0%, var(--accent-b) 60%, var(--accent-c) 100%);
+    background: linear-gradient(135deg, #7cf5c5 0%, #b3a1ff 50%, #ff9068 100%);
     -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
+    display: inline-block;
+    padding-right: 0.1em;
+    filter: drop-shadow(0 0 24px rgba(179, 161, 255, 0.35));
   }
+  /* Fallback: se reveal JS falhar, tudo visível */
+  .reveal { opacity: 1; transform: none; }
+  .js-loaded .reveal { opacity: 0; transform: translateY(40px); }
 
   /* Project card glass */
   .glass {
@@ -156,8 +163,7 @@
     to { transform: translateX(-50%); }
   }
 
-  /* Reveal on scroll */
-  .reveal { opacity: 0; transform: translateY(40px); }
+  /* Reveal on scroll (state gerido via .js-loaded — ver acima) */
 
   /* Scroll indicator */
   .scroll-hint {
@@ -467,6 +473,7 @@
 
     // Kinetic type reveal + GSAP timeline
     window.addEventListener('load', () => {
+      document.documentElement.classList.add('js-loaded');
       Splitting();
       gsap.registerPlugin(ScrollTrigger);
       const chars = document.querySelectorAll('.hero-title .char');
@@ -484,10 +491,22 @@
           ease: "expo.out",
           scrollTrigger: {
             trigger: el,
-            start: "top 85%",
+            start: "top 92%",
+            toggleActions: "play none none none"
           }
         });
       });
+      // Após 300ms, se algum reveal continuar em opacity 0 (fora do viewport),
+      // força ele visível — evita elementos invisíveis fora da rota de scroll
+      setTimeout(() => {
+        document.querySelectorAll('.reveal').forEach(el => {
+          const rect = el.getBoundingClientRect();
+          const cs = getComputedStyle(el);
+          if (parseFloat(cs.opacity) === 0 && rect.top > window.innerHeight * 1.5) {
+            gsap.set(el, { opacity: 1, y: 0 });
+          }
+        });
+      }, 400);
     });
   </script>
 </body>
