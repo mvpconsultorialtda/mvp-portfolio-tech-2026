@@ -101,48 +101,21 @@
     color: var(--azul);
   }
 
-  /* Caminho de tabuleiro serpenteante — casinhas coloridas sem numeros */
-  .trilha-container {
+  /* Trilha fluida — SVG paths com blocos grandes conectados por semicirculos (referencia Julia) */
+  .trilha-fluida {
     position: absolute;
     pointer-events: none;
     z-index: 0;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08));
   }
-  .casa-tabuleiro {
-    position: absolute;
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    box-shadow:
-      inset 0 -3px 0 rgba(0,0,0,0.15),
-      0 2px 4px rgba(0,0,0,0.08);
-    /* Textura papel sutil */
-    background-image:
-      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18) 1px, transparent 2px),
-      radial-gradient(circle at 70% 70%, rgba(0,0,0,0.06) 1px, transparent 2px);
-    background-size: 6px 6px, 8px 8px;
-    background-blend-mode: overlay;
-  }
-  .casa-rosa   { background-color: var(--rosa); }
-  .casa-lima   { background-color: var(--lima); }
-  .casa-azul   { background-color: var(--azul); }
-  .casa-laranja { background-color: #F27F32; }
-  .casa-roxo   { background-color: #7C3AED; }
-  .casa-amarelo { background-color: #FFC93C; }
-  .casa-verde  { background-color: #4CAF50; }
-  .casa-creme  { background-color: #E8D9BE; box-shadow: inset 0 -3px 0 rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.08); }
-
-  /* Pino peao no fim da trilha */
-  .pino-peao {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #ffffff 0%, var(--azul) 30%, #052a44 100%);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  .trilha-fluida svg { display: block; }
+  /* Textura papel aplicada via mask svg */
+  .trilha-block {
+    filter: url(#paperTexture);
   }
   /* Fallback antigo (mantido por compat) */
-  .shape-blob { display: none; }
-  .shape-rosa, .shape-lima, .shape-azul { display: none; }
+  .shape-blob, .shape-rosa, .shape-lima, .shape-azul { display: none; }
+  .trilha-container, .casa-tabuleiro, .pino-peao { display: none; }
 
   /* Buttons */
   .btn-primary {
@@ -342,36 +315,40 @@
 
   <!-- Hero editorial -->
   <section class="max-w-7xl mx-auto pt-12 md:pt-20 pb-8 md:pb-16 relative" style="min-height: 600px;">
-    <!-- Caminho de tabuleiro SERPENTEANTE — hero (zig-zag horizontal partindo direita) -->
-    <div class="trilha-container hidden md:block" style="top: 3%; right: 0; width: 340px; height: 500px;">
-      <!-- linha 1: direita→esquerda (top 0) -->
-      <div class="casa-tabuleiro casa-rosa" style="top: 0px; left: 280px;"></div>
-      <div class="casa-tabuleiro casa-lima" style="top: 0px; left: 224px;"></div>
-      <div class="casa-tabuleiro casa-azul" style="top: 0px; left: 168px;"></div>
-      <div class="casa-tabuleiro casa-laranja" style="top: 0px; left: 112px;"></div>
-      <!-- curva descendo -->
-      <div class="casa-tabuleiro casa-amarelo" style="top: 56px; left: 112px;"></div>
-      <!-- linha 2: esquerda→direita (top 112) -->
-      <div class="casa-tabuleiro casa-roxo" style="top: 112px; left: 112px;"></div>
-      <div class="casa-tabuleiro casa-verde" style="top: 112px; left: 168px;"></div>
-      <div class="casa-tabuleiro casa-rosa" style="top: 112px; left: 224px;"></div>
-      <div class="casa-tabuleiro casa-lima" style="top: 112px; left: 280px;"></div>
-      <!-- curva descendo -->
-      <div class="casa-tabuleiro casa-azul" style="top: 168px; left: 280px;"></div>
-      <!-- linha 3: direita→esquerda (top 224) -->
-      <div class="casa-tabuleiro casa-laranja" style="top: 224px; left: 280px;"></div>
-      <div class="casa-tabuleiro casa-amarelo" style="top: 224px; left: 224px;"></div>
-      <div class="casa-tabuleiro casa-roxo" style="top: 224px; left: 168px;"></div>
-      <div class="casa-tabuleiro casa-verde" style="top: 224px; left: 112px;"></div>
-      <!-- curva descendo -->
-      <div class="casa-tabuleiro casa-rosa" style="top: 280px; left: 112px;"></div>
-      <!-- linha 4: esquerda→direita (top 336) -->
-      <div class="casa-tabuleiro casa-lima" style="top: 336px; left: 112px;"></div>
-      <div class="casa-tabuleiro casa-azul" style="top: 336px; left: 168px;"></div>
-      <div class="casa-tabuleiro casa-laranja" style="top: 336px; left: 224px;"></div>
-      <div class="casa-tabuleiro casa-amarelo" style="top: 336px; left: 280px;"></div>
-      <!-- Peao fim -->
-      <div class="pino-peao" style="top: 343px; left: 287px;"></div>
+    <!-- Trilha fluida GRANDE — hero direita, blocos coloridos conectados em curva fluida -->
+    <div class="trilha-fluida hidden md:block" style="top: 2%; right: -30px; width: 480px; height: 480px;">
+      <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" width="480" height="480">
+        <defs>
+          <filter id="paperTexture" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/>
+            <feColorMatrix values="0 0 0 0 0.05
+                                   0 0 0 0 0.05
+                                   0 0 0 0 0.05
+                                   0 0 0 0.08 0"/>
+            <feComposite in2="SourceGraphic" operator="in"/>
+            <feBlend in="SourceGraphic" mode="multiply"/>
+          </filter>
+        </defs>
+        <!-- Segmento 1: rosa arredondada esquerda (bloco entrada bottom-left) -->
+        <rect x="20" y="360" width="140" height="90" rx="45" fill="#F4428B" filter="url(#paperTexture)"/>
+        <!-- Segmento 2: lima grande horizontal (embaixo) -->
+        <rect x="120" y="360" width="200" height="90" fill="#CAD644" filter="url(#paperTexture)"/>
+        <!-- Segmento 3: azul curvando pra cima (canto direito bottom) -->
+        <path d="M 280 360 Q 400 360 400 270 L 400 300 L 280 300 Z" fill="#0B4E77" filter="url(#paperTexture)"/>
+        <rect x="280" y="270" width="130" height="90" rx="45" fill="#0B4E77" filter="url(#paperTexture)"/>
+        <!-- Segmento 4: rosa horizontal (meio) -->
+        <rect x="180" y="205" width="180" height="90" fill="#F4428B" filter="url(#paperTexture)"/>
+        <!-- Segmento 5: lima curvando pra cima esquerda -->
+        <rect x="60" y="205" width="180" height="90" fill="#CAD644" filter="url(#paperTexture)"/>
+        <!-- Segmento 6: rosa arredondada esquerda topo -->
+        <rect x="20" y="115" width="140" height="90" rx="45" fill="#F4428B" filter="url(#paperTexture)"/>
+        <rect x="40" y="115" width="120" height="90" fill="#F4428B" filter="url(#paperTexture)"/>
+        <!-- Segmento 7: azul horizontal topo -->
+        <rect x="130" y="115" width="180" height="90" fill="#0B4E77" filter="url(#paperTexture)"/>
+        <!-- Segmento 8: rosa arredondada direita topo (fim) -->
+        <rect x="280" y="30" width="150" height="90" rx="45" fill="#F4428B" filter="url(#paperTexture)"/>
+        <path d="M 280 115 Q 280 30 370 30 L 370 120 L 280 120 Z" fill="#F4428B" filter="url(#paperTexture)"/>
+      </svg>
     </div>
 
     <!-- Dados coloridos como acentos — reposicionados FORA do texto (top e side, nao no meio) -->
@@ -413,26 +390,16 @@
 
   <!-- Jogar também é aprender -->
   <section class="max-w-7xl mx-auto py-14 md:py-24 relative">
-    <!-- Trilha meio: serpente HORIZONTAL saindo da esquerda -->
-    <div class="trilha-container hidden md:block" style="top: 10%; left: -30px; width: 340px; height: 240px;">
-      <!-- linha 1: esquerda→direita (top 0) -->
-      <div class="casa-tabuleiro casa-lima" style="top: 0; left: 0;"></div>
-      <div class="casa-tabuleiro casa-azul" style="top: 0; left: 56px;"></div>
-      <div class="casa-tabuleiro casa-laranja" style="top: 0; left: 112px;"></div>
-      <div class="casa-tabuleiro casa-rosa" style="top: 0; left: 168px;"></div>
-      <!-- curva desce -->
-      <div class="casa-tabuleiro casa-amarelo" style="top: 56px; left: 168px;"></div>
-      <!-- linha 2: direita→esquerda (top 112) -->
-      <div class="casa-tabuleiro casa-roxo" style="top: 112px; left: 168px;"></div>
-      <div class="casa-tabuleiro casa-verde" style="top: 112px; left: 112px;"></div>
-      <div class="casa-tabuleiro casa-creme" style="top: 112px; left: 56px;"></div>
-      <div class="casa-tabuleiro casa-rosa" style="top: 112px; left: 0;"></div>
-      <!-- curva desce -->
-      <div class="casa-tabuleiro casa-azul" style="top: 168px; left: 0;"></div>
-      <!-- linha 3: esquerda→direita -->
-      <div class="casa-tabuleiro casa-laranja" style="top: 168px; left: 56px;"></div>
-      <div class="casa-tabuleiro casa-amarelo" style="top: 168px; left: 112px;"></div>
-      <div class="casa-tabuleiro casa-lima" style="top: 168px; left: 168px;"></div>
+    <!-- Trilha meio: fluida saindo da esquerda -->
+    <div class="trilha-fluida hidden md:block" style="top: 8%; left: -40px; width: 400px; height: 260px;">
+      <svg viewBox="0 0 400 260" width="400" height="260">
+        <rect x="0" y="30" width="140" height="90" rx="45" fill="#CAD644" filter="url(#paperTexture)"/>
+        <rect x="80" y="30" width="180" height="90" fill="#0B4E77" filter="url(#paperTexture)"/>
+        <rect x="220" y="30" width="150" height="90" rx="45" fill="#F4428B" filter="url(#paperTexture)"/>
+        <path d="M 260 120 Q 340 130 340 200 L 340 130 L 260 130 Z" fill="#F4428B" filter="url(#paperTexture)"/>
+        <rect x="180" y="140" width="180" height="90" fill="#0B4E77" filter="url(#paperTexture)"/>
+        <rect x="40" y="140" width="180" height="90" fill="#CAD644" filter="url(#paperTexture)"/>
+      </svg>
     </div>
 
     <!-- Dados verdes/rosas coloridos (troquei brancos que sumiam no fundo creme) -->
@@ -456,25 +423,16 @@
 
   <!-- Atributos -->
   <section class="max-w-7xl mx-auto py-14 md:py-24 relative">
-    <!-- Trilha atributos: serpente HORIZONTAL na direita -->
-    <div class="trilha-container hidden md:block" style="top: 8%; right: 0; width: 300px; height: 240px;">
-      <!-- linha 1: direita→esquerda -->
-      <div class="casa-tabuleiro casa-rosa" style="top: 0; left: 224px;"></div>
-      <div class="casa-tabuleiro casa-roxo" style="top: 0; left: 168px;"></div>
-      <div class="casa-tabuleiro casa-lima" style="top: 0; left: 112px;"></div>
-      <div class="casa-tabuleiro casa-azul" style="top: 0; left: 56px;"></div>
-      <!-- curva desce -->
-      <div class="casa-tabuleiro casa-amarelo" style="top: 56px; left: 56px;"></div>
-      <!-- linha 2: esquerda→direita -->
-      <div class="casa-tabuleiro casa-laranja" style="top: 112px; left: 56px;"></div>
-      <div class="casa-tabuleiro casa-verde" style="top: 112px; left: 112px;"></div>
-      <div class="casa-tabuleiro casa-creme" style="top: 112px; left: 168px;"></div>
-      <div class="casa-tabuleiro casa-rosa" style="top: 112px; left: 224px;"></div>
-      <!-- curva desce -->
-      <div class="casa-tabuleiro casa-lima" style="top: 168px; left: 224px;"></div>
-      <!-- linha 3: direita→esquerda -->
-      <div class="casa-tabuleiro casa-azul" style="top: 168px; left: 168px;"></div>
-      <div class="casa-tabuleiro casa-roxo" style="top: 168px; left: 112px;"></div>
+    <!-- Trilha atributos: fluida na direita -->
+    <div class="trilha-fluida hidden md:block" style="top: 5%; right: -30px; width: 400px; height: 260px;">
+      <svg viewBox="0 0 400 260" width="400" height="260">
+        <rect x="20" y="30" width="140" height="90" rx="45" fill="#F4428B" filter="url(#paperTexture)"/>
+        <rect x="100" y="30" width="180" height="90" fill="#CAD644" filter="url(#paperTexture)"/>
+        <rect x="240" y="30" width="140" height="90" rx="45" fill="#0B4E77" filter="url(#paperTexture)"/>
+        <rect x="180" y="140" width="180" height="90" fill="#F4428B" filter="url(#paperTexture)"/>
+        <rect x="60" y="140" width="180" height="90" fill="#0B4E77" filter="url(#paperTexture)"/>
+        <rect x="20" y="140" width="120" height="90" rx="45" fill="#CAD644" filter="url(#paperTexture)"/>
+      </svg>
     </div>
 
     <img src="../assets/brand-refs/educahubplay/livros-05.png" alt="" class="element-decor" style="bottom: 20%; right: -3%; width: 200px; transform: rotate(-8deg); opacity: 0.85;" />
