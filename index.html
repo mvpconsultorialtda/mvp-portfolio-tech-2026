@@ -212,7 +212,7 @@
     50% { transform: translateX(-50%) translateY(8px); }
   }
 
-  /* Card name — cinza medio-escuro (visivel como cinza em fundo escuro sem virar branco) */
+  /* Card name — branco com sombreado atras + underline furta-cor escuro */
   .card-name {
     display: inline-block;
     padding: 0 0.15em;
@@ -220,30 +220,27 @@
     border: none;
     position: relative;
     z-index: 2;
-    color: #71717a;
+    color: #ffffff;
     font-family: 'Fraunces', serif !important;
     font-weight: 900;
     font-style: italic;
     line-height: 1;
     letter-spacing: -0.02em;
     text-shadow:
-      0 0 20px rgba(113, 113, 122, 0.5),
-      0 0 40px rgba(124, 245, 197, 0.12);
-    animation: cardname-pulse 4s ease-in-out infinite;
+      4px 5px 0 rgba(0, 0, 0, 0.55),
+      6px 8px 24px rgba(0, 0, 0, 0.45),
+      0 0 40px rgba(255, 255, 255, 0.12);
   }
   .card-name::after {
     content: "";
     position: absolute;
     left: 0; right: 0; bottom: 0.05em;
-    height: 0.28em;
-    background: linear-gradient(90deg, #7cf5c5, #b3a1ff, #ff9068);
-    opacity: 0.35;
+    height: 0.32em;
+    background: linear-gradient(90deg, #0f7a5a 0%, #5c3fb0 45%, #b83f22 100%);
+    opacity: 0.85;
     z-index: -1;
     border-radius: 4px;
-  }
-  @keyframes cardname-pulse {
-    0%, 100% { text-shadow: 0 0 20px rgba(113, 113, 122, 0.5), 0 0 40px rgba(124, 245, 197, 0.12); }
-    50% { text-shadow: 0 0 30px rgba(113, 113, 122, 0.7), 0 0 60px rgba(124, 245, 197, 0.22); }
+    filter: saturate(1.2);
   }
 
   /* Nav mobile-first */
