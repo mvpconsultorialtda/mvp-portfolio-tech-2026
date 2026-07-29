@@ -193,6 +193,42 @@
     50% { transform: translateX(-50%) translateY(8px); }
   }
 
+  /* Card name — mesmo tratamento do em do hero (highlight bar) */
+  .card-name {
+    display: inline-block;
+    padding: 0.1em 0.4em;
+    background: rgba(5, 6, 10, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 8px;
+    position: relative;
+    color: #fff;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+  }
+  .card-name::after {
+    content: "";
+    position: absolute;
+    left: 0.4em; right: 0.4em; bottom: 0.15em;
+    height: 0.15em;
+    background: linear-gradient(90deg, var(--accent-a), var(--accent-b), var(--accent-c));
+    opacity: 0.7;
+    border-radius: 3px;
+  }
+
+  /* Nav scrolled state */
+  nav#mainnav.scrolled {
+    background: rgba(5, 6, 10, 0.85);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
   /* Meta line */
   .eyebrow {
     font-family: 'JetBrains Mono', monospace;
@@ -220,12 +256,12 @@
   <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
 
   <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6" style="mix-blend-mode: difference;">
+  <nav id="mainnav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 transition-all duration-300">
     <div class="eyebrow">MVP · Consultoria em Tecnologia</div>
     <div class="flex gap-8 eyebrow">
-      <a href="#projects" data-hover>Projetos</a>
+      <a href="#projects" data-hover>Vitrine</a>
       <a href="#stack" data-hover>Stack</a>
-      <a href="mvp-portfolio-2026.pdf" data-hover>PDF ↓</a>
+      <a href="#manifesto" data-hover>Manifesto</a>
     </div>
   </nav>
 
@@ -237,38 +273,49 @@
       <span data-splitting>com <em>design</em> que</span><br />
       <span data-splitting>não pede desculpa.</span>
     </h1>
-    <p class="mt-12 max-w-xl text-lg text-neutral-400 font-serif italic reveal" style="font-family: 'Instrument Serif', serif;">
-      Cinco produtos digitais entregues. Financiados por CAPES, UNEB, FAPESB e clientes privados. Cada um com identidade própria — nada de template genérico.
-    </p>
     <div class="scroll-hint">↓ scroll · role para explorar</div>
   </section>
 
-  <!-- MARQUEE FINANCIADORES -->
-  <section class="py-16 overflow-hidden border-y border-white/5">
-    <div class="marquee eyebrow text-neutral-400" style="font-size: 1.5rem; letter-spacing: 0.15em;">
-      <span>CAPES ✦ InovaEDUCAÇÃO</span>
-      <span>UNEB ✦ Proinovação</span>
-      <span>FAPESB ✦ Ciência da Bahia</span>
-      <span>Mandato André Fraga</span>
-      <span>CAPES ✦ InovaEDUCAÇÃO</span>
-      <span>UNEB ✦ Proinovação</span>
-      <span>FAPESB ✦ Ciência da Bahia</span>
-      <span>Mandato André Fraga</span>
+  <!-- MARQUEE PARCEIROS -->
+  <section class="py-14 overflow-hidden border-y border-white/5">
+    <div class="marquee text-neutral-400" style="font-family: 'Instrument Serif', serif; font-size: 1.7rem; letter-spacing: 0.02em;">
+      <span class="italic opacity-70">Grupo de empresas baianas em tecnologia desde 2020</span>
+      <span>✦</span><span>Eleva</span>
+      <span>✦</span><span>Mandacaru</span>
+      <span>✦</span><span>DC Consultoria</span>
+      <span>✦</span><span>MVP Inovação</span>
+      <span>✦</span><span>UNEB</span>
+      <span>✦</span><span>UEFS</span>
+      <span>✦</span><span>FAPESB</span>
+      <span>✦</span><span>CAPES</span>
+      <span>✦</span><span>Narrativo</span>
+      <span>✦</span><span>Copere</span>
+      <span>✦</span>
+      <span class="italic opacity-70">Grupo de empresas baianas em tecnologia desde 2020</span>
+      <span>✦</span><span>Eleva</span>
+      <span>✦</span><span>Mandacaru</span>
+      <span>✦</span><span>DC Consultoria</span>
+      <span>✦</span><span>MVP Inovação</span>
+      <span>✦</span><span>UNEB</span>
+      <span>✦</span><span>UEFS</span>
+      <span>✦</span><span>FAPESB</span>
+      <span>✦</span><span>CAPES</span>
+      <span>✦</span><span>Narrativo</span>
+      <span>✦</span><span>Copere</span>
     </div>
   </section>
 
   <!-- PROJECTS -->
   <section id="projects" class="px-8 md:px-16 py-32">
     <div class="max-w-7xl mx-auto">
-      <div class="flex items-end justify-between mb-20 flex-wrap gap-6">
-        <div>
-          <div class="eyebrow mb-4 reveal">01 — Vitrine</div>
-          <h2 class="reveal" style="font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 1;">
-            Cinco projetos.<br />Cinco linguagens visuais.
-          </h2>
-        </div>
-        <p class="max-w-md text-neutral-400 reveal" style="font-family: 'Instrument Serif', serif; font-size: 1.15rem;">
-          Cada página abaixo assume a identidade do próprio produto — porque um portfolio de design que iguala tudo em cinza é o oposto de portfolio de design.
+      <div class="mb-20">
+        <div class="eyebrow mb-6 reveal">Vitrine</div>
+        <h2 class="reveal max-w-5xl" style="font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(2rem, 5vw, 4.2rem); letter-spacing: -0.03em; line-height: 1.02;">
+          Um grupo de empresas baianas nascido em 2020 —<br />
+          de um edital, com edital.
+        </h2>
+        <p class="max-w-3xl mt-8 text-neutral-300 reveal" style="font-family: 'Instrument Serif', serif; font-size: 1.35rem; line-height: 1.5;">
+          Trabalhamos com <em>Universidade do Estado da Bahia</em> e <em>Universidade Estadual de Feira de Santana</em>, e com um time irmão em consultoria, design e RH. Cada projeto abaixo tem identidade própria — porque tecnologia é ferramenta, o ser humano é motivo.
         </p>
       </div>
 
@@ -282,7 +329,7 @@
           <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-8 relative" style="background: linear-gradient(135deg, #0032A0 0%, #7790ED 50%, #C0D31F 100%);">
             <img src="assets/screenshots/xequemath.png" alt="XequeMath" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
             <div class="absolute inset-0 flex items-end p-6">
-              <div class="text-white font-black text-5xl" style="font-family: 'Fredoka', 'Fraunces', sans-serif;">XequeMath</div>
+              <div class="card-name" style="font-size: 3rem; font-family: 'Fredoka', sans-serif;">XequeMath</div>
             </div>
           </div>
           <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">Aprenda matemática sem enxergar número.</h3>
@@ -306,7 +353,7 @@
           <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-8 relative" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 50%, #6bcf7f 100%);">
             <img src="assets/screenshots/educahubplay.png" alt="EducaHubPlay" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
             <div class="absolute inset-0 flex items-end p-6">
-              <div class="text-white font-black text-5xl">EducaHubPlay</div>
+              <div class="card-name" style="font-size: 3rem;">EducaHubPlay</div>
             </div>
           </div>
           <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">Professor cria seu quiz em 5 minutos.</h3>
@@ -330,7 +377,7 @@
           <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-8 relative" style="background: linear-gradient(135deg, #ff006e 0%, #ffbe0b 50%, #8338ec 100%);">
             <img src="assets/screenshots/hq-lab.png" alt="HQ-Lab" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
             <div class="absolute inset-0 flex items-end p-6">
-              <div class="text-white font-black text-5xl">HQ-Lab</div>
+              <div class="card-name" style="font-size: 3rem;">HQ-Lab</div>
             </div>
           </div>
           <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">Quadrinhos digitais na sala de aula.</h3>
@@ -354,7 +401,7 @@
           <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-8 relative" style="background: linear-gradient(135deg, #001d3d 0%, #003566 50%, #ffc300 100%);">
             <img src="assets/screenshots/labconect.png" alt="LabConect" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
             <div class="absolute inset-0 flex items-end p-6">
-              <div class="text-white font-black text-5xl">LabConect</div>
+              <div class="card-name" style="font-size: 3rem;">LabConect</div>
             </div>
           </div>
           <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">Rede de laboratórios e pesquisadores.</h3>
@@ -370,26 +417,34 @@
         </a>
 
         <!-- CARD 5 André Fraga -->
-        <a href="projects/andre-fraga.html" data-hover class="glass rounded-3xl p-8 md:p-10 group reveal transition-transform duration-500 hover:-translate-y-2 block md:col-span-2">
+        <a href="projects/andre-fraga.html" data-hover class="glass rounded-3xl p-8 md:p-10 group reveal transition-transform duration-500 hover:-translate-y-2 block">
           <div class="flex items-start justify-between mb-8">
-            <div class="eyebrow">Cliente privado · Câmara Municipal Salvador</div>
+            <div class="eyebrow">Cliente privado · CMS</div>
             <div class="eyebrow opacity-40">05 / 05</div>
           </div>
-          <div class="aspect-[21/9] rounded-2xl overflow-hidden mb-8 relative" style="background: linear-gradient(135deg, #003d1f 0%, #059669 50%, #a7f3d0 100%);">
-            <img src="assets/screenshots/andre-fraga-site.png" alt="Mandato André Fraga" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
-            <div class="absolute inset-0 flex items-end p-8">
-              <div class="text-white font-black text-6xl">Mandato André Fraga</div>
+          <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-8 relative flex items-end p-6" style="background: linear-gradient(135deg, #052e16 0%, #14532d 40%, #059669 100%);">
+            <svg class="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#a7f3d0" stroke-width="1"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+            <div class="relative z-10">
+              <div class="inline-block px-3 py-1 mb-3 rounded-full text-xs font-mono uppercase tracking-widest" style="background: rgba(167, 243, 208, 0.2); color: #a7f3d0; border: 1px solid rgba(167, 243, 208, 0.3);">iOS · Android</div>
+              <div class="text-white font-black text-4xl leading-none" style="font-family: 'Fraunces', serif;">Mandato<br />André Fraga</div>
             </div>
           </div>
-          <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">App de mandato — transparência e cidadania.</h3>
+          <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">App do gabinete — transparência de mandato.</h3>
           <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
-            Aplicativo mobile (iOS + Android) do gabinete do vereador André Fraga (Câmara Municipal de Salvador). Módulos de projetos, notícias, colabore, comissões e fiscalização.
+            Aplicativo mobile do vereador na Câmara Municipal de Salvador. Módulos: projetos, notícias, colabore, comissões, fiscalização.
           </p>
           <div class="flex flex-wrap gap-2 eyebrow">
-            <span class="px-3 py-1 border border-white/10 rounded-full">iOS + Android</span>
             <span class="px-3 py-1 border border-white/10 rounded-full">React Native</span>
             <span class="px-3 py-1 border border-white/10 rounded-full">Firebase</span>
-            <span class="px-3 py-1 border border-white/10 rounded-full">App Store · Play Store</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">App Store</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Play Store</span>
           </div>
         </a>
       </div>
@@ -398,12 +453,26 @@
 
   <div class="divider"></div>
 
+  <!-- MANIFESTO -->
+  <section id="manifesto" class="px-8 md:px-16 py-32 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto text-center">
+      <div class="eyebrow mb-8 reveal">Manifesto</div>
+      <p class="reveal" style="font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.6rem, 3.2vw, 2.6rem); line-height: 1.35; letter-spacing: -0.015em;">
+        A gente <em style="color: var(--accent-a); font-style: italic;">constrói junto</em> com quem estuda, com quem financia, com quem usa. <br /><br />
+        Trabalhamos <em style="color: var(--accent-b); font-style: italic;">na frente</em> — não porque é bonito, mas porque quem chega tarde no futuro perde a mão. <br /><br />
+        E <em style="color: var(--accent-c); font-style: italic;">no ritmo humano</em>. A tecnologia é ferramenta; a pessoa que usa é o motivo.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- STACK -->
   <section id="stack" class="px-8 md:px-16 py-32">
     <div class="max-w-7xl mx-auto">
-      <div class="eyebrow mb-4 reveal">02 — Stack</div>
+      <div class="eyebrow mb-4 reveal">Stack</div>
       <h2 class="reveal mb-16" style="font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 1;">
-        O que rodamos — na produção, agora.
+        Debaixo do capô.
       </h2>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -461,6 +530,13 @@
   </footer>
 
   <script>
+    // Nav scroll behavior — muda pra fundo sólido após 80px
+    const _nav = document.getElementById('mainnav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) _nav.classList.add('scrolled');
+      else _nav.classList.remove('scrolled');
+    }, { passive: true });
+
     // Custom cursor
     const dot = document.getElementById('cursor-dot');
     const ring = document.getElementById('cursor-ring');
