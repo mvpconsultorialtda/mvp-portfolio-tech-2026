@@ -1,0 +1,14 @@
+OK xequemath -> xequemath.png (162KB)
+OK xequemath-mobile -> xequemath-mobile.png (118KB)
+OK educahubplay -> educahubplay.png (2434KB)
+OK educahubplay-mobile -> educahubplay-mobile.png (1151KB)
+OK labconect -> labconect.png (508KB)
+OK labconect-mobile -> labconect-mobile.png (198KB)
+OK hq-lab -> hq-lab.png (1101KB)
+OK hq-lab-mobile -> hq-lab-mobile.png (371KB)
+OK andre-fraga-site -> andre-fraga-site.png (1526KB)
+FAIL andre-fraga-mandato @ https://www.andrefraga.com/mandato: Page.goto: Timeout 25000ms exceeded.
+Call log:
+  - navigating to "https://www.andrefraga.com/mandato", waiting until "networkidle"
+
+DONE all captures

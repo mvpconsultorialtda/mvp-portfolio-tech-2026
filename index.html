@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MVP Consultoria em Tecnologia — Portfolio 2026</title>
+<meta name="description" content="Portfolio de projetos entregues pela MVP Consultoria em Tecnologia — cinco produtos digitais financiados por CAPES, UNEB, FAPESB e clientes privados." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=JetBrains+Mono:wght@400;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
+<link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting-cells.css">
+
+<style>
+  :root {
+    --bg-0: #05060a;
+    --bg-1: #0b0d15;
+    --ink-hi: #f6f4ef;
+    --ink-lo: #a8a49b;
+    --accent-a: #7cf5c5;
+    --accent-b: #b3a1ff;
+    --accent-c: #ff9068;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg-0);
+    color: var(--ink-hi);
+    font-family: 'Fraunces', serif;
+    font-feature-settings: "ss01", "ss02";
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Aurora background — CSS art com blur */
+  .aurora {
+    position: fixed;
+    inset: -20% -20% -20% -20%;
+    z-index: -1;
+    filter: blur(120px) saturate(1.3);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .aurora::before, .aurora::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+  }
+  .aurora::before {
+    width: 60vw; height: 60vw;
+    top: -10%; left: 5%;
+    background: radial-gradient(circle, #7cf5c5 0%, transparent 60%);
+    animation: drift1 24s ease-in-out infinite alternate;
+  }
+  .aurora::after {
+    width: 55vw; height: 55vw;
+    bottom: -10%; right: -5%;
+    background: radial-gradient(circle, #b3a1ff 0%, transparent 65%);
+    animation: drift2 30s ease-in-out infinite alternate;
+  }
+  @keyframes drift1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(15vw, 10vh) scale(1.1); }
+  }
+  @keyframes drift2 {
+    0% { transform: translate(0, 0) scale(0.9); }
+    100% { transform: translate(-10vw, -8vh) scale(1.15); }
+  }
+
+  /* Grain noise overlay */
+  .grain {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    opacity: 0.12; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+  }
+
+  /* Custom cursor */
+  .cursor-dot {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--accent-a);
+    border-radius: 50%;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 999;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, width 0.2s, height 0.2s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(246, 244, 239, 0.6);
+    border-radius: 50%;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s, height 0.3s, border-color 0.3s;
+  }
+  .cursor-ring.hover {
+    width: 64px; height: 64px;
+    border-color: var(--accent-a);
+  }
+
+  /* Hero kinetic type */
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 10vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    font-variation-settings: "opsz" 144;
+  }
+  .hero-title .char {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  .hero-title em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--accent-a) 0%, var(--accent-b) 60%, var(--accent-c) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Project card glass */
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  .glass:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Marquee / running text */
+  .marquee {
+    display: flex;
+    gap: 3rem;
+    white-space: nowrap;
+    animation: marquee 40s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(40px); }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-lo);
+    animation: bob 2.5s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* Meta line */
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-lo);
+  }
+
+  /* Section divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  }
+
+  a { text-decoration: none; color: inherit; }
+  a, button { cursor: none; }
+</style>
+</head>
+
+<body>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6" style="mix-blend-mode: difference;">
+    <div class="eyebrow">MVP · Consultoria em Tecnologia</div>
+    <div class="flex gap-8 eyebrow">
+      <a href="#projects" data-hover>Projetos</a>
+      <a href="#stack" data-hover>Stack</a>
+      <a href="mvp-portfolio-2026.pdf" data-hover>PDF ↓</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex flex-col justify-center px-8 md:px-16 relative pt-32 pb-16">
+    <div class="eyebrow mb-10 reveal">Portfolio · 2026 · Salvador — Bahia</div>
+    <h1 class="hero-title max-w-6xl">
+      <span data-splitting>Tecnologia</span><br />
+      <span data-splitting>com <em>design</em> que</span><br />
+      <span data-splitting>não pede desculpa.</span>
+    </h1>
+    <p class="mt-12 max-w-xl text-lg text-neutral-400 font-serif italic reveal" style="font-family: 'Instrument Serif', serif;">
+      Cinco produtos digitais entregues. Financiados por CAPES, UNEB, FAPESB e clientes privados. Cada um com identidade própria — nada de template genérico.
+    </p>
+    <div class="scroll-hint">↓ scroll · role para explorar</div>
+  </section>
+
+  <!-- MARQUEE FINANCIADORES -->
+  <section class="py-16 overflow-hidden border-y border-white/5">
+    <div class="marquee eyebrow text-neutral-400" style="font-size: 1.5rem; letter-spacing: 0.15em;">
+      <span>CAPES ✦ InovaEDUCAÇÃO</span>
+      <span>UNEB ✦ Proinovação</span>
+      <span>FAPESB ✦ Ciência da Bahia</span>
+      <span>Mandato André Fraga</span>
+      <span>CAPES ✦ InovaEDUCAÇÃO</span>
+      <span>UNEB ✦ Proinovação</span>
+      <span>FAPESB ✦ Ciência da Bahia</span>
+      <span>Mandato André Fraga</span>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="px-8 md:px-16 py-32">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end justify-between mb-20 flex-wrap gap-6">
+        <div>
+          <div class="eyebrow mb-4 reveal">01 — Vitrine</div>
+          <h2 class="reveal" style="font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 1;">
+            Cinco projetos.<br />Cinco linguagens visuais.
+          </h2>
+        </div>
+        <p class="max-w-md text-neutral-400 reveal" style="font-family: 'Instrument Serif', serif; font-size: 1.15rem;">
+          Cada página abaixo assume a identidade do próprio produto — porque um portfolio de design que iguala tudo em cinza é o oposto de portfolio de design.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- CARD 1 XequeMath -->
+        <a href="projects/xequemath.html" data-hover class="glass rounded-3xl p-8 md:p-10 group reveal transition-transform duration-500 hover:-translate-y-2 block">
+          <div class="flex items-start justify-between mb-8">
+            <div class="eyebrow">CAPES · InovaEDUCAÇÃO</div>
+            <div class="eyebrow opacity-40">01 / 05</div>
+          </div>
+          <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-8 relative" style="background: linear-gradient(135deg, #0032A0 0%, #7790ED 50%, #C0D31F 100%);">
+            <img src="assets/screenshots/xequemath.png" alt="XequeMath" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
+            <div class="absolute inset-0 flex items-end p-6">
+              <div class="text-white font-black text-5xl" style="font-family: 'Fredoka', 'Fraunces', sans-serif;">XequeMath</div>
+            </div>
+          </div>
+          <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">Aprenda matemática sem enxergar número.</h3>
+          <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
+            Plataforma de jogos educacionais para desestigmatizar matemática. 8 jogos categorizados por conteúdo, sistema de ranking + conquistas e assistente IA.
+          </p>
+          <div class="flex flex-wrap gap-2 eyebrow">
+            <span class="px-3 py-1 border border-white/10 rounded-full">Next.js</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">TypeScript</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Firebase</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Tailwind</span>
+          </div>
+        </a>
+
+        <!-- CARD 2 EducaHubPlay -->
+        <a href="projects/educahubplay.html" data-hover class="glass rounded-3xl p-8 md:p-10 group reveal transition-transform duration-500 hover:-translate-y-2 block">
+          <div class="flex items-start justify-between mb-8">
+            <div class="eyebrow">CAPES · InovaEDUCAÇÃO</div>
+            <div class="eyebrow opacity-40">02 / 05</div>
+          </div>
+          <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-8 relative" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 50%, #6bcf7f 100%);">
+            <img src="assets/screenshots/educahubplay.png" alt="EducaHubPlay" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
+            <div class="absolute inset-0 flex items-end p-6">
+              <div class="text-white font-black text-5xl">EducaHubPlay</div>
+            </div>
+          </div>
+          <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">Professor cria seu quiz em 5 minutos.</h3>
+          <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
+            Plataforma colaborativa de gamificação pedagógica. 22 quizzes, 5 formatos (Clássico, Show do Milhão, Perfil, Adivinha, Trilha), 10 disciplinas, assistente IA com BNCC.
+          </p>
+          <div class="flex flex-wrap gap-2 eyebrow">
+            <span class="px-3 py-1 border border-white/10 rounded-full">Next.js</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">TypeScript</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Firebase</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">OpenAI</span>
+          </div>
+        </a>
+
+        <!-- CARD 3 HQ-Lab -->
+        <a href="projects/hq-lab.html" data-hover class="glass rounded-3xl p-8 md:p-10 group reveal transition-transform duration-500 hover:-translate-y-2 block">
+          <div class="flex items-start justify-between mb-8">
+            <div class="eyebrow">CAPES · FAPESB · UNEB</div>
+            <div class="eyebrow opacity-40">03 / 05</div>
+          </div>
+          <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-8 relative" style="background: linear-gradient(135deg, #ff006e 0%, #ffbe0b 50%, #8338ec 100%);">
+            <img src="assets/screenshots/hq-lab.png" alt="HQ-Lab" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
+            <div class="absolute inset-0 flex items-end p-6">
+              <div class="text-white font-black text-5xl">HQ-Lab</div>
+            </div>
+          </div>
+          <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">Quadrinhos digitais na sala de aula.</h3>
+          <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
+            Plataforma para criação, publicação e leitura de HQs educacionais. Único projeto MVP com tripé de financiamento: CAPES + FAPESB + UNEB.
+          </p>
+          <div class="flex flex-wrap gap-2 eyebrow">
+            <span class="px-3 py-1 border border-white/10 rounded-full">Next.js</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">TypeScript</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Node backend</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Firebase</span>
+          </div>
+        </a>
+
+        <!-- CARD 4 LabConect -->
+        <a href="projects/labconect.html" data-hover class="glass rounded-3xl p-8 md:p-10 group reveal transition-transform duration-500 hover:-translate-y-2 block">
+          <div class="flex items-start justify-between mb-8">
+            <div class="eyebrow">UNEB · Proinovação 104/2024</div>
+            <div class="eyebrow opacity-40">04 / 05</div>
+          </div>
+          <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-8 relative" style="background: linear-gradient(135deg, #001d3d 0%, #003566 50%, #ffc300 100%);">
+            <img src="assets/screenshots/labconect.png" alt="LabConect" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
+            <div class="absolute inset-0 flex items-end p-6">
+              <div class="text-white font-black text-5xl">LabConect</div>
+            </div>
+          </div>
+          <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">Rede de laboratórios e pesquisadores.</h3>
+          <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
+            Plataforma de matching entre pesquisadores, laboratórios e infraestrutura da UNEB. Entregue com titularidade integral e código-fonte transferido.
+          </p>
+          <div class="flex flex-wrap gap-2 eyebrow">
+            <span class="px-3 py-1 border border-white/10 rounded-full">Next.js</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Firebase Auth</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Firestore</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Vercel</span>
+          </div>
+        </a>
+
+        <!-- CARD 5 André Fraga -->
+        <a href="projects/andre-fraga.html" data-hover class="glass rounded-3xl p-8 md:p-10 group reveal transition-transform duration-500 hover:-translate-y-2 block md:col-span-2">
+          <div class="flex items-start justify-between mb-8">
+            <div class="eyebrow">Cliente privado · Câmara Municipal Salvador</div>
+            <div class="eyebrow opacity-40">05 / 05</div>
+          </div>
+          <div class="aspect-[21/9] rounded-2xl overflow-hidden mb-8 relative" style="background: linear-gradient(135deg, #003d1f 0%, #059669 50%, #a7f3d0 100%);">
+            <img src="assets/screenshots/andre-fraga-site.png" alt="Mandato André Fraga" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
+            <div class="absolute inset-0 flex items-end p-8">
+              <div class="text-white font-black text-6xl">Mandato André Fraga</div>
+            </div>
+          </div>
+          <h3 class="text-3xl mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em;">App de mandato — transparência e cidadania.</h3>
+          <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
+            Aplicativo mobile (iOS + Android) do gabinete do vereador André Fraga (Câmara Municipal de Salvador). Módulos de projetos, notícias, colabore, comissões e fiscalização.
+          </p>
+          <div class="flex flex-wrap gap-2 eyebrow">
+            <span class="px-3 py-1 border border-white/10 rounded-full">iOS + Android</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">React Native</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Firebase</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">App Store · Play Store</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STACK -->
+  <section id="stack" class="px-8 md:px-16 py-32">
+    <div class="max-w-7xl mx-auto">
+      <div class="eyebrow mb-4 reveal">02 — Stack</div>
+      <h2 class="reveal mb-16" style="font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 1;">
+        O que rodamos — na produção, agora.
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="reveal">
+          <div class="eyebrow mb-3 opacity-60">Frontend</div>
+          <ul class="space-y-2" style="font-family: 'Fraunces', serif; font-size: 1.2rem;">
+            <li>Next.js 15</li>
+            <li>React 19</li>
+            <li>TypeScript</li>
+            <li>Tailwind CSS</li>
+            <li>Framer Motion</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="eyebrow mb-3 opacity-60">Backend</div>
+          <ul class="space-y-2" style="font-family: 'Fraunces', serif; font-size: 1.2rem;">
+            <li>Firebase Auth</li>
+            <li>Cloud Firestore</li>
+            <li>Node.js</li>
+            <li>Python 3.12</li>
+            <li>PostgreSQL</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="eyebrow mb-3 opacity-60">Mobile</div>
+          <ul class="space-y-2" style="font-family: 'Fraunces', serif; font-size: 1.2rem;">
+            <li>React Native</li>
+            <li>Ionic + Capacitor</li>
+            <li>iOS + Android</li>
+            <li>App Store deploy</li>
+            <li>Play Store deploy</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <div class="eyebrow mb-3 opacity-60">Infra + IA</div>
+          <ul class="space-y-2" style="font-family: 'Fraunces', serif; font-size: 1.2rem;">
+            <li>Vercel</li>
+            <li>GitHub Actions</li>
+            <li>OpenAI GPT-4o</li>
+            <li>Anthropic Claude</li>
+            <li>Google Cloud</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="px-8 md:px-16 py-16 border-t border-white/5">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between gap-8 eyebrow">
+      <div>MVP Consultoria em Tecnologia LTDA · CNPJ 36.390.332/0001-77</div>
+      <div>Salvador — Bahia · Brasil</div>
+      <div>mvpconsultorialtda@gmail.com</div>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+    });
+    function loop() {
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
+      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+      requestAnimationFrame(loop);
+    }
+    loop();
+    document.querySelectorAll('[data-hover]').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
+
+    // Kinetic type reveal + GSAP timeline
+    window.addEventListener('load', () => {
+      Splitting();
+      gsap.registerPlugin(ScrollTrigger);
+      const chars = document.querySelectorAll('.hero-title .char');
+      gsap.to(chars, {
+        y: 0, opacity: 1,
+        duration: 1.1,
+        stagger: 0.025,
+        ease: "expo.out",
+        delay: 0.3
+      });
+      gsap.utils.toArray('.reveal').forEach(el => {
+        gsap.to(el, {
+          opacity: 1, y: 0,
+          duration: 1,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

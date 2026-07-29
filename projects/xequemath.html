@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>XequeMath — MVP Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+<style>
+  :root {
+    /* Paleta oficial XequeMath (manual de marca Bionica) */
+    --bg-cream: #EFE8E4;
+    --ink-dark: #292621;
+    --lavender: #7790ED;
+    --deep-blue: #0032A0;
+    --vibrant-blue: #112EF7;
+    --lime: #C0D31F;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg-cream);
+    color: var(--ink-dark);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  .fredoka { font-family: 'Fredoka', sans-serif; }
+  .jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+  /* Símbolos de controle giratórios (referência universo gamer) */
+  .control-symbol {
+    display: inline-block;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(15deg); }
+  }
+
+  /* Hero title kinetic */
+  .hero-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: clamp(3rem, 9vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .em-blue {
+    color: var(--vibrant-blue);
+    font-style: italic;
+  }
+  .em-lime {
+    background: var(--lime);
+    padding: 0 0.3em;
+    color: var(--ink-dark);
+    display: inline-block;
+    transform: rotate(-2deg);
+    border-radius: 8px;
+  }
+
+  /* Gamepad symbols floating */
+  .symbol-bg {
+    position: absolute;
+    font-family: 'Fredoka', sans-serif;
+    color: var(--lavender);
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Card game preview */
+  .game-card {
+    background: white;
+    border: 3px solid var(--ink-dark);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 8px 8px 0 var(--ink-dark);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .game-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--lime);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.2rem;
+    border: 2px solid var(--ink-dark);
+    border-radius: 999px;
+    background: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .pill-primary {
+    background: var(--vibrant-blue);
+    color: white;
+  }
+
+  .pill-lime {
+    background: var(--lime);
+  }
+
+  .btn-primary {
+    background: var(--ink-dark);
+    color: var(--bg-cream);
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    border: 3px solid var(--ink-dark);
+    transition: all 0.2s;
+  }
+  .btn-primary:hover {
+    background: var(--vibrant-blue);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink-dark);
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border: 3px solid var(--ink-dark);
+    transition: all 0.2s;
+  }
+  .btn-outline:hover {
+    background: var(--ink-dark);
+    color: var(--bg-cream);
+  }
+
+  .section-label {
+    display: inline-block;
+    background: var(--ink-dark);
+    color: var(--bg-cream);
+    padding: 0.4rem 1.2rem;
+    border-radius: 999px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+
+  .reveal { opacity: 0; transform: translateY(30px); }
+
+  /* Screenshot mockup frame */
+  .device-frame {
+    border: 8px solid var(--ink-dark);
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 16px 16px 0 var(--lavender);
+    background: white;
+    position: relative;
+  }
+  .device-frame::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 20px;
+    background: var(--ink-dark);
+    border-radius: 0 0 12px 12px;
+    z-index: 2;
+  }
+
+  a { color: inherit; text-decoration: none; }
+</style>
+</head>
+
+<body>
+  <!-- Nav -->
+  <nav class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+    <a href="../index.html" class="fredoka font-bold text-xl flex items-center gap-2">
+      <span>←</span> MVP · Portfolio
+    </a>
+    <div class="flex gap-4">
+      <a href="https://xequemath.vercel.app" target="_blank" class="pill pill-lime">Ver ao vivo →</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="max-w-7xl mx-auto px-8 py-16 relative">
+    <div class="symbol-bg fredoka" style="top: 10%; left: -3%; font-size: 200px; transform: rotate(-15deg);">○</div>
+    <div class="symbol-bg fredoka" style="top: 30%; right: 5%; font-size: 160px; transform: rotate(20deg);">△</div>
+    <div class="symbol-bg fredoka" style="bottom: 10%; left: 20%; font-size: 140px; transform: rotate(45deg);">□</div>
+    <div class="symbol-bg fredoka" style="top: 60%; right: 15%; font-size: 180px; transform: rotate(-25deg);">✕</div>
+
+    <div class="section-label mb-8 reveal">CAPES · InovaEDUCAÇÃO · UNEB</div>
+    <h1 class="hero-title reveal">
+      Aprender <span class="em-blue">matemática</span><br />
+      sem enxergar <span class="em-lime">número.</span>
+    </h1>
+    <p class="mt-10 max-w-2xl text-xl reveal" style="line-height: 1.5;">
+      Uma plataforma de jogos que traduz o universo gamer para a sala de aula — sem intimidar quem tem fobia de fórmula.
+    </p>
+    <div class="mt-12 flex flex-wrap gap-4 reveal">
+      <a href="https://xequemath.vercel.app" target="_blank" class="btn-primary">Ver plataforma ao vivo →</a>
+      <a href="#stack" class="btn-outline">Stack técnica</a>
+    </div>
+  </section>
+
+  <!-- Screenshot hero -->
+  <section class="max-w-7xl mx-auto px-8 py-16">
+    <div class="device-frame reveal">
+      <img src="../assets/screenshots/xequemath.png" alt="XequeMath — tela inicial" class="w-full h-auto block" onerror="this.style.height='500px'; this.style.background='linear-gradient(135deg, #0032A0 0%, #7790ED 50%, #C0D31F 100%)'; this.alt='Screenshot em breve';" />
+    </div>
+  </section>
+
+  <!-- What we did -->
+  <section class="max-w-7xl mx-auto px-8 py-24">
+    <div class="section-label mb-6 reveal">O que a MVP entregou</div>
+    <h2 class="fredoka font-bold text-5xl md:text-6xl mb-12 reveal" style="letter-spacing: -0.03em; line-height: 1;">
+      Plataforma completa —<br />do jogo ao ranking.
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="game-card reveal">
+        <div class="fredoka font-bold text-4xl mb-4" style="color: var(--vibrant-blue);">8 jogos</div>
+        <p class="text-lg leading-relaxed">Probabilidade, geometria, aritmética, álgebra, lógica, combinatória. Cada jogo com dificuldade calibrada, duração e descrição pedagógica.</p>
+      </div>
+      <div class="game-card reveal">
+        <div class="fredoka font-bold text-4xl mb-4" style="color: var(--vibrant-blue);">Ranking + Conquistas</div>
+        <p class="text-lg leading-relaxed">Sistema de progressão e leaderboard. O aluno vê o próprio avanço, compete com a turma, coleciona conquistas.</p>
+      </div>
+      <div class="game-card reveal">
+        <div class="fredoka font-bold text-4xl mb-4" style="color: var(--vibrant-blue);">Assistente IA</div>
+        <p class="text-lg leading-relaxed">Assistente de matemática que responde dúvidas em linguagem natural, adapta explicação ao nível do aluno.</p>
+      </div>
+      <div class="game-card reveal">
+        <div class="fredoka font-bold text-4xl mb-4" style="color: var(--vibrant-blue);">Portal de candidatura</div>
+        <p class="text-lg leading-relaxed">Fluxo completo para novos jogadores + área da equipe pedagógica com métricas em tempo real.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Design system -->
+  <section class="max-w-7xl mx-auto px-8 py-24">
+    <div class="section-label mb-6 reveal">Design System</div>
+    <h2 class="fredoka font-bold text-5xl md:text-6xl mb-12 reveal" style="letter-spacing: -0.03em; line-height: 1;">
+      Identidade visual —<br />do controle ao aprendizado.
+    </h2>
+    <p class="max-w-3xl text-lg mb-16 reveal" style="line-height: 1.6;">
+      Sistema visual construído em parceria com Bionica (Vitória). Símbolos do controle (○, □, △, ✕) traduzem geometria básica e criam ponte natural entre gaming e matemática. Fredoka nas assinaturas (arredondada, calorosa); Plus Jakarta no corpo (funcional, digital).
+    </p>
+
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-4 reveal mb-12">
+      <div class="rounded-2xl p-6 aspect-square flex items-end" style="background: var(--bg-cream); border: 2px solid var(--ink-dark);">
+        <div class="fredoka text-xs">#EFE8E4<br /><strong>Cream</strong></div>
+      </div>
+      <div class="rounded-2xl p-6 aspect-square flex items-end" style="background: var(--ink-dark);">
+        <div class="fredoka text-xs" style="color: var(--bg-cream);">#292621<br /><strong>Ink</strong></div>
+      </div>
+      <div class="rounded-2xl p-6 aspect-square flex items-end" style="background: var(--lavender);">
+        <div class="fredoka text-xs" style="color: white;">#7790ED<br /><strong>Lavender</strong></div>
+      </div>
+      <div class="rounded-2xl p-6 aspect-square flex items-end" style="background: var(--deep-blue);">
+        <div class="fredoka text-xs" style="color: white;">#0032A0<br /><strong>Deep Blue</strong></div>
+      </div>
+      <div class="rounded-2xl p-6 aspect-square flex items-end" style="background: var(--vibrant-blue);">
+        <div class="fredoka text-xs" style="color: white;">#112EF7<br /><strong>Vibrant Blue</strong></div>
+      </div>
+      <div class="rounded-2xl p-6 aspect-square flex items-end" style="background: var(--lime);">
+        <div class="fredoka text-xs" style="color: var(--ink-dark);">#C0D31F<br /><strong>Lime</strong></div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+      <div class="game-card">
+        <div class="text-xs mb-2 uppercase tracking-wider">Assinatura</div>
+        <div style="font-family: 'Fredoka', sans-serif; font-size: 5rem; font-weight: 700; line-height: 1;">Aa</div>
+        <div class="mt-4 fredoka font-bold text-xl">Fredoka</div>
+        <p class="mt-2 text-sm">Títulos, marca, calls-to-action. Traços grossos, cantos arredondados — linguagem simples e acolhedora.</p>
+      </div>
+      <div class="game-card">
+        <div class="text-xs mb-2 uppercase tracking-wider">Corpo</div>
+        <div class="jakarta" style="font-size: 5rem; font-weight: 300; line-height: 1;">Aa</div>
+        <div class="mt-4 fredoka font-bold text-xl">Plus Jakarta Sans</div>
+        <p class="mt-2 text-sm">Leitura corrida, dashboards, interface funcional. Digital e legível em qualquer tamanho.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section id="stack" class="max-w-7xl mx-auto px-8 py-24">
+    <div class="section-label mb-6 reveal">Stack</div>
+    <h2 class="fredoka font-bold text-5xl md:text-6xl mb-12 reveal" style="letter-spacing: -0.03em; line-height: 1;">
+      Debaixo do capô.
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+      <div class="pill pill-primary">Next.js 15</div>
+      <div class="pill">React 19</div>
+      <div class="pill">TypeScript</div>
+      <div class="pill">Tailwind CSS 4</div>
+      <div class="pill">Firebase Auth</div>
+      <div class="pill">Cloud Firestore</div>
+      <div class="pill pill-lime">OpenAI GPT-4o</div>
+      <div class="pill">Vercel</div>
+    </div>
+  </section>
+
+  <!-- Footer / CTA -->
+  <section class="max-w-7xl mx-auto px-8 py-24">
+    <div class="rounded-3xl p-12 md:p-20 text-center relative overflow-hidden" style="background: var(--ink-dark); color: var(--bg-cream);">
+      <div class="symbol-bg fredoka" style="top: 10%; left: 5%; font-size: 180px; color: var(--lime); opacity: 0.15;">○</div>
+      <div class="symbol-bg fredoka" style="bottom: 10%; right: 5%; font-size: 180px; color: var(--lavender); opacity: 0.15;">△</div>
+      <div class="fredoka font-bold text-4xl md:text-6xl mb-6" style="letter-spacing: -0.03em;">
+        Precisa de plataforma <span class="em-lime">assim</span>?
+      </div>
+      <p class="text-lg max-w-xl mx-auto mb-10">
+        A MVP entrega produto pronto, com identidade própria e stack de produção — do primeiro wireframe à App Store.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--lime); color: var(--ink-dark); border-color: var(--lime);">Escreva pra gente →</a>
+        <a href="../index.html" class="btn-outline" style="color: var(--bg-cream); border-color: var(--bg-cream);">Ver outros projetos</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="max-w-7xl mx-auto px-8 py-12 fredoka text-xs uppercase tracking-widest opacity-60">
+    MVP Consultoria em Tecnologia — Salvador · Bahia · Brasil
+  </footer>
+
+  <script>
+    window.addEventListener('load', () => {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.utils.toArray('.reveal').forEach(el => {
+        gsap.to(el, {
+          opacity: 1, y: 0,
+          duration: 1,
+          ease: "expo.out",
+          scrollTrigger: { trigger: el, start: "top 88%" }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
