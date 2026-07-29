@@ -11,6 +11,26 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <style>
+  /* MOBILE-FIRST GLOBAL — cursor, touch-target, safe-area */
+  body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  @media (hover: none), (pointer: coarse) { body { cursor: auto !important; } }
+  @supports (padding: max(0px)) {
+    body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  }
+  /* Touch-target minimo 44px */
+  a[href], button, .btn-primary, .btn-outline, .format-badge, .pill, .label, .tag {
+    min-height: 44px;
+  }
+  /* Reduz box-shadows offset em mobile pra nao cortar */
+  @media (max-width: 640px) {
+    .quiz-card, .panel, .card, .game-card { box-shadow: 4px 4px 0 var(--ink, #000) !important; }
+    .device-frame { box-shadow: 4px 4px 0 var(--pink, #000) !important; }
+  }
+  /* Fluid section-pad global */
+  section { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); }
+  @media (min-width: 640px) { section { padding-left: 2rem; padding-right: 2rem; } }
+  html { scroll-behavior: smooth; }
+
   :root {
     --forest: #14532d;
     --green: #059669;
@@ -40,7 +60,7 @@
   .hero-title {
     font-family: 'Fraunces', serif;
     font-weight: 900;
-    font-size: clamp(3rem, 8.5vw, 7.5rem);
+    font-size: clamp(2.2rem, 9vw, 7.5rem);
     line-height: 0.92;
     letter-spacing: -0.03em;
     color: var(--forest);
@@ -159,7 +179,7 @@
       no bolso.
     </h1>
     <p class="mt-10 max-w-2xl text-xl reveal" style="line-height: 1.6; color: #333;">
-      Aplicativo mobile do gabinete do vereador André Fraga (Partido Verde · Câmara Municipal de Salvador). Nativo iOS e Android, na App Store e Play Store desde 2023.
+      Aplicativo mobile do gabinete do vereador André Fraga (Câmara Municipal de Salvador). Desenvolvido pela MVP em parceria com DC Consultoria. Nativo para iOS e Android, publicado na App Store e Google Play desde 2023.
     </p>
     <div class="mt-12 flex flex-wrap gap-4 reveal">
       <a href="https://www.andrefraga.com" target="_blank" class="btn-primary">Ver o mandato →</a>
@@ -168,7 +188,7 @@
   </section>
 
   <!-- Screenshot mobile -->
-  <section class="max-w-7xl mx-auto px-8 py-16">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
       <div class="reveal">
         <div class="eyebrow mb-6">Aplicativo mobile</div>
@@ -186,13 +206,13 @@
   </section>
 
   <!-- Módulos -->
-  <section class="max-w-7xl mx-auto px-8 py-24">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="eyebrow mb-6 reveal">O que entregamos</div>
     <h2 class="serif text-5xl md:text-6xl mb-16 reveal" style="font-weight: 700; line-height: 1.05; color: var(--forest); letter-spacing: -0.02em;">
       Cinco módulos —<br />todos no mesmo app.
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
       <div class="card reveal">
         <div class="serif text-3xl mb-3 italic" style="color: var(--green);">Quem sou.</div>
         <p class="text-lg leading-relaxed">Perfil do vereador, trajetória, comissões que integra, projetos apresentados. Página institucional do mandato.</p>
@@ -213,7 +233,7 @@
   </section>
 
   <!-- Stack -->
-  <section id="stack" class="max-w-7xl mx-auto px-8 py-24">
+  <section id="stack" class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="eyebrow mb-6 reveal">Stack técnica</div>
     <h2 class="serif text-5xl md:text-6xl mb-12 reveal" style="font-weight: 700; color: var(--forest); line-height: 1;">Debaixo do capô.</h2>
     <div class="flex flex-wrap gap-3 reveal">
@@ -228,8 +248,8 @@
   </section>
 
   <!-- CTA -->
-  <section class="max-w-7xl mx-auto px-8 py-24">
-    <div class="rounded-3xl p-12 md:p-20 relative overflow-hidden" style="background: var(--forest); color: var(--paper);">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
+    <div class="rounded-3xl p-6 md:p-12 lg:p-20 relative overflow-hidden" style="background: var(--forest); color: var(--paper);">
       <div class="eyebrow mb-6" style="color: var(--green-soft);">Gabinete + Sociedade</div>
       <div class="serif text-5xl md:text-6xl mb-6" style="font-weight: 700; line-height: 1.05;">
         Precisa de app <em style="color: var(--green-soft); font-style: italic;">de mandato</em>?
@@ -238,13 +258,13 @@
         A MVP entrega app nativo iOS e Android, aprovado nas duas lojas, com backend integrado ao CMS do site do mandato.
       </p>
       <div class="flex flex-wrap gap-4">
-        <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--green-soft); color: var(--forest);">Escreva pra gente →</a>
+        <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--green-soft); color: var(--forest);">Solicitar apresentação →</a>
         <a href="../index.html" class="btn-outline" style="color: var(--paper); border-color: var(--paper);">Ver outros projetos</a>
       </div>
     </div>
   </section>
 
-  <footer class="max-w-7xl mx-auto px-8 py-12 eyebrow">
+  <footer class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 eyebrow">
     MVP Consultoria em Tecnologia — Salvador · Bahia · Brasil
   </footer>
 

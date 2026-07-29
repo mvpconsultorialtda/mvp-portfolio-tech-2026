@@ -14,6 +14,26 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 
 <style>
+  /* MOBILE-FIRST GLOBAL — cursor, touch-target, safe-area */
+  body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  @media (hover: none), (pointer: coarse) { body { cursor: auto !important; } }
+  @supports (padding: max(0px)) {
+    body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  }
+  /* Touch-target minimo 44px */
+  a[href], button, .btn-primary, .btn-outline, .format-badge, .pill, .label, .tag {
+    min-height: 44px;
+  }
+  /* Reduz box-shadows offset em mobile pra nao cortar */
+  @media (max-width: 640px) {
+    .quiz-card, .panel, .card, .game-card { box-shadow: 4px 4px 0 var(--ink, #000) !important; }
+    .device-frame { box-shadow: 4px 4px 0 var(--pink, #000) !important; }
+  }
+  /* Fluid section-pad global */
+  section { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); }
+  @media (min-width: 640px) { section { padding-left: 2rem; padding-right: 2rem; } }
+  html { scroll-behavior: smooth; }
+
   :root {
     /* Paleta oficial XequeMath (manual de marca Bionica) */
     --bg-cream: #EFE8E4;
@@ -49,7 +69,7 @@
   .hero-title {
     font-family: 'Fredoka', sans-serif;
     font-weight: 700;
-    font-size: clamp(3rem, 9vw, 8rem);
+    font-size: clamp(2.4rem, 10vw, 8rem);
     line-height: 0.95;
     letter-spacing: -0.02em;
   }
@@ -189,7 +209,7 @@
 
 <body>
   <!-- Nav -->
-  <nav class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+  <nav class="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex justify-between items-center">
     <a href="../index.html" class="fredoka font-bold text-xl flex items-center gap-2">
       <span>←</span> MVP · Portfolio
     </a>
@@ -199,7 +219,7 @@
   </nav>
 
   <!-- Hero -->
-  <section class="max-w-7xl mx-auto px-8 py-16 relative">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16 relative">
     <div class="symbol-bg fredoka" style="top: 10%; left: -3%; font-size: 200px; transform: rotate(-15deg);">○</div>
     <div class="symbol-bg fredoka" style="top: 30%; right: 5%; font-size: 160px; transform: rotate(20deg);">△</div>
     <div class="symbol-bg fredoka" style="bottom: 10%; left: 20%; font-size: 140px; transform: rotate(45deg);">□</div>
@@ -207,11 +227,10 @@
 
     <div class="section-label mb-8 reveal">CAPES · InovaEDUCAÇÃO · UNEB</div>
     <h1 class="hero-title reveal">
-      Aprender <span class="em-blue">matemática</span><br />
-      sem enxergar <span class="em-lime">número.</span>
+      Plataforma de jogos para o<br /><span class="em-blue">aprendizado</span> da matemática.
     </h1>
     <p class="mt-10 max-w-2xl text-xl reveal" style="line-height: 1.5;">
-      Uma plataforma de jogos que traduz o universo gamer para a sala de aula — sem intimidar quem tem fobia de fórmula.
+      Desenvolvida em parceria com a Universidade do Estado da Bahia (UNEB) e financiada pelo Programa InovaEDUCAÇÃO da CAPES. Traduz o universo dos jogos para a experiência pedagógica.
     </p>
     <div class="mt-12 flex flex-wrap gap-4 reveal">
       <a href="https://xequemath.vercel.app" target="_blank" class="btn-primary">Ver plataforma ao vivo →</a>
@@ -220,19 +239,19 @@
   </section>
 
   <!-- Screenshot hero -->
-  <section class="max-w-7xl mx-auto px-8 py-16">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16">
     <div class="device-frame reveal">
       <img src="../assets/screenshots/xequemath.png" alt="XequeMath — tela inicial" class="w-full h-auto block" onerror="this.style.height='500px'; this.style.background='linear-gradient(135deg, #0032A0 0%, #7790ED 50%, #C0D31F 100%)'; this.alt='Screenshot em breve';" />
     </div>
   </section>
 
   <!-- What we did -->
-  <section class="max-w-7xl mx-auto px-8 py-24">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="section-label mb-6 reveal">O que a MVP entregou</div>
-    <h2 class="fredoka font-bold text-5xl md:text-6xl mb-12 reveal" style="letter-spacing: -0.03em; line-height: 1;">
+    <h2 class="fredoka font-bold text-5xl md:text-6xl mb-12 reveal" style="letter-spacing: -0.03em; line-height: 1.05;">
       Plataforma completa —<br />do jogo ao ranking.
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
       <div class="game-card reveal">
         <div class="fredoka font-bold text-4xl mb-4" style="color: var(--vibrant-blue);">8 jogos</div>
         <p class="text-lg leading-relaxed">Probabilidade, geometria, aritmética, álgebra, lógica, combinatória. Cada jogo com dificuldade calibrada, duração e descrição pedagógica.</p>
@@ -253,9 +272,9 @@
   </section>
 
   <!-- Design system -->
-  <section class="max-w-7xl mx-auto px-8 py-24">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="section-label mb-6 reveal">Design System</div>
-    <h2 class="fredoka font-bold text-5xl md:text-6xl mb-12 reveal" style="letter-spacing: -0.03em; line-height: 1;">
+    <h2 class="fredoka font-bold text-5xl md:text-6xl mb-12 reveal" style="letter-spacing: -0.03em; line-height: 1.05;">
       Identidade visual —<br />do controle ao aprendizado.
     </h2>
     <p class="max-w-3xl text-lg mb-16 reveal" style="line-height: 1.6;">
@@ -300,9 +319,9 @@
   </section>
 
   <!-- Stack -->
-  <section id="stack" class="max-w-7xl mx-auto px-8 py-24">
+  <section id="stack" class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="section-label mb-6 reveal">Stack</div>
-    <h2 class="fredoka font-bold text-5xl md:text-6xl mb-12 reveal" style="letter-spacing: -0.03em; line-height: 1;">
+    <h2 class="fredoka font-bold text-5xl md:text-6xl mb-12 reveal" style="letter-spacing: -0.03em; line-height: 1.05;">
       Debaixo do capô.
     </h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
@@ -318,8 +337,8 @@
   </section>
 
   <!-- Footer / CTA -->
-  <section class="max-w-7xl mx-auto px-8 py-24">
-    <div class="rounded-3xl p-12 md:p-20 text-center relative overflow-hidden" style="background: var(--ink-dark); color: var(--bg-cream);">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
+    <div class="rounded-3xl p-6 md:p-12 lg:p-20 text-center relative overflow-hidden" style="background: var(--ink-dark); color: var(--bg-cream);">
       <div class="symbol-bg fredoka" style="top: 10%; left: 5%; font-size: 180px; color: var(--lime); opacity: 0.15;">○</div>
       <div class="symbol-bg fredoka" style="bottom: 10%; right: 5%; font-size: 180px; color: var(--lavender); opacity: 0.15;">△</div>
       <div class="fredoka font-bold text-4xl md:text-6xl mb-6" style="letter-spacing: -0.03em;">
@@ -329,13 +348,13 @@
         A MVP entrega produto pronto, com identidade própria e stack de produção — do primeiro wireframe à App Store.
       </p>
       <div class="flex flex-wrap gap-4 justify-center">
-        <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--lime); color: var(--ink-dark); border-color: var(--lime);">Escreva pra gente →</a>
+        <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--lime); color: var(--ink-dark); border-color: var(--lime);">Solicitar apresentação →</a>
         <a href="../index.html" class="btn-outline" style="color: var(--bg-cream); border-color: var(--bg-cream);">Ver outros projetos</a>
       </div>
     </div>
   </section>
 
-  <footer class="max-w-7xl mx-auto px-8 py-12 fredoka text-xs uppercase tracking-widest opacity-60">
+  <footer class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 fredoka text-xs uppercase tracking-widest opacity-60">
     MVP Consultoria em Tecnologia — Salvador · Bahia · Brasil
   </footer>
 

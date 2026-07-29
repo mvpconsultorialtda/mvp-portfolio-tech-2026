@@ -11,6 +11,26 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <style>
+  /* MOBILE-FIRST GLOBAL — cursor, touch-target, safe-area */
+  body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  @media (hover: none), (pointer: coarse) { body { cursor: auto !important; } }
+  @supports (padding: max(0px)) {
+    body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  }
+  /* Touch-target minimo 44px */
+  a[href], button, .btn-primary, .btn-outline, .format-badge, .pill, .label, .tag {
+    min-height: 44px;
+  }
+  /* Reduz box-shadows offset em mobile pra nao cortar */
+  @media (max-width: 640px) {
+    .quiz-card, .panel, .card, .game-card { box-shadow: 4px 4px 0 var(--ink, #000) !important; }
+    .device-frame { box-shadow: 4px 4px 0 var(--pink, #000) !important; }
+  }
+  /* Fluid section-pad global */
+  section { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); }
+  @media (min-width: 640px) { section { padding-left: 2rem; padding-right: 2rem; } }
+  html { scroll-behavior: smooth; }
+
   :root {
     --navy: #001d3d;
     --uneb-blue: #003566;
@@ -33,7 +53,7 @@
 
   .hero-title {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(3rem, 8.5vw, 7.5rem);
+    font-size: clamp(2.2rem, 9vw, 7.5rem);
     line-height: 0.95;
     letter-spacing: -0.02em;
     color: var(--navy);
@@ -146,7 +166,7 @@
       <em>pesquisadores</em>.
     </h1>
     <p class="mt-10 max-w-2xl text-xl reveal" style="line-height: 1.6; color: #444;">
-      Plataforma institucional da Universidade do Estado da Bahia. Descoberta e matching entre grupos de pesquisa, laboratórios ativos e infraestrutura disponível.
+      Plataforma institucional entregue à Universidade do Estado da Bahia (UNEB) no âmbito do Programa Proinovação. Descoberta e matching entre grupos de pesquisa, laboratórios ativos e infraestrutura disponível. Código-fonte, deploy e banco de dados transferidos integralmente à instituição.
     </p>
     <div class="mt-12 flex flex-wrap gap-4 reveal">
       <a href="https://labconnect-uneb.vercel.app" target="_blank" class="btn-primary">Ver plataforma ao vivo →</a>
@@ -155,14 +175,14 @@
   </section>
 
   <!-- Screenshot -->
-  <section class="max-w-7xl mx-auto px-8 py-16">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16">
     <div class="device-frame reveal">
       <img src="../assets/screenshots/labconect.png" alt="LabConect UNEB" class="w-full block" onerror="this.style.height='500px'; this.style.background='linear-gradient(135deg, #001d3d, #003566, #ffc300);'" />
     </div>
   </section>
 
   <!-- O que entregamos -->
-  <section class="max-w-7xl mx-auto px-8 py-24">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
       <div class="md:col-span-1">
         <div class="eyebrow mb-6 reveal">O que a MVP entregou</div>
@@ -214,7 +234,7 @@
   <div class="max-w-7xl mx-auto px-8"><div class="divider-line"></div></div>
 
   <!-- Stack -->
-  <section id="stack" class="max-w-7xl mx-auto px-8 py-24">
+  <section id="stack" class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="eyebrow mb-6 reveal">Stack técnica</div>
     <h2 class="display text-5xl md:text-6xl mb-12 reveal" style="line-height: 1; color: var(--navy);">Debaixo do capô.</h2>
     <div class="flex flex-wrap gap-3 reveal">
@@ -230,8 +250,8 @@
   </section>
 
   <!-- CTA -->
-  <section class="max-w-7xl mx-auto px-8 py-24">
-    <div class="p-12 md:p-20 relative overflow-hidden" style="background: var(--navy); color: white;">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
+    <div class="p-6 md:p-12 lg:p-20 relative overflow-hidden" style="background: var(--navy); color: white;">
       <div class="absolute inset-0 grid-bg opacity-5"></div>
       <div class="relative z-10">
         <div class="eyebrow mb-6" style="color: var(--gold);">Sua instituição</div>
@@ -242,14 +262,14 @@
           A MVP entrega com transferência integral de titularidade — código, deploy, banco e conta. Sem lock-in, sem dependência de fornecedor.
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--gold); color: var(--ink); border-color: var(--gold);">Escreva pra gente →</a>
+          <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--gold); color: var(--ink); border-color: var(--gold);">Solicitar apresentação →</a>
           <a href="../index.html" class="btn-outline" style="color: white; border-color: white;">Ver outros projetos</a>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="max-w-7xl mx-auto px-8 py-12 eyebrow">
+  <footer class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 eyebrow">
     MVP Consultoria em Tecnologia — Salvador · Bahia · Brasil
   </footer>
 

@@ -11,6 +11,26 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <style>
+  /* MOBILE-FIRST GLOBAL — cursor, touch-target, safe-area */
+  body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  @media (hover: none), (pointer: coarse) { body { cursor: auto !important; } }
+  @supports (padding: max(0px)) {
+    body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  }
+  /* Touch-target minimo 44px */
+  a[href], button, .btn-primary, .btn-outline, .format-badge, .pill, .label, .tag {
+    min-height: 44px;
+  }
+  /* Reduz box-shadows offset em mobile pra nao cortar */
+  @media (max-width: 640px) {
+    .quiz-card, .panel, .card, .game-card { box-shadow: 4px 4px 0 var(--ink, #000) !important; }
+    .device-frame { box-shadow: 4px 4px 0 var(--pink, #000) !important; }
+  }
+  /* Fluid section-pad global */
+  section { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); }
+  @media (min-width: 640px) { section { padding-left: 2rem; padding-right: 2rem; } }
+  html { scroll-behavior: smooth; }
+
   :root {
     --pink: #ff006e;
     --yellow: #ffd60a;
@@ -37,7 +57,7 @@
   .blob-2 { background: var(--yellow); animation: float2 10s ease-in-out infinite; }
   .blob-3 { background: var(--purple); animation: float1 12s ease-in-out infinite reverse; }
 
-  .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 9vw, 8rem); line-height: 0.95; letter-spacing: -0.02em; }
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 10vw, 8rem); line-height: 0.95; letter-spacing: -0.02em; }
 
   .btn-primary {
     background: var(--ink); color: var(--bg);
@@ -95,24 +115,23 @@
 </style>
 </head>
 <body>
-  <nav class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center relative z-10">
+  <nav class="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6 flex justify-between items-center relative z-10">
     <a href="../index.html" class="font-bold flex items-center gap-2" style="font-size: 1rem;">← MVP · Portfolio</a>
     <a href="https://educahubplay.vercel.app" target="_blank" class="format-badge badge-p">Ver ao vivo →</a>
   </nav>
 
   <!-- Hero -->
-  <section class="max-w-7xl mx-auto px-8 py-16 relative">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16 relative">
     <div class="blob blob-1" style="width: 350px; height: 350px; top: 10%; right: -10%;"></div>
     <div class="blob blob-2" style="width: 300px; height: 300px; bottom: 5%; left: -10%;"></div>
     <div class="blob blob-3" style="width: 250px; height: 250px; top: 40%; right: 30%;"></div>
 
     <div class="label mb-8 reveal">CAPES · InovaEDUCAÇÃO · UNEB</div>
     <h1 class="hero-title reveal relative z-10">
-      <em>Aprender</em> jogando <br />
-      <span style="background: var(--yellow); padding: 0 0.15em; display: inline-block; transform: rotate(-2deg); border-radius: 12px;">quizzes.</span>
+      Plataforma colaborativa<br />de <em>gamificação</em><br />pedagógica.
     </h1>
     <p class="mt-10 max-w-2xl text-xl reveal relative z-10" style="line-height: 1.5;">
-      Uma plataforma colaborativa onde professor cria seu próprio quiz em cinco minutos — e o aluno joga, evolui, coleciona.
+      Desenvolvida em parceria com a Universidade do Estado da Bahia (UNEB), financiada pelo Programa InovaEDUCAÇÃO da CAPES. Professores criam quizzes em cinco minutos; alunos jogam, evoluem, colecionam. Assistente pedagógico alinhado à BNCC.
     </p>
     <div class="mt-12 flex flex-wrap gap-4 reveal relative z-10">
       <a href="https://educahubplay.vercel.app" target="_blank" class="btn-primary">Ver plataforma ao vivo →</a>
@@ -121,14 +140,14 @@
   </section>
 
   <!-- Screenshot -->
-  <section class="max-w-7xl mx-auto px-8 py-16">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16">
     <div class="device-frame reveal">
       <img src="../assets/screenshots/educahubplay.png" alt="EducaHubPlay tela inicial" class="w-full block" onerror="this.style.height='500px'; this.style.background='linear-gradient(135deg, #ff006e 0%, #ffd60a 50%, #8338ec 100%)';" />
     </div>
   </section>
 
   <!-- Números -->
-  <section class="max-w-7xl mx-auto px-8 py-24">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="label label-pink mb-6 reveal">Escala</div>
     <h2 class="display text-5xl md:text-6xl mb-16 reveal" style="line-height: 1.05; letter-spacing: -0.02em;">
       22 quizzes ativos. <br />5 formatos de jogo. <br />10 disciplinas.
@@ -142,7 +161,7 @@
       <div class="format-badge badge-pu text-center py-3">Trilha</div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
       <div class="quiz-card reveal">
         <div class="display text-4xl mb-3" style="color: var(--pink);">Professor cria em 5min.</div>
         <p class="text-lg leading-relaxed">Editor visual, arrastar-e-soltar. Sem código, sem curva de aprendizado. Do rascunho ao publicado em cinco minutos.</p>
@@ -163,7 +182,7 @@
   </section>
 
   <!-- Stack -->
-  <section id="stack" class="max-w-7xl mx-auto px-8 py-24">
+  <section id="stack" class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
     <div class="label mb-6 reveal">Stack</div>
     <h2 class="display text-5xl md:text-6xl mb-12 reveal" style="line-height: 1;">Debaixo do capô.</h2>
     <div class="flex flex-wrap gap-3 reveal">
@@ -179,24 +198,23 @@
   </section>
 
   <!-- CTA -->
-  <section class="max-w-7xl mx-auto px-8 py-24">
-    <div class="rounded-3xl p-12 md:p-20 relative overflow-hidden" style="background: var(--ink); color: var(--bg);">
+  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
+    <div class="rounded-3xl p-6 md:p-12 lg:p-20 relative overflow-hidden" style="background: var(--ink); color: var(--bg);">
       <div class="blob blob-1" style="width: 300px; height: 300px; top: -10%; right: -5%; opacity: 0.4;"></div>
       <div class="display text-5xl md:text-6xl mb-6 relative z-10" style="line-height: 1.05;">
-        Precisa de plataforma <br />
-        <em style="color: var(--yellow); font-style: italic;">assim de flexível?</em>
+        Precisa de <em style="color: var(--yellow); font-style: italic;">plataforma pedagógica</em>?
       </div>
       <p class="text-lg max-w-xl mb-10 relative z-10" style="color: #d4d4d8;">
-        A MVP entrega produto pronto — do wireframe ao dashboard do professor, do quiz ao offline mode.
+        A MVP entrega o produto integralmente — do wireframe ao dashboard do professor, do editor ao modo offline. Com transferência de titularidade e documentação técnica.
       </p>
       <div class="flex flex-wrap gap-4 relative z-10">
-        <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--yellow); color: var(--ink); border-color: var(--yellow);">Escreva pra gente →</a>
+        <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--yellow); color: var(--ink); border-color: var(--yellow);">Solicitar apresentação →</a>
         <a href="../index.html" class="btn-outline" style="color: var(--bg); border-color: var(--bg);">Ver outros projetos</a>
       </div>
     </div>
   </section>
 
-  <footer class="max-w-7xl mx-auto px-8 py-12 text-xs uppercase tracking-widest opacity-60 font-bold">
+  <footer class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 text-xs uppercase tracking-widest opacity-60 font-bold">
     MVP Consultoria em Tecnologia — Salvador · Bahia
   </footer>
 
