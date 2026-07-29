@@ -212,7 +212,7 @@
     50% { transform: translateX(-50%) translateY(8px); }
   }
 
-  /* Card name — cinza claro (estrutura igual .hero-title em mas cor cinza + glow neutro) */
+  /* Card name — cinza medio-escuro (visivel como cinza em fundo escuro sem virar branco) */
   .card-name {
     display: inline-block;
     padding: 0 0.15em;
@@ -220,16 +220,16 @@
     border: none;
     position: relative;
     z-index: 2;
-    color: #d4d4d8;
+    color: #71717a;
     font-family: 'Fraunces', serif !important;
     font-weight: 900;
     font-style: italic;
     line-height: 1;
     letter-spacing: -0.02em;
     text-shadow:
-      0 0 30px rgba(212, 212, 216, 0.35),
-      0 0 60px rgba(124, 245, 197, 0.15);
-    animation: cardname-pulse 3.5s ease-in-out infinite;
+      0 0 20px rgba(113, 113, 122, 0.5),
+      0 0 40px rgba(124, 245, 197, 0.12);
+    animation: cardname-pulse 4s ease-in-out infinite;
   }
   .card-name::after {
     content: "";
@@ -237,13 +237,13 @@
     left: 0; right: 0; bottom: 0.05em;
     height: 0.28em;
     background: linear-gradient(90deg, #7cf5c5, #b3a1ff, #ff9068);
-    opacity: 0.4;
+    opacity: 0.35;
     z-index: -1;
     border-radius: 4px;
   }
   @keyframes cardname-pulse {
-    0%, 100% { text-shadow: 0 0 30px rgba(212, 212, 216, 0.35), 0 0 60px rgba(124, 245, 197, 0.15); }
-    50% { text-shadow: 0 0 45px rgba(212, 212, 216, 0.55), 0 0 80px rgba(124, 245, 197, 0.3); }
+    0%, 100% { text-shadow: 0 0 20px rgba(113, 113, 122, 0.5), 0 0 40px rgba(124, 245, 197, 0.12); }
+    50% { text-shadow: 0 0 30px rgba(113, 113, 122, 0.7), 0 0 60px rgba(124, 245, 197, 0.22); }
   }
 
   /* Nav mobile-first */
@@ -473,17 +473,9 @@
             <div class="eyebrow">Cliente privado · CMS</div>
             <div class="eyebrow opacity-40">05 / 05</div>
           </div>
-          <div class="aspect-[16/10] rounded-2xl overflow-hidden mb-8 relative flex items-end p-6" style="background: linear-gradient(135deg, #052e16 0%, #14532d 40%, #059669 100%);">
-            <svg class="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#a7f3d0" stroke-width="1"/>
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-            <div class="relative z-10">
-              <div class="inline-block px-3 py-1 mb-3 rounded-full text-xs font-mono uppercase tracking-widest" style="background: rgba(167, 243, 208, 0.2); color: #a7f3d0; border: 1px solid rgba(167, 243, 208, 0.3);">iOS · Android</div>
+          <div class="aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden mb-6 md:mb-8 relative" style="background: linear-gradient(135deg, #052e16 0%, #14532d 40%, #059669 100%);">
+            <img src="assets/brand-refs/andre-fraga/foto-vereador-app.jpg" alt="Vereador André Fraga" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
+            <div class="absolute inset-0 flex items-end p-6">
               <div class="card-name" style="font-size: clamp(1.6rem, 5vw, 2.5rem);">Mandato André Fraga</div>
             </div>
           </div>
