@@ -3,274 +3,407 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LabConect — MVP Portfolio</title>
+<title>LabConnect — MVP Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <style>
-  /* MOBILE-FIRST GLOBAL — cursor, touch-target, safe-area */
-  body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-  @media (hover: none), (pointer: coarse) { body { cursor: auto !important; } }
-  @supports (padding: max(0px)) {
-    body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
-  }
-  /* Touch-target minimo 44px */
-  a[href], button, .btn-primary, .btn-outline, .format-badge, .pill, .label, .tag {
-    min-height: 44px;
-  }
-  /* Reduz box-shadows offset em mobile pra nao cortar */
-  @media (max-width: 640px) {
-    .quiz-card, .panel, .card, .game-card { box-shadow: 4px 4px 0 var(--ink, #000) !important; }
-    .device-frame { box-shadow: 4px 4px 0 var(--pink, #000) !important; }
-  }
-  /* Fluid section-pad global */
-  section { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); }
-  @media (min-width: 640px) { section { padding-left: 2rem; padding-right: 2rem; } }
-  html { scroll-behavior: smooth; }
-
   :root {
-    --navy: #001d3d;
-    --uneb-blue: #003566;
-    --gold: #ffc300;
-    --gold-soft: #ffd60a;
-    --paper: #fafaf5;
-    --ink: #0a0a0f;
-    --line: #e5e5e0;
+    /* Paleta oficial LabConnect — extraida de tailwind.config.js do repo design-uneb/labconnect */
+    --primary: #ffa552;
+    --secondary: #de6623;
+    --dark: #0d0d0d;
+    --gray: #e6e9e9;
+    --navy: #121424;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--gray);
+    color: var(--navy);
     font-family: 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
-  .display { font-family: 'DM Serif Display', serif; }
-  .mono { font-family: 'JetBrains Mono', monospace; }
+  @media (hover: none), (pointer: coarse) { body { cursor: auto !important; } }
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+  }
 
+  .display { font-family: 'Montserrat', sans-serif; }
+  .display-bold { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+
+  /* Hero title */
   .hero-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.2rem, 9vw, 7.5rem);
-    line-height: 0.95;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 8vw, 6.5rem);
+    line-height: 1.02;
     letter-spacing: -0.02em;
     color: var(--navy);
   }
-  .hero-title em {
-    font-style: italic;
-    background: linear-gradient(180deg, transparent 65%, var(--gold-soft) 65%);
-    padding: 0 0.1em;
+  .hero-title .grad {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
 
+  /* Background gradients — blobs blur laranja */
+  .bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Pill "Exclusivo para..." */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    background: rgba(255, 165, 82, 0.12);
+    border: 1px solid rgba(255, 165, 82, 0.3);
+    color: var(--secondary);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge .dot {
+    width: 8px; height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 0.5; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* Buttons */
   .btn-primary {
-    background: var(--navy); color: white;
-    padding: 1rem 2rem; border-radius: 4px;
-    font-weight: 600; font-size: 1rem;
     display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: filter 0.2s, transform 0.2s;
+    box-shadow: 0 8px 20px rgba(222, 102, 35, 0.25);
+    min-height: 44px;
+  }
+  .btn-primary:hover { filter: brightness(1.1); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: var(--navy);
+    border: 1px solid rgba(18, 20, 36, 0.15);
+    border-radius: 999px;
+    font-weight: 700;
     text-decoration: none;
     transition: background 0.2s;
-    border: 1px solid var(--navy);
+    min-height: 44px;
   }
-  .btn-primary:hover { background: var(--uneb-blue); }
-  .btn-outline {
-    background: transparent; color: var(--navy);
-    padding: 1rem 2rem; border-radius: 4px;
-    font-weight: 600; font-size: 1rem;
-    text-decoration: none;
-    border: 1px solid var(--navy);
-    transition: all 0.2s;
-  }
-  .btn-outline:hover { background: var(--navy); color: white; }
+  .btn-outline:hover { background: rgba(18, 20, 36, 0.05); }
 
-  .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--uneb-blue);
-    font-weight: 500;
+  /* Glass cards */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
   }
 
-  .card {
-    background: white;
-    border: 1px solid var(--line);
-    padding: 2.5rem;
-    transition: box-shadow 0.3s, transform 0.3s;
+  .feature-card {
+    background: rgba(230, 233, 233, 0.3);
+    border: 1px solid rgba(18, 20, 36, 0.05);
+    border-radius: 20px;
+    padding: 1.75rem;
+    transition: all 0.3s ease;
   }
-  .card:hover {
-    box-shadow: 0 12px 40px -12px rgba(0, 29, 61, 0.2);
-    transform: translateY(-4px);
+  .feature-card:hover {
+    border-color: rgba(255, 165, 82, 0.5);
+    background: rgba(255, 165, 82, 0.05);
   }
-
-  .card-number {
-    font-family: 'DM Serif Display', serif;
-    font-size: 3rem;
-    color: var(--gold);
-    line-height: 1;
-    font-style: italic;
+  .icon-wrap {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
+  .icon-primary { background: rgba(255, 165, 82, 0.12); color: var(--primary); }
+  .icon-secondary { background: rgba(222, 102, 35, 0.12); color: var(--secondary); }
+  .icon-purple { background: rgba(147, 51, 234, 0.12); color: #9333ea; }
 
   .tag {
     display: inline-block;
     padding: 0.4rem 1rem;
-    border: 1px solid var(--navy);
+    background: white;
+    border: 1px solid rgba(18, 20, 36, 0.15);
     color: var(--navy);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.8rem;
   }
-  .tag-gold { background: var(--gold-soft); border-color: var(--gold-soft); }
-  .tag-navy { background: var(--navy); color: white; }
+  .tag-primary { background: var(--primary); color: white; border-color: var(--primary); }
+  .tag-nav { background: var(--navy); color: white; border-color: var(--navy); }
+  .tag-secondary { background: var(--secondary); color: white; border-color: var(--secondary); }
 
   .device-frame {
-    border: 1px solid var(--line);
-    box-shadow: 0 40px 80px -20px rgba(0, 29, 61, 0.25);
     background: white;
+    border-radius: 24px;
+    padding: 1rem;
+    box-shadow: 0 40px 80px -20px rgba(18, 20, 36, 0.15);
     overflow: hidden;
   }
 
-  .divider-line {
-    height: 1px;
-    background: var(--line);
-    margin: 4rem 0;
-  }
+  section { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); }
+  @media (min-width: 640px) { section { padding-left: 2rem; padding-right: 2rem; } }
 
   a { color: inherit; text-decoration: none; }
   .reveal { opacity: 0; transform: translateY(30px); }
 
-  /* Grid decoration */
-  .grid-bg {
-    background-image: linear-gradient(var(--line) 1px, transparent 1px),
-                       linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 40px 40px;
+  .divider-line {
+    height: 1px;
+    background: rgba(18, 20, 36, 0.08);
+    margin: 3rem 0;
   }
 </style>
 </head>
 <body>
-  <nav class="border-b border-neutral-200">
-    <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center">
-      <a href="../index.html" class="eyebrow flex items-center gap-2">← MVP · Portfolio</a>
-      <a href="https://labconnect-uneb.vercel.app" target="_blank" class="tag tag-navy">Ver ao vivo →</a>
+  <!-- Nav -->
+  <nav class="border-b" style="border-color: rgba(18,20,36,0.06); background: rgba(230,233,233,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50;">
+    <div class="max-w-7xl mx-auto py-4 flex justify-between items-center">
+      <a href="../index.html" class="flex items-center gap-3">
+        <img src="../assets/logos/labconect/logo_reduzido.png" alt="LabConnect" style="height: 32px; width: auto;" />
+        <span class="text-xs uppercase tracking-widest" style="color: rgba(18,20,36,0.6); font-weight: 600;">← MVP · Portfolio</span>
+      </a>
+      <a href="https://labconnect-uneb.vercel.app" target="_blank" class="tag tag-primary">Ver ao vivo →</a>
     </div>
   </nav>
 
   <!-- Hero -->
-  <section class="max-w-7xl mx-auto px-8 py-24 relative">
-    <div class="eyebrow mb-8 reveal">UNEB · Proinovação 104/2024</div>
-    <h1 class="hero-title reveal">
-      A rede que conecta <br />
-      <em>laboratórios</em> e <br />
-      <em>pesquisadores</em>.
-    </h1>
-    <p class="mt-10 max-w-2xl text-xl reveal" style="line-height: 1.6; color: #444;">
-      Plataforma institucional entregue à Universidade do Estado da Bahia (UNEB) no âmbito do Programa Proinovação. Descoberta e matching entre grupos de pesquisa, laboratórios ativos e infraestrutura disponível. Código-fonte, deploy e banco de dados transferidos integralmente à instituição.
-    </p>
-    <div class="mt-12 flex flex-wrap gap-4 reveal">
-      <a href="https://labconnect-uneb.vercel.app" target="_blank" class="btn-primary">Ver plataforma ao vivo →</a>
-      <a href="#stack" class="btn-outline">Stack técnica</a>
+  <section class="max-w-7xl mx-auto pt-16 md:pt-24 pb-12 md:pb-20 relative">
+    <div class="bg-blob" style="width: 400px; height: 400px; top: 5%; left: 10%; background: rgba(255,165,82,0.15);"></div>
+    <div class="bg-blob" style="width: 400px; height: 400px; bottom: 5%; right: 5%; background: rgba(222,102,35,0.12);"></div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div>
+        <div class="badge reveal mb-6">
+          <span class="dot"></span>
+          <span>UNEB · Proinovação 104/2024</span>
+        </div>
+        <h1 class="hero-title reveal mb-6">
+          Conectando o <br />
+          <span class="grad">Futuro do Design</span>
+        </h1>
+        <p class="text-lg reveal mb-8 max-w-xl" style="color: rgba(18,20,36,0.75); line-height: 1.6;">
+          Plataforma institucional entregue à Universidade do Estado da Bahia (UNEB). Rede oficial de vagas, mentorias e networking para egressos e estudantes de Design. Código-fonte e infraestrutura transferidos integralmente à instituição.
+        </p>
+        <div class="flex flex-wrap gap-4 reveal">
+          <a href="https://labconnect-uneb.vercel.app" target="_blank" class="btn-primary">
+            Ver plataforma ao vivo
+            <span>→</span>
+          </a>
+          <a href="#stack" class="btn-outline">Stack técnica</a>
+        </div>
+      </div>
+
+      <!-- Mockup card -->
+      <div class="relative reveal">
+        <div class="glass-card p-6" style="transform: rotate(3deg); transition: transform 0.5s;">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="display-bold text-lg" style="color: var(--navy);">Vagas em destaque</h3>
+              <p class="text-xs" style="color: rgba(18,20,36,0.5);">Curadoria UNEB Design</p>
+            </div>
+            <div class="icon-wrap icon-primary" style="width: 40px; height: 40px; margin: 0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-3V5c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2z"/></svg>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="p-3 rounded-xl" style="background: rgba(230,233,233,0.5); border: 1px solid rgba(18,20,36,0.05);">
+              <div class="flex justify-between items-start mb-2">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold" style="background: rgba(255,165,82,0.15); color: var(--secondary);">S</div>
+                <span class="text-xs font-medium px-2 py-1 rounded" style="background: rgba(255,165,82,0.2); color: var(--secondary);">Pleno</span>
+              </div>
+              <div class="font-semibold text-sm" style="color: var(--navy);">UX/UI Designer</div>
+              <div class="text-xs" style="color: rgba(18,20,36,0.5);">Studio K · Híbrido · Salvador</div>
+            </div>
+            <div class="p-3 rounded-xl" style="background: rgba(230,233,233,0.5); border: 1px solid rgba(18,20,36,0.05);">
+              <div class="flex justify-between items-start mb-2">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold" style="background: rgba(59,130,246,0.15); color: #3b82f6;">N</div>
+                <span class="text-xs font-medium px-2 py-1 rounded" style="background: rgba(59,130,246,0.1); color: #2563eb;">Júnior</span>
+              </div>
+              <div class="font-semibold text-sm" style="color: var(--navy);">Designer Gráfico</div>
+              <div class="text-xs" style="color: rgba(18,20,36,0.5);">Nubank · Remoto</div>
+            </div>
+            <div class="p-3 rounded-xl" style="background: rgba(230,233,233,0.5); border: 1px solid rgba(18,20,36,0.05);">
+              <div class="flex justify-between items-start mb-2">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold" style="background: rgba(147,51,234,0.15); color: #9333ea;">I</div>
+                <span class="text-xs font-medium px-2 py-1 rounded" style="background: rgba(147,51,234,0.1); color: #7c3aed;">Estágio</span>
+              </div>
+              <div class="font-semibold text-sm" style="color: var(--navy);">Product Design Intern</div>
+              <div class="text-xs" style="color: rgba(18,20,36,0.5);">Inter · Belo Horizonte</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating elements -->
+        <div class="absolute -top-6 -right-4 md:-right-8 z-20" style="background: var(--primary); color: white; padding: 0.75rem 1rem; border-radius: 16px; box-shadow: 0 12px 24px rgba(222,102,35,0.25); font-size: 0.75rem;">
+          <div class="flex items-center gap-2">
+            <div style="background: rgba(255,255,255,0.2); padding: 0.35rem; border-radius: 8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <div class="font-bold text-[10px] opacity-90 uppercase tracking-wider">Mentorias</div>
+              <div class="font-bold">Com professores UNEB</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Screenshot -->
-  <section class="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16">
+  <!-- Screenshot real -->
+  <section class="max-w-7xl mx-auto py-8 md:py-16">
     <div class="device-frame reveal">
-      <img src="../assets/screenshots/labconect.png" alt="LabConect UNEB" class="w-full block" onerror="this.style.height='500px'; this.style.background='linear-gradient(135deg, #001d3d, #003566, #ffc300);'" />
+      <img src="../assets/screenshots/labconect.png" alt="LabConnect plataforma" class="w-full block rounded-xl" onerror="this.style.height='400px'; this.style.background='linear-gradient(135deg, #ffa552, #de6623);'" />
     </div>
   </section>
 
-  <!-- O que entregamos -->
-  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div class="md:col-span-1">
-        <div class="eyebrow mb-6 reveal">O que a MVP entregou</div>
-        <h2 class="display reveal" style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--navy);">
-          Um produto <em>entregue</em>, não uma promessa.
-        </h2>
+  <!-- Features -->
+  <section class="max-w-7xl mx-auto py-16 md:py-24">
+    <div class="text-center mb-16 reveal">
+      <div class="badge mb-6"><span class="dot"></span>O que a MVP entregou</div>
+      <h2 class="display-bold text-3xl md:text-5xl" style="color: var(--navy); letter-spacing: -0.02em; line-height: 1.1;">
+        Por que o Lab Connect?
+      </h2>
+      <p class="max-w-2xl mx-auto mt-6" style="color: rgba(18,20,36,0.75); font-size: 1.05rem;">
+        Nascido dentro da UNEB para fortalecer a comunidade de Design. A MVP construiu e transferiu a plataforma como ponte entre o ambiente acadêmico e o mercado.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="feature-card reveal">
+        <div class="icon-wrap icon-primary">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+        </div>
+        <h3 class="display-bold text-xl mb-3" style="color: var(--navy);">Networking real</h3>
+        <p style="color: rgba(18,20,36,0.75); line-height: 1.6;">Conexão entre egressos e estudantes com veteranos da UNEB já no mercado. Rede curada, não algorítmica.</p>
       </div>
-      <div class="md:col-span-3 space-y-6">
-        <div class="card reveal">
-          <div class="flex items-start gap-8">
-            <div class="card-number">01</div>
-            <div>
-              <h3 class="display text-2xl mb-3" style="color: var(--navy);">Autenticação institucional.</h3>
-              <p class="text-lg leading-relaxed">Firebase Auth integrado ao domínio UNEB. Cadastro por e-mail institucional, verificação em duas etapas, controle de perfis por área.</p>
-            </div>
-          </div>
+      <div class="feature-card reveal">
+        <div class="icon-wrap icon-secondary">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-3V5c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2z"/></svg>
         </div>
-        <div class="card reveal">
-          <div class="flex items-start gap-8">
-            <div class="card-number">02</div>
-            <div>
-              <h3 class="display text-2xl mb-3" style="color: var(--navy);">Diretório de labs.</h3>
-              <p class="text-lg leading-relaxed">Cadastro completo de laboratórios ativos — equipamentos, linhas de pesquisa, coordenação. Busca por tema, campus, disponibilidade.</p>
-            </div>
-          </div>
+        <h3 class="display-bold text-xl mb-3" style="color: var(--navy);">Vagas exclusivas</h3>
+        <p style="color: rgba(18,20,36,0.75); line-height: 1.6;">Oportunidades curadas especificamente para o perfil dos designers formados na UNEB. Sem ruído.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon-wrap icon-purple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </div>
-        <div class="card reveal">
-          <div class="flex items-start gap-8">
-            <div class="card-number">03</div>
-            <div>
-              <h3 class="display text-2xl mb-3" style="color: var(--navy);">Perfil de pesquisador.</h3>
-              <p class="text-lg leading-relaxed">Integração com CV Lattes, publicações, ORCID. Conecta pesquisador a laboratório com competência complementar.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card reveal">
-          <div class="flex items-start gap-8">
-            <div class="card-number">04</div>
-            <div>
-              <h3 class="display text-2xl mb-3" style="color: var(--navy);">Transferência de titularidade.</h3>
-              <p class="text-lg leading-relaxed">Código-fonte, hospedagem, banco de dados e conta administrativa transferidos formalmente à UNEB. Documentação técnica completa.</p>
-            </div>
-          </div>
-        </div>
+        <h3 class="display-bold text-xl mb-3" style="color: var(--navy);">Mentoria e eventos</h3>
+        <p style="color: rgba(18,20,36,0.75); line-height: 1.6;">Workshops, palestras e programas de mentoria com o corpo docente da UNEB. Aceleração de trajetória.</p>
       </div>
     </div>
   </section>
 
-  <div class="max-w-7xl mx-auto px-8"><div class="divider-line"></div></div>
+  <div class="max-w-7xl mx-auto"><div class="divider-line"></div></div>
 
   <!-- Stack -->
-  <section id="stack" class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
-    <div class="eyebrow mb-6 reveal">Stack técnica</div>
-    <h2 class="display text-5xl md:text-6xl mb-12 reveal" style="line-height: 1; color: var(--navy);">Debaixo do capô.</h2>
+  <section id="stack" class="max-w-7xl mx-auto py-16 md:py-24">
+    <div class="mb-12 reveal">
+      <div class="badge mb-6"><span class="dot"></span>Stack técnica</div>
+      <h2 class="display-bold text-3xl md:text-5xl" style="color: var(--navy); letter-spacing: -0.02em; line-height: 1.1;">
+        Debaixo do capô.
+      </h2>
+    </div>
     <div class="flex flex-wrap gap-3 reveal">
-      <span class="tag tag-navy">Next.js 15</span>
-      <span class="tag">React 19</span>
-      <span class="tag">TypeScript</span>
-      <span class="tag">Tailwind CSS</span>
-      <span class="tag tag-gold">Firebase Auth</span>
+      <span class="tag tag-nav">React 19</span>
+      <span class="tag">TypeScript 5.9</span>
+      <span class="tag tag-primary">Tailwind CSS 4</span>
+      <span class="tag">Vite 7</span>
+      <span class="tag tag-secondary">Firebase Auth</span>
       <span class="tag">Cloud Firestore</span>
-      <span class="tag">Vercel</span>
-      <span class="tag">GitHub Design UNEB</span>
+      <span class="tag">Framer Motion</span>
+      <span class="tag">React Router 7</span>
+      <span class="tag">Capacitor 7 (Android)</span>
+      <span class="tag">React Hook Form + Zod</span>
+      <span class="tag">Vitest</span>
+      <span class="tag tag-nav">Vercel</span>
+    </div>
+  </section>
+
+  <!-- Entrega institucional -->
+  <section class="max-w-7xl mx-auto py-16 md:py-24">
+    <div class="glass-card p-8 md:p-12 reveal">
+      <div class="badge mb-6"><span class="dot"></span>Transferência integral</div>
+      <h3 class="display-bold text-2xl md:text-4xl mb-6" style="color: var(--navy); line-height: 1.1;">
+        A UNEB é titular exclusiva de tudo.
+      </h3>
+      <div class="grid md:grid-cols-2 gap-6 text-base" style="color: rgba(18,20,36,0.85); line-height: 1.7;">
+        <div>
+          <div class="text-xs uppercase tracking-wider font-bold mb-2" style="color: var(--secondary);">Código-fonte</div>
+          <div>Repositório oficial: <code style="background: rgba(255,165,82,0.15); padding: 2px 8px; border-radius: 4px; font-size: 0.9em;">github.com/design-uneb/labconnect</code></div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wider font-bold mb-2" style="color: var(--secondary);">Deploy</div>
+          <div>Vercel: <code style="background: rgba(255,165,82,0.15); padding: 2px 8px; border-radius: 4px; font-size: 0.9em;">labconnect-uneb.vercel.app</code></div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wider font-bold mb-2" style="color: var(--secondary);">Banco de dados</div>
+          <div>Firebase Firestore + Auth — Console UNEB</div>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-wider font-bold mb-2" style="color: var(--secondary);">Documentação</div>
+          <div>Ficha técnica + PDF de conceito visual entregues</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-24">
-    <div class="p-6 md:p-12 lg:p-20 relative overflow-hidden" style="background: var(--navy); color: white;">
-      <div class="absolute inset-0 grid-bg opacity-5"></div>
+  <section class="max-w-7xl mx-auto py-16 md:py-24">
+    <div class="rounded-3xl p-8 md:p-16 relative overflow-hidden" style="background: linear-gradient(135deg, var(--navy) 0%, #1e2140 100%); color: white;">
+      <div class="bg-blob" style="width: 400px; height: 400px; top: -20%; right: -10%; background: rgba(255,165,82,0.15);"></div>
       <div class="relative z-10">
-        <div class="eyebrow mb-6" style="color: var(--gold);">Sua instituição</div>
-        <div class="display text-5xl md:text-6xl mb-6" style="line-height: 1.05;">
-          Precisa de plataforma <em style="color: var(--gold); font-style: italic;">institucional?</em>
-        </div>
-        <p class="text-lg max-w-xl mb-10" style="color: #cbd5e1;">
-          A MVP entrega com transferência integral de titularidade — código, deploy, banco e conta. Sem lock-in, sem dependência de fornecedor.
+        <div class="badge mb-6" style="background: rgba(255,165,82,0.15); color: var(--primary); border-color: rgba(255,165,82,0.3);"><span class="dot"></span>Sua instituição</div>
+        <h3 class="display-bold text-3xl md:text-5xl mb-6" style="line-height: 1.1;">
+          Precisa de <span class="grad">plataforma institucional</span>?
+        </h3>
+        <p class="text-lg max-w-2xl mb-8" style="color: rgba(255,255,255,0.75); line-height: 1.6;">
+          A MVP entrega com transferência integral de titularidade — código, deploy, banco e conta. Sem lock-in, sem dependência de fornecedor. Documentação técnica completa e código auditado.
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--gold); color: var(--ink); border-color: var(--gold);">Solicitar apresentação →</a>
-          <a href="../index.html" class="btn-outline" style="color: white; border-color: white;">Ver outros projetos</a>
+          <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary">Solicitar apresentação →</a>
+          <a href="../index.html" class="btn-outline" style="color: white; border-color: rgba(255,255,255,0.3);">Ver outros projetos</a>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 eyebrow">
-    MVP Consultoria em Tecnologia — Salvador · Bahia · Brasil
+  <footer class="max-w-7xl mx-auto py-8 md:py-12">
+    <div class="text-xs uppercase tracking-widest" style="color: rgba(18,20,36,0.5); font-weight: 600;">
+      MVP Consultoria em Tecnologia · Salvador · Bahia · Brasil
+    </div>
   </footer>
 
   <script>
