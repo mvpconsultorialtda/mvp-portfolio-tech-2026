@@ -342,21 +342,36 @@
 
   <!-- Hero editorial -->
   <section class="max-w-7xl mx-auto pt-12 md:pt-20 pb-8 md:pb-16 relative" style="min-height: 600px;">
-    <!-- Caminho de tabuleiro SERPENTEANTE — hero (canto direito, entra pela lateral) -->
-    <div class="trilha-container hidden md:block" style="top: 5%; right: 0; width: 320px; height: 380px;">
-      <div class="casa-tabuleiro casa-rosa" style="top: 0; left: 200px;"></div>
-      <div class="casa-tabuleiro casa-lima" style="top: 0; left: 250px;"></div>
-      <div class="casa-tabuleiro casa-azul" style="top: 50px; left: 250px;"></div>
-      <div class="casa-tabuleiro casa-laranja" style="top: 100px; left: 250px;"></div>
-      <div class="casa-tabuleiro casa-rosa" style="top: 100px; left: 200px;"></div>
-      <div class="casa-tabuleiro casa-amarelo" style="top: 100px; left: 150px;"></div>
-      <div class="casa-tabuleiro casa-verde" style="top: 150px; left: 150px;"></div>
-      <div class="casa-tabuleiro casa-roxo" style="top: 200px; left: 150px;"></div>
-      <div class="casa-tabuleiro casa-lima" style="top: 200px; left: 200px;"></div>
-      <div class="casa-tabuleiro casa-azul" style="top: 200px; left: 250px;"></div>
-      <div class="casa-tabuleiro casa-laranja" style="top: 250px; left: 250px;"></div>
-      <div class="casa-tabuleiro casa-rosa" style="top: 300px; left: 250px;"></div>
-      <div class="pino-peao" style="top: 305px; left: 257px;"></div>
+    <!-- Caminho de tabuleiro SERPENTEANTE — hero (zig-zag horizontal partindo direita) -->
+    <div class="trilha-container hidden md:block" style="top: 3%; right: 0; width: 340px; height: 500px;">
+      <!-- linha 1: direita→esquerda (top 0) -->
+      <div class="casa-tabuleiro casa-rosa" style="top: 0px; left: 280px;"></div>
+      <div class="casa-tabuleiro casa-lima" style="top: 0px; left: 224px;"></div>
+      <div class="casa-tabuleiro casa-azul" style="top: 0px; left: 168px;"></div>
+      <div class="casa-tabuleiro casa-laranja" style="top: 0px; left: 112px;"></div>
+      <!-- curva descendo -->
+      <div class="casa-tabuleiro casa-amarelo" style="top: 56px; left: 112px;"></div>
+      <!-- linha 2: esquerda→direita (top 112) -->
+      <div class="casa-tabuleiro casa-roxo" style="top: 112px; left: 112px;"></div>
+      <div class="casa-tabuleiro casa-verde" style="top: 112px; left: 168px;"></div>
+      <div class="casa-tabuleiro casa-rosa" style="top: 112px; left: 224px;"></div>
+      <div class="casa-tabuleiro casa-lima" style="top: 112px; left: 280px;"></div>
+      <!-- curva descendo -->
+      <div class="casa-tabuleiro casa-azul" style="top: 168px; left: 280px;"></div>
+      <!-- linha 3: direita→esquerda (top 224) -->
+      <div class="casa-tabuleiro casa-laranja" style="top: 224px; left: 280px;"></div>
+      <div class="casa-tabuleiro casa-amarelo" style="top: 224px; left: 224px;"></div>
+      <div class="casa-tabuleiro casa-roxo" style="top: 224px; left: 168px;"></div>
+      <div class="casa-tabuleiro casa-verde" style="top: 224px; left: 112px;"></div>
+      <!-- curva descendo -->
+      <div class="casa-tabuleiro casa-rosa" style="top: 280px; left: 112px;"></div>
+      <!-- linha 4: esquerda→direita (top 336) -->
+      <div class="casa-tabuleiro casa-lima" style="top: 336px; left: 112px;"></div>
+      <div class="casa-tabuleiro casa-azul" style="top: 336px; left: 168px;"></div>
+      <div class="casa-tabuleiro casa-laranja" style="top: 336px; left: 224px;"></div>
+      <div class="casa-tabuleiro casa-amarelo" style="top: 336px; left: 280px;"></div>
+      <!-- Peao fim -->
+      <div class="pino-peao" style="top: 343px; left: 287px;"></div>
     </div>
 
     <!-- Dados coloridos como acentos -->
@@ -397,15 +412,26 @@
 
   <!-- Jogar também é aprender -->
   <section class="max-w-7xl mx-auto py-14 md:py-24 relative">
-    <!-- Trilha secundaria: serpente saindo da esquerda no meio da pagina -->
-    <div class="trilha-container hidden md:block" style="top: 15%; left: -20px; width: 300px; height: 180px;">
+    <!-- Trilha meio: serpente HORIZONTAL saindo da esquerda -->
+    <div class="trilha-container hidden md:block" style="top: 10%; left: -30px; width: 340px; height: 240px;">
+      <!-- linha 1: esquerda→direita (top 0) -->
       <div class="casa-tabuleiro casa-lima" style="top: 0; left: 0;"></div>
-      <div class="casa-tabuleiro casa-azul" style="top: 0; left: 50px;"></div>
-      <div class="casa-tabuleiro casa-laranja" style="top: 0; left: 100px;"></div>
-      <div class="casa-tabuleiro casa-rosa" style="top: 50px; left: 100px;"></div>
-      <div class="casa-tabuleiro casa-amarelo" style="top: 100px; left: 100px;"></div>
-      <div class="casa-tabuleiro casa-roxo" style="top: 100px; left: 150px;"></div>
-      <div class="casa-tabuleiro casa-verde" style="top: 100px; left: 200px;"></div>
+      <div class="casa-tabuleiro casa-azul" style="top: 0; left: 56px;"></div>
+      <div class="casa-tabuleiro casa-laranja" style="top: 0; left: 112px;"></div>
+      <div class="casa-tabuleiro casa-rosa" style="top: 0; left: 168px;"></div>
+      <!-- curva desce -->
+      <div class="casa-tabuleiro casa-amarelo" style="top: 56px; left: 168px;"></div>
+      <!-- linha 2: direita→esquerda (top 112) -->
+      <div class="casa-tabuleiro casa-roxo" style="top: 112px; left: 168px;"></div>
+      <div class="casa-tabuleiro casa-verde" style="top: 112px; left: 112px;"></div>
+      <div class="casa-tabuleiro casa-creme" style="top: 112px; left: 56px;"></div>
+      <div class="casa-tabuleiro casa-rosa" style="top: 112px; left: 0;"></div>
+      <!-- curva desce -->
+      <div class="casa-tabuleiro casa-azul" style="top: 168px; left: 0;"></div>
+      <!-- linha 3: esquerda→direita -->
+      <div class="casa-tabuleiro casa-laranja" style="top: 168px; left: 56px;"></div>
+      <div class="casa-tabuleiro casa-amarelo" style="top: 168px; left: 112px;"></div>
+      <div class="casa-tabuleiro casa-lima" style="top: 168px; left: 168px;"></div>
     </div>
 
     <img src="../assets/brand-refs/educahubplay/dado-branco-06.png" alt="" class="element-decor" style="top: 5%; right: 8%; width: 80px; transform: rotate(20deg);" />
@@ -427,16 +453,25 @@
 
   <!-- Atributos -->
   <section class="max-w-7xl mx-auto py-14 md:py-24 relative">
-    <!-- Trilha 3: serpente entrando pela direita nos atributos -->
-    <div class="trilha-container hidden md:block" style="top: 25%; right: 0; width: 240px; height: 200px;">
-      <div class="casa-tabuleiro casa-rosa" style="top: 0; left: 150px;"></div>
-      <div class="casa-tabuleiro casa-roxo" style="top: 0; left: 100px;"></div>
-      <div class="casa-tabuleiro casa-lima" style="top: 0; left: 50px;"></div>
-      <div class="casa-tabuleiro casa-azul" style="top: 50px; left: 50px;"></div>
-      <div class="casa-tabuleiro casa-amarelo" style="top: 100px; left: 50px;"></div>
-      <div class="casa-tabuleiro casa-laranja" style="top: 100px; left: 100px;"></div>
-      <div class="casa-tabuleiro casa-verde" style="top: 100px; left: 150px;"></div>
-      <div class="casa-tabuleiro casa-creme" style="top: 100px; left: 200px;"></div>
+    <!-- Trilha atributos: serpente HORIZONTAL na direita -->
+    <div class="trilha-container hidden md:block" style="top: 8%; right: 0; width: 300px; height: 240px;">
+      <!-- linha 1: direita→esquerda -->
+      <div class="casa-tabuleiro casa-rosa" style="top: 0; left: 224px;"></div>
+      <div class="casa-tabuleiro casa-roxo" style="top: 0; left: 168px;"></div>
+      <div class="casa-tabuleiro casa-lima" style="top: 0; left: 112px;"></div>
+      <div class="casa-tabuleiro casa-azul" style="top: 0; left: 56px;"></div>
+      <!-- curva desce -->
+      <div class="casa-tabuleiro casa-amarelo" style="top: 56px; left: 56px;"></div>
+      <!-- linha 2: esquerda→direita -->
+      <div class="casa-tabuleiro casa-laranja" style="top: 112px; left: 56px;"></div>
+      <div class="casa-tabuleiro casa-verde" style="top: 112px; left: 112px;"></div>
+      <div class="casa-tabuleiro casa-creme" style="top: 112px; left: 168px;"></div>
+      <div class="casa-tabuleiro casa-rosa" style="top: 112px; left: 224px;"></div>
+      <!-- curva desce -->
+      <div class="casa-tabuleiro casa-lima" style="top: 168px; left: 224px;"></div>
+      <!-- linha 3: direita→esquerda -->
+      <div class="casa-tabuleiro casa-azul" style="top: 168px; left: 168px;"></div>
+      <div class="casa-tabuleiro casa-roxo" style="top: 168px; left: 112px;"></div>
     </div>
 
     <img src="../assets/brand-refs/educahubplay/livros-05.png" alt="" class="element-decor" style="bottom: 20%; right: -3%; width: 200px; transform: rotate(-8deg); opacity: 0.85;" />
