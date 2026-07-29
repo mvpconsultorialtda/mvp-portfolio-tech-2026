@@ -12,11 +12,13 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <style>
   :root {
-    /* Paleta oficial site André Fraga (www.andrefraga.com) */
+    /* Paleta oficial site André Fraga (www.andrefraga.com) + acento roxo */
     --verde-escuro: #0F3B1E;
     --verde-mid: #1C5D2E;
     --verde-vibrante: #23CC5B;
     --verde-lima: #B7E547;
+    --roxo: #7C3AED;
+    --roxo-soft: #C4B5FD;
     --creme: #F5F0E6;
     --off-white: #FAFAF7;
     --ink: #0d1116;
@@ -114,14 +116,16 @@
   }
   .tag-verde { background: var(--verde-vibrante); color: var(--verde-escuro); border-color: var(--verde-vibrante); }
   .tag-lima { background: var(--verde-lima); color: var(--verde-escuro); border-color: var(--verde-lima); }
+  .tag-roxo { background: var(--roxo); color: white; border-color: var(--roxo); }
+  .tag-roxo-soft { background: var(--roxo-soft); color: var(--verde-escuro); border-color: var(--roxo-soft); }
   .tag-outline-white { background: transparent; color: var(--off-white); border-color: rgba(250, 250, 247, 0.4); }
 
   .badge {
     display: inline-flex; align-items: center; gap: 0.5rem;
     padding: 0.4rem 1rem;
-    background: rgba(35, 204, 91, 0.15);
-    border: 1px solid rgba(35, 204, 91, 0.35);
-    color: var(--verde-vibrante);
+    background: rgba(124, 58, 237, 0.15);
+    border: 1px solid rgba(124, 58, 237, 0.35);
+    color: var(--roxo-soft);
     border-radius: 999px;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
@@ -131,7 +135,7 @@
   }
   .badge .dot {
     width: 8px; height: 8px;
-    background: var(--verde-vibrante);
+    background: var(--roxo-soft);
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
   }
@@ -367,9 +371,9 @@
         <h3>Ação climática</h3>
         <p style="color: rgba(15, 59, 30, 0.7); font-size: 0.95rem;">Adaptação de Salvador ao cenário de mudanças climáticas.</p>
       </div>
-      <div class="foco-card reveal">
-        <div class="num">05</div>
-        <h3>Inovação</h3>
+      <div class="foco-card reveal" style="border-color: var(--roxo);">
+        <div class="num" style="color: var(--roxo);">05</div>
+        <h3 style="color: var(--roxo);">Inovação</h3>
         <p style="color: rgba(15, 59, 30, 0.7); font-size: 0.95rem;">Tecnologia a serviço da cidade e do cidadão. O app é parte disso.</p>
       </div>
       <div class="foco-card reveal">
@@ -426,10 +430,10 @@
       <span class="tag">iOS + Android</span>
       <span class="tag tag-lima">Firebase Auth</span>
       <span class="tag">Firestore</span>
-      <span class="tag">Cloud Functions</span>
+      <span class="tag tag-roxo">Cloud Functions</span>
       <span class="tag">FCM · APNs</span>
       <span class="tag tag-verde">App Store</span>
-      <span class="tag tag-verde">Play Store</span>
+      <span class="tag tag-roxo-soft">Play Store</span>
     </div>
   </section>
 
