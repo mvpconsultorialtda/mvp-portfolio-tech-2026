@@ -27,7 +27,7 @@
   html, body { margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    background: #e8ede1;
+    background: var(--cream);
     color: var(--ink);
     font-family: 'Fredoka', system-ui, sans-serif;
     overflow-x: hidden;
@@ -55,15 +55,14 @@
   }
   .hero-title {
     font-family: 'Lilita One', sans-serif;
-    font-size: clamp(2.5rem, 8vw, 6.5rem);
+    font-size: clamp(3rem, 12vw, 8.5rem);
     color: var(--forest);
-    -webkit-text-stroke: 4px var(--white);
+    -webkit-text-stroke: 5px var(--white);
     paint-order: stroke fill;
-    text-shadow: 6px 6px 0 var(--forest-dark);
+    text-shadow: 8px 8px 0 var(--forest-dark);
     line-height: 0.88;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    white-space: nowrap;
   }
 
   /* SUNBURST/RAIOS de fundo do hero */
@@ -297,13 +296,13 @@
 </head>
 <body class="paper-texture">
   <!-- Nav -->
-  <nav style="background: rgba(15, 105, 48, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 3px solid var(--forest-dark); position: sticky; top: 0; z-index: 50;">
+  <nav style="background: rgba(251, 233, 206, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 3px solid var(--forest); position: sticky; top: 0; z-index: 50;">
     <div class="max-w-7xl mx-auto py-4 flex justify-between items-center">
       <a href="../index.html" class="flex items-center gap-3">
         <div class="hq-logo-badge" style="font-size: 1rem; padding: 0.35rem 0.8rem;">HQLAB</div>
-        <span style="font-family: 'Lilita One', sans-serif; font-size: 0.85rem; color: var(--white); letter-spacing: 0.1em;">← MVP · PORTFOLIO</span>
+        <span style="font-family: 'Lilita One', sans-serif; font-size: 0.85rem; color: var(--forest); letter-spacing: 0.1em;">← MVP · PORTFOLIO</span>
       </a>
-      <a href="https://hq-lab.vercel.app" target="_blank" class="tag" style="background: var(--white); color: var(--forest); border-color: var(--white);">Ver ao vivo →</a>
+      <a href="https://hq-lab.vercel.app" target="_blank" class="tag tag-forest">Ver ao vivo →</a>
     </div>
   </nav>
 
@@ -315,23 +314,22 @@
       POW!
     </div>
 
-    <div class="grid md:grid-cols-[2fr_3fr] gap-6 items-center relative z-10">
+    <img src="../assets/brand-refs/hq-lab/expressao-1.png" alt="" class="expressao-float" style="top: 15%; left: 5%; z-index: 2;" />
+    <img src="../assets/brand-refs/hq-lab/expressao-3.png" alt="" class="expressao-float" style="bottom: 12%; right: 12%; z-index: 2; animation-delay: -2s;" />
+    <img src="../assets/brand-refs/hq-lab/expressao-5.png" alt="" class="expressao-float" style="top: 40%; right: 4%; z-index: 2; animation-delay: -1s;" />
+
+    <div class="grid md:grid-cols-2 gap-8 items-center relative z-10">
       <div>
-        <div class="flex items-center gap-4 mb-6 reveal">
-          <div class="flex flex-col gap-2">
-            <div class="label-badge">
-              <span style="width: 8px; height: 8px; background: var(--forest); border-radius: 50%;"></span>
-              CAPES + FAPESB + UNEB
-            </div>
-            <div class="hero-sub" style="font-family: 'Lilita One', sans-serif; font-size: 1rem; letter-spacing: 0.35em; color: var(--sage); text-transform: uppercase;">Universo Visual</div>
-          </div>
-          <img src="../assets/brand-refs/hq-lab/expressao-1.png" alt="" class="expressao-float" style="position: relative; top: auto; left: auto; height: 5.5rem; width: auto;" />
+        <div class="label-badge mb-6 reveal">
+          <span style="width: 8px; height: 8px; background: var(--forest); border-radius: 50%;"></span>
+          CAPES + FAPESB + UNEB
         </div>
+        <div class="hero-sub mb-2 reveal" style="font-family: 'Lilita One', sans-serif; font-size: 1rem; letter-spacing: 0.35em; color: var(--sage); text-transform: uppercase;">Universo Visual</div>
         <h1 class="hero-title reveal">HQ-LAB</h1>
-        <p class="mt-8 max-w-md reveal" style="font-family: 'Fredoka', sans-serif; font-size: 1.05rem; line-height: 1.55; color: rgba(41, 38, 33, 0.85);">
+        <p class="mt-8 max-w-xl reveal" style="font-family: 'Fredoka', sans-serif; font-size: 1.15rem; line-height: 1.55; color: rgba(41, 38, 33, 0.85);">
           Uma biblioteca oficial de personagens 3D construída como <strong>brinquedo educativo</strong> — Pesquisadora, Artista, Professora e Experimentador. Cada arquétipo representa uma forma de aprender.
         </p>
-        <p class="mt-4 max-w-md reveal" style="font-family: 'Fredoka', sans-serif; font-size: 0.95rem; line-height: 1.55; color: rgba(41, 38, 33, 0.7);">
+        <p class="mt-4 max-w-xl reveal" style="font-family: 'Fredoka', sans-serif; font-size: 1rem; line-height: 1.55; color: rgba(41, 38, 33, 0.7);">
           Projeto de pesquisa da <strong>Universidade do Estado da Bahia</strong> (UNEB) com tripé de financiamento — CAPES, FAPESB e UNEB. Coordenação: Profa. Dra. Gerusa Soares Pinheiro.
         </p>
         <div class="mt-10 flex flex-wrap gap-4 reveal">
@@ -340,7 +338,7 @@
         </div>
       </div>
       <div class="reveal" style="position: relative; z-index: 4;">
-        <img src="../assets/brand-refs/hq-lab/turminha.png" alt="Turminha HQ-Lab — Pesquisadora, Professora, Artista e Inventor" style="width: 100%; max-width: 100%; margin: 0 auto; display: block; filter: drop-shadow(0 20px 30px rgba(15, 105, 48, 0.25));" />
+        <img src="../assets/brand-refs/hq-lab/pesquisadora.png" alt="Pesquisadora — personagem hero HQ-Lab" style="width: 100%; max-width: 500px; margin: 0 auto; display: block; filter: drop-shadow(0 20px 30px rgba(15, 105, 48, 0.25));" />
       </div>
     </div>
   </section>
@@ -472,7 +470,7 @@
         A MVP entrega da <strong>modelagem 3D dos personagens</strong> ao editor visual, do backend ao deploy — pareando escrita técnica e pedagógica. Documentação e style guide completos.
       </p>
       <div class="flex flex-wrap gap-4">
-        <a href="mailto:mvpconsultorialtda@gmail.com" class="btn-primary" style="background: var(--cream); color: var(--forest);">Solicitar apresentação →</a>
+        <button type="button" data-open-contact data-contact-subject="Solicitar apresentação — HQ-Lab" class="btn-primary" style="background: var(--cream); color: var(--forest); cursor: pointer; font: inherit;">Solicitar apresentação →</button>
         <a href="../index.html" class="btn-outline" style="color: var(--cream); background: transparent; border-color: var(--cream); box-shadow: 4px 4px 0 var(--ink);">Ver outros projetos</a>
       </div>
     </div>
@@ -492,5 +490,6 @@
       });
     });
   </script>
+  <script src="../assets/js/contact-modal.js" defer></script>
 </body>
 </html>
