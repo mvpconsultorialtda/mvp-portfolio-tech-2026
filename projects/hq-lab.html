@@ -91,7 +91,7 @@
   .comic-burst {
     position: absolute;
     background: var(--forest);
-    color: var(--cream);
+    color: var(--white);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -120,7 +120,7 @@
     display: inline-flex; align-items: center; gap: 0.5rem;
     padding: 1rem 2rem;
     background: var(--forest);
-    color: var(--cream);
+    color: var(--white);
     border-radius: 999px;
     font-family: 'Lilita One', sans-serif;
     font-size: 1rem;
@@ -178,7 +178,7 @@
     border-radius: 999px;
     min-height: 44px;
   }
-  .tag-forest { background: var(--forest); color: var(--cream); border-color: var(--forest); }
+  .tag-forest { background: var(--forest); color: var(--white); border-color: var(--forest); }
   .tag-sage { background: var(--sage); color: var(--white); border-color: var(--sage); }
   .tag-coral { background: var(--coral); color: var(--white); border-color: var(--coral); }
 
@@ -211,7 +211,7 @@
     box-shadow: 9px 9px 0 var(--forest);
   }
   .personagem-avatar {
-    background: var(--cream);
+    background: transparent;
     aspect-ratio: 1;
     border-radius: 14px;
     display: flex;
@@ -356,7 +356,7 @@
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
       <div class="personagem-card reveal">
-        <div class="personagem-avatar" style="background: #E8F0E4;">
+        <div class="personagem-avatar" style="background: transparent;">
           <img src="../assets/brand-refs/hq-lab/pesquisadora-card.png" alt="Pesquisadora" />
         </div>
         <div class="arquetipo-tag">Explorar</div>
@@ -365,7 +365,7 @@
       </div>
 
       <div class="personagem-card reveal">
-        <div class="personagem-avatar" style="background: #FBEDDA;">
+        <div class="personagem-avatar" style="background: transparent;">
           <img src="../assets/brand-refs/hq-lab/artista-card.png" alt="Artista" />
         </div>
         <div class="arquetipo-tag">Criar</div>
@@ -374,7 +374,7 @@
       </div>
 
       <div class="personagem-card reveal">
-        <div class="personagem-avatar" style="background: #FDF1D9;">
+        <div class="personagem-avatar" style="background: transparent;">
           <img src="../assets/brand-refs/hq-lab/professora-card.png" alt="Professora" />
         </div>
         <div class="arquetipo-tag">Compartilhar</div>
@@ -383,7 +383,7 @@
       </div>
 
       <div class="personagem-card reveal">
-        <div class="personagem-avatar" style="background: #E5EEF4;">
+        <div class="personagem-avatar" style="background: transparent;">
           <img src="../assets/brand-refs/hq-lab/inventor-card.png" alt="Experimentador" />
         </div>
         <div class="arquetipo-tag">Experimentar</div>
@@ -459,11 +459,11 @@
 
   <!-- CTA -->
   <section class="max-w-7xl mx-auto pt-2 md:pt-3 pb-4 md:pb-6">
-    <div class="rounded-3xl p-8 md:p-14 relative overflow-hidden reveal" style="background: var(--forest); color: var(--cream); border: 4px solid var(--ink); box-shadow: 10px 10px 0 var(--ink);">
+    <div class="rounded-3xl p-8 md:p-14 relative overflow-hidden reveal" style="background: var(--forest); color: var(--white); border: 4px solid var(--ink); box-shadow: 10px 10px 0 var(--ink);">
       <div class="comic-burst" style="top: 12%; right: 6%; width: 90px; height: 90px; background: var(--coral); font-size: 0.85rem;">WOW!</div>
 
       <div style="font-family: 'Lilita One', sans-serif; letter-spacing: 0.35em; text-transform: uppercase; font-size: 0.85rem; color: rgba(251, 233, 206, 0.65); margin-bottom: -1px;">Sua instituição</div>
-      <h3 style="font-family: 'Lilita One', sans-serif; font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1.05; color: var(--cream); margin-bottom: 1.5rem;">
+      <h3 style="font-family: 'Lilita One', sans-serif; font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1.05; color: var(--white); margin-bottom: 1.5rem;">
         PRECISA DE BIBLIOTECA<br />VISUAL EDUCACIONAL?
       </h3>
       <p style="font-size: 1.1rem; line-height: 1.55; color: rgba(251, 233, 206, 0.85); max-width: 640px; margin-bottom: 2.5rem;">
@@ -471,7 +471,7 @@
       </p>
       <div class="flex flex-wrap gap-4">
         <button type="button" data-open-contact data-contact-subject="Solicitar apresentação — HQ-Lab" class="btn-primary" style="background: var(--cream); color: var(--forest); cursor: pointer; font: inherit;">Solicitar apresentação →</button>
-        <a href="../index.html" class="btn-outline" style="color: var(--cream); background: transparent; border-color: var(--cream); box-shadow: 4px 4px 0 var(--ink);">Ver outros projetos</a>
+        <a href="../index.html" class="btn-outline" style="color: var(--white); background: transparent; border-color: var(--white); box-shadow: 4px 4px 0 var(--ink);">Ver outros projetos</a>
       </div>
     </div>
   </section>
