@@ -107,7 +107,7 @@ pre.copy{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;backgroun
   </div>
   <header class="abre">
     <h1>Agenda de conversas com os professores</h1>
-    <p class="muted">Indique os dias e horários em que você pode participar, a partir de segunda-feira, 30 de novembro. Marque pelo menos <b>2 horários</b>. Todos os horários estão no horário de Brasília.</p>
+    <p class="muted">Indique os dias e horários em que você pode participar, a partir de segunda-feira, 30 de novembro. Escolha um dia, marque os horários que puder e depois escolha outro dia: pode marcar quantos dias e horários quiser, com pelo menos <b>2 horários</b> no total. Todos os horários estão no horário de Brasília.</p>
   </header>
 
   
@@ -128,7 +128,7 @@ pre.copy{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;backgroun
 
     <section class="card">
       <h2><span class="step">Passo 2</span> Escolha um dia</h2>
-      <p class="muted">Toque num dia para ver os horários. O número amarelo mostra quantos horários você já marcou nele.</p>
+      <p class="muted">Toque num dia para ver os horários dele. Depois de marcar, volte aqui e escolha outro dia; os horários já marcados ficam guardados. O número amarelo mostra quantos horários você marcou em cada dia.</p>
       <div id="days" role="group" aria-label="Dias" style="display:flex;flex-direction:column;gap:14px"></div>
     </section>
 
@@ -143,6 +143,7 @@ pre.copy{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;backgroun
       </div>
       <p class="muted" id="dia-label"></p>
       <div id="slots"></div>
+      <div><button type="button" class="btn sec" id="outro-dia">Escolher outro dia</button></div>
     </section>
 
     <section class="card">
@@ -249,7 +250,7 @@ pre.copy{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;backgroun
   function sobrepoe(a0,a1,b0,b1){ return a0<b1 && b0<a1; }
   function renderSlots(){
     const p=partes(st.dia);
-    $("dia-label").textContent = `${SEMANA_LONGA[dow(st.dia)][0].toUpperCase()+SEMANA_LONGA[dow(st.dia)].slice(1)}-feira, ${p.d} de ${MESES_LONGOS[p.m-1]}. Toque num horário para marcar ou desmarcar.`.replace("Sábado-feira","Sábado");
+    $("dia-label").textContent = `${SEMANA_LONGA[dow(st.dia)][0].toUpperCase()+SEMANA_LONGA[dow(st.dia)].slice(1)}-feira, ${p.d} de ${MESES_LONGOS[p.m-1]}. Marque quantos horários quiser neste dia.`.replace("Sábado-feira","Sábado");
     const box=$("slots"); box.textContent="";
     const doDia=[...st.sel.values()].filter(h=>h.data===st.dia);
     const periodos=[["Manhã",INICIO_MIN,12*60],["Tarde",12*60,18*60],["Noite",18*60,FIM_MIN]];
@@ -400,6 +401,7 @@ pre.copy{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;backgroun
   ["nome","obs"].forEach(id=>$(id).addEventListener("input",()=>{ salvarRascunho(); renderSel(); }));
   ["r-geral","r-indiv"].forEach(id=>$(id).addEventListener("change",renderSel));
   $("enviar").addEventListener("click",enviar);
+  $("outro-dia").addEventListener("click",()=>$("days").scrollIntoView({behavior:"smooth",block:"center"}));
 
   lerRascunho(); render();
 
