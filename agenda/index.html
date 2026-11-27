@@ -107,7 +107,7 @@ pre.copy{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;backgroun
   </div>
   <header class="abre">
     <h1>Agenda de conversas com os professores</h1>
-    <p class="muted">Indique os dias e horários em que você pode participar, a partir de segunda-feira, 30 de novembro. Escolha um dia, marque os horários que puder e depois escolha outro dia: pode marcar quantos dias e horários quiser, com pelo menos <b>2 horários</b> no total. Todos os horários estão no horário de Brasília.</p>
+    <p class="muted">Indique os dias e horários em que você pode participar, a partir de segunda-feira, 30 de novembro. Escolha um dia, marque os horários que puder e depois escolha outro dia: marque horários em pelo menos <b>2 dias diferentes</b>. Pode marcar quantos dias e horários quiser, tudo num envio só. Todos os horários estão no horário de Brasília.</p>
   </header>
 
   
@@ -173,7 +173,7 @@ pre.copy{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;backgroun
 
 <div class="bar" id="bar">
   <div class="bar-in">
-    <p class="count" id="count">Marque pelo menos <b>2</b> horários.</p>
+    <p class="count" id="count">Marque horários em pelo menos <b>2 dias</b>.</p>
     <button type="button" class="btn" id="enviar" disabled>Enviar</button>
   </div>
 </div>
@@ -282,8 +282,9 @@ pre.copy{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;backgroun
     });
     const n=lista.length, c=$("count");
     c.textContent="";
-    if(n<2){ c.append("Marque pelo menos "); const b=document.createElement("b"); b.textContent="2"; c.append(b," horários"+(n?` (falta ${2-n}).`:".")); }
-    else { const b=document.createElement("b"); b.textContent=n; c.append(b, " horários marcados."); }
+    const nd=new Set(lista.map(h=>h.data)).size;
+    if(nd<2){ c.append("Marque horários em pelo menos "); const b=document.createElement("b"); b.textContent="2 dias"; c.append(b, nd? " (falta mais 1 dia)." : "."); }
+    else { const b=document.createElement("b"); b.textContent=n; const b2=document.createElement("b"); b2.textContent=nd; c.append(b, n===1?" horário em ":" horários em ", b2, " dias."); }
     $("enviar").disabled = st.enviando || !podeEnviar().ok;
     $("enviar").textContent = st.enviando ? "Salvando…" : "Enviar";
   }
@@ -303,7 +304,7 @@ pre.copy{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;backgroun
   function podeEnviar(){
     if(!$("nome").value.trim()) return {ok:false,msg:"Escreva o seu nome."};
     if(!reunioes().length) return {ok:false,msg:"Escolha pelo menos uma reunião."};
-    if(st.sel.size<2) return {ok:false,msg:"Marque pelo menos 2 horários."};
+    if(new Set([...st.sel.values()].map(h=>h.data)).size<2) return {ok:false,msg:"Marque horários em pelo menos 2 dias diferentes."};
     return {ok:true};
   }
 
@@ -343,10 +344,10 @@ pre.copy{white-space:pre-wrap;font-family:var(--mono);font-size:.82rem;backgroun
   async function postar(corpo){
     const hs=corpo.horarios;
     const dados={
-      _subject:`Agenda dos professores: ${corpo.nome} (${hs.length} horários)`,
+      _subject:`Agenda dos professores: ${corpo.nome} (${hs.length} horários em ${new Set(hs.map(h=>h.data)).size} dias)`,
       _template:"table", _captcha:"false",
       "Nome":corpo.nome, "Reuniões":corpo.reunioes.join(" e "),
-      "Horários":hs.map(faixaTexto).join(" | "), "Quantidade":String(hs.length),
+      "Horários":hs.map(faixaTexto).join(" | "), "Quantidade":String(hs.length), "Dias":String(new Set(hs.map(h=>h.data)).size),
       "Observação":corpo.observacao||"-", "Código":corpo.id.slice(-6).toUpperCase(),
       "Enviado em":agoraISO(), "Dados":JSON.stringify(corpo)
     };
