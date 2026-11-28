@@ -27,6 +27,6 @@ Prova antes de promessa (números e resultados logo depois da capa), casos agrup
 | 18,2 mil visualizações, 133 posts | Painéis dos 4 perfis CAPES, 90 dias até 27/11/2026 |
 
 ## Pendências
-- O PDF (`mvp-portfolio-2026.pdf`) ainda é a versão antiga; refazer depois do ok no conteúdo.
+- PDF refeito em 28/11/2026 a partir do site publicado (28 páginas A4, números arredondados). Script em `tools/gerar-pdf.js`.
 - Os "8 jogos" do XequeMath e "22 quizzes" do EducaHubPlay vêm da versão anterior e não foram reconferidos.
 - Não entram nos números: valor do LabConect, contrato do app André Fraga e as propostas do Ciência na Mesa 4 (resultado só em 2027).
