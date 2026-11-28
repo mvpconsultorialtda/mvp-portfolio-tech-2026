@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MVP Consultoria em Tecnologia — Portfolio 2026</title>
-<meta name="description" content="Portfolio de projetos entregues pela MVP Consultoria em Tecnologia — cinco produtos digitais financiados por CAPES, UNEB, FAPESB e clientes privados." />
+<meta name="description" content="Portfólio 2026 da MVP: sistemas de dados para a gestão pública e plataformas educacionais, feitos com UNEB e UEFS em mais de 10 projetos aprovados em editais da FAPESB, CAPES e UNEB." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -293,6 +293,50 @@
 
   a { text-decoration: none; color: inherit; }
   a, button { cursor: none; }
+
+  /* ===== Números (atualização nov/2026) ===== */
+  :root { --chart-a: #22a87c; --chart-b: #8d78f0; --surface: #0b0d15; }
+  .kpi { padding: 1.4rem 1.4rem 1.2rem; border-radius: 1.25rem; }
+  .kpi .pre { font-family: 'JetBrains Mono', monospace; font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-lo); margin-bottom: .35rem; }
+  .kpi .num { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.7rem, 6vw, 3.6rem); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .kpi .lbl { font-family: 'Instrument Serif', serif; font-size: 1.1rem; color: #d6d2c9; margin-top: .6rem; line-height: 1.35; }
+  .kpi .src { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .08em; color: var(--ink-lo); margin-top: .7rem; text-transform: uppercase; }
+  .chart { padding: 1.5rem; border-radius: 1.5rem; }
+  .chart h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(1.2rem, 3vw, 1.6rem); letter-spacing: -0.02em; margin: 0 0 .3rem; }
+  .chart .sub { font-family: 'Instrument Serif', serif; color: var(--ink-lo); font-size: 1.02rem; margin-bottom: 1.2rem; }
+  .bar-row { display: grid; grid-template-columns: minmax(7.5rem, 34%) 1fr; gap: .8rem; align-items: center; padding: .38rem 0; position: relative; }
+  .bar-row .name { font-family: 'Instrument Serif', serif; font-size: 1.02rem; color: var(--ink-hi); line-height: 1.2; }
+  .bar-row .name small { display: block; font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .08em; color: var(--ink-lo); text-transform: uppercase; margin-top: 2px; }
+  .bar-track { display: flex; align-items: center; gap: .6rem; min-width: 0; }
+  .bar { height: 14px; border-radius: 0 4px 4px 0; background: var(--chart-a); flex: none; transform-origin: left center; }
+  .bar.b { background: var(--chart-b); }
+  .bar-val { font-family: 'JetBrains Mono', monospace; font-size: .78rem; color: var(--ink-hi); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .bar-row:hover .bar { filter: brightness(1.25); }
+  .axis-note { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .06em; color: var(--ink-lo); margin-top: 1rem; text-transform: uppercase; }
+  .stack { display: flex; height: 18px; gap: 2px; border-radius: 4px; overflow: hidden; margin: .6rem 0 .9rem; }
+  .stack span { display: block; height: 100%; }
+  .legend { display: flex; flex-wrap: wrap; gap: 1rem 1.4rem; font-family: 'Instrument Serif', serif; font-size: 1rem; color: var(--ink-hi); }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: .45rem; vertical-align: 1px; }
+  .tl { list-style: none; margin: 0; padding: 0; border-left: 1px solid rgba(255,255,255,.15); }
+  .tl li { position: relative; padding: 0 0 1.25rem 1.3rem; }
+  .tl li::before { content: ""; position: absolute; left: -5px; top: .45rem; width: 9px; height: 9px; border-radius: 50%; background: var(--chart-a); box-shadow: 0 0 0 3px var(--surface); }
+  .tl .when { font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-lo); }
+  .tl .what { font-family: 'Instrument Serif', serif; font-size: 1.1rem; line-height: 1.35; }
+  #tip { position: fixed; z-index: 1000; pointer-events: none; padding: .5rem .7rem; border-radius: .6rem; background: rgba(11,13,21,.96); border: 1px solid rgba(255,255,255,.18); font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--ink-hi); max-width: 260px; opacity: 0; transition: opacity .12s; }
+  .data-table { width: 100%; border-collapse: collapse; font-family: 'Instrument Serif', serif; font-size: 1rem; margin-top: .8rem; }
+  .data-table th, .data-table td { text-align: left; padding: .35rem .4rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .data-table th { font-family: 'JetBrains Mono', monospace; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-lo); font-weight: 400; }
+  .data-table td.n { font-family: 'JetBrains Mono', monospace; font-size: .8rem; text-align: right; }
+  details summary { font-family: 'JetBrains Mono', monospace; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-lo); cursor: pointer; margin-top: .8rem; }
+  .group-title { font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .28em; text-transform: uppercase; color: var(--accent-a); margin: 3.5rem 0 1.4rem; display: flex; align-items: center; gap: 1rem; }
+  .group-title::after { content: ""; flex: 1; height: 1px; background: rgba(255,255,255,.1); }
+  .step { padding: 1.6rem; border-radius: 1.4rem; }
+  .step .k { font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .2em; color: var(--accent-a); }
+  .step h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.35rem; letter-spacing: -0.02em; margin: .7rem 0 .5rem; }
+  .step p { font-family: 'Instrument Serif', serif; font-size: 1.05rem; color: #c9c5bc; line-height: 1.45; margin: 0; }
+  @media (max-width: 639px) { nav#mainnav a.nav-wide { display: none; } }
+  .motif { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  @media (prefers-reduced-motion: reduce) { .marquee, .aurora::before, .aurora::after, .scroll-hint { animation: none !important; } }
 </style>
 </head>
 
@@ -301,13 +345,15 @@
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+  <div id="tip" role="status" aria-live="polite"></div>
 
   <!-- NAV -->
   <nav id="mainnav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 transition-all duration-300">
     <div class="eyebrow nav-brand">MVP · Consultoria em Tecnologia</div>
     <div class="flex eyebrow nav-links">
+      <a href="#numeros" data-hover>Números</a>
       <a href="#projects" data-hover>Vitrine</a>
-      <a href="#manifesto" data-hover>Manifesto</a>
+      <a href="#como" data-hover class="nav-wide">Como trabalhamos</a>
       <a href="#stack" data-hover>Stack</a>
       <a href="mvp-portfolio-2026.pdf" data-hover download>PDF ↓</a>
     </div>
@@ -315,12 +361,15 @@
 
   <!-- HERO -->
   <section class="min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 relative pt-28 pb-12 md:pt-32 md:pb-16">
-    <div class="eyebrow mb-10 reveal">Portfolio · 2026 · Salvador — Bahia</div>
+    <div class="eyebrow mb-10 reveal">Portfólio · atualizado em novembro de 2026 · Salvador — Bahia</div>
     <h1 class="hero-title max-w-6xl">
       <span data-splitting>Tecnologia</span><br />
       <span data-splitting>com <em>design</em> que</span><br />
       <span data-splitting>não pede desculpa.</span>
     </h1>
+    <p class="max-w-3xl mt-10 text-neutral-300 reveal" style="font-family: 'Instrument Serif', serif; font-size: clamp(1.15rem, 2.6vw, 1.5rem); line-height: 1.45;">
+      Sistemas de dados para a gestão pública e plataformas educacionais, feitos com grupos de pesquisa da UNEB e da UEFS. <span style="color: var(--accent-a);">Mais de 10 projetos aprovados em editais públicos, mais de R$ 1,5 milhão captados e mais de 50 bolsistas na equipe.</span>
+    </p>
     <div class="scroll-hint">↓ scroll · role para explorar</div>
   </section>
 
@@ -336,8 +385,10 @@
       <span>✦</span><span>UEFS</span>
       <span>✦</span><span>FAPESB</span>
       <span>✦</span><span>CAPES</span>
+      <span>✦</span><span>SAEB</span>
+      <span>✦</span><span>Prefeitura de Jequié</span>
       <span>✦</span><span>Narrativo</span>
-      <span>✦</span><span>Copere</span>
+      <span>✦</span><span>Coopere</span>
       <span>✦</span>
       <span class="italic opacity-70">Grupo de empresas baianas em tecnologia desde 2020</span>
       <span>✦</span><span>Eleva</span>
@@ -348,10 +399,123 @@
       <span>✦</span><span>UEFS</span>
       <span>✦</span><span>FAPESB</span>
       <span>✦</span><span>CAPES</span>
+      <span>✦</span><span>SAEB</span>
+      <span>✦</span><span>Prefeitura de Jequié</span>
       <span>✦</span><span>Narrativo</span>
-      <span>✦</span><span>Copere</span>
+      <span>✦</span><span>Coopere</span>
     </div>
   </section>
+
+  <!-- NÚMEROS (nov/2026) -->
+  <section id="numeros" class="px-4 md:px-8 lg:px-16 py-16 md:py-24 lg:py-28">
+    <div class="max-w-7xl mx-auto">
+      <div class="eyebrow mb-6 reveal">Em números · novembro de 2026</div>
+      <h2 class="reveal max-w-5xl mb-12" style="font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.9rem, 5.5vw, 4.2rem); letter-spacing: -0.03em; line-height: 1.05;">
+        O que já foi aprovado,<br />entregue e pago.
+      </h2>
+
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10">
+        <div class="glass kpi reveal"><div class="pre">mais de</div><div class="num" style="color: var(--accent-a);">R$ 1,5 mi</div><div class="lbl">captados em projetos aprovados com a nossa participação</div><div class="src">FAPESB · CAPES · 2025–2026</div></div>
+        <div class="glass kpi reveal"><div class="pre">mais de</div><div class="num">10</div><div class="lbl">projetos aprovados em 5 editais públicos</div><div class="src">CAPES · FAPESB · SECTI/SAEB · UNEB</div></div>
+        <div class="glass kpi reveal"><div class="pre">mais de</div><div class="num" style="color: var(--accent-b);">50</div><div class="lbl">bolsistas de graduação e pós alocados nas equipes</div><div class="src">CAPES InovaEDUCAÇÃO + FAPESB Defesa Civil</div></div>
+        <div class="glass kpi reveal"><div class="pre">mais de</div><div class="num">250</div><div class="lbl">mensalidades de bolsa CAPES pagas aos estudantes</div><div class="src">SCBA/CAPES · mais de R$ 170 mil</div></div>
+        <div class="glass kpi reveal"><div class="pre">&nbsp;</div><div class="num">11</div><div class="lbl">sistemas e plataformas no ar, com código e manual entregues</div><div class="src">7 públicos + 4 da Defesa Civil</div></div>
+        <div class="glass kpi reveal"><div class="pre">mais de</div><div class="num">18 mil</div><div class="lbl">visualizações em 90 dias nos 4 perfis de divulgação científica</div><div class="src">mais de 130 posts · ago–nov 2026</div></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-8">
+        <div class="glass chart reveal">
+          <h3>Recursos captados por edital</h3>
+          <div class="sub">Orçamento aprovado de cada frente, em R$ mil.</div>
+          <div class="bar-row" data-tip="FAPESB Edital 014/2025 · 5 projetos (UNEB e UEFS) · quase R$ 1 milhão · vigência até 03/2027">
+            <div class="name">Defesa Civil<small>FAPESB 014/2025 · 5 projetos</small></div>
+            <div class="bar-track"><div class="bar b" style="width: 72%"></div><span class="bar-val">999</span></div>
+          </div>
+          <div class="bar-row" data-tip="CAPES Edital 003/2025 · 4 projetos · R$ 120 mil de custeio + quase R$ 200 mil em bolsas concedidas">
+            <div class="name">InovaEDUCAÇÃO<small>CAPES 003/2025 · 4 projetos</small></div>
+            <div class="bar-track"><div class="bar" style="width: 23%"></div><span class="bar-val">320</span></div>
+          </div>
+          <div class="bar-row" data-tip="FAPESB/SECTI/SAEB Edital 006/2025 · Jequié · quase R$ 250 mil em 24 meses">
+            <div class="name">Cientista no Governo<small>FAPESB/SAEB 006/2025 · Jequié</small></div>
+            <div class="bar-track"><div class="bar b" style="width: 18%"></div><span class="bar-val">250</span></div>
+          </div>
+          <div class="bar-row" data-tip="FAPESB Centelha 3 · Edital 024/2025 · aprovado na fase final em novembro de 2026 · R$ 86 mil">
+            <div class="name">Centelha 3<small>FAPESB 024/2025 · startup</small></div>
+            <div class="bar-track"><div class="bar b" style="width: 6.2%"></div><span class="bar-val">86</span></div>
+          </div>
+          <div class="legend mt-5"><span><i style="background: var(--chart-a)"></i>CAPES</span><span><i style="background: var(--chart-b)"></i>FAPESB</span></div>
+          <div class="axis-note">Total: mais de R$ 1,5 milhão · não inclui o LabConect (UNEB) nem clientes privados</div>
+        </div>
+
+        <div class="glass chart reveal">
+          <h3>Bolsistas por projeto</h3>
+          <div class="sub">Estudantes com bolsa de iniciação científica ou pós-graduação na equipe.</div>
+          <div class="bar-row" data-tip="XequeMath · 16 bolsistas de IC · CAPES">
+            <div class="name">XequeMath</div>
+            <div class="bar-track"><div class="bar" style="width: 80%"></div><span class="bar-val">16</span></div>
+          </div>
+          <div class="bar-row" data-tip="InventAI · 12 bolsistas de IC + 1 de mestrado profissional · CAPES">
+            <div class="name">InventAI</div>
+            <div class="bar-track"><div class="bar" style="width: 65%"></div><span class="bar-val">13</span></div>
+          </div>
+          <div class="bar-row" data-tip="HQ-Lab · 12 bolsistas de IC Educação Básica · CAPES">
+            <div class="name">HQ-Lab</div>
+            <div class="bar-track"><div class="bar" style="width: 60%"></div><span class="bar-val">12</span></div>
+          </div>
+          <div class="bar-row" data-tip="EducaHubPlay · 12 bolsistas de IC · CAPES">
+            <div class="name">EducaHubPlay</div>
+            <div class="bar-track"><div class="bar" style="width: 60%"></div><span class="bar-val">12</span></div>
+          </div>
+          <div class="bar-row" data-tip="Defesa Civil · 6 bolsistas de IC nos 5 projetos · FAPESB">
+            <div class="name">Defesa Civil</div>
+            <div class="bar-track"><div class="bar b" style="width: 30%"></div><span class="bar-val">6</span></div>
+          </div>
+          <div class="legend mt-5"><span><i style="background: var(--chart-a)"></i>CAPES</span><span><i style="background: var(--chart-b)"></i>FAPESB</span></div>
+          <div class="axis-note">Mais de 50 bolsistas · fonte: SCBA/CAPES e termos FAPESB, nov/2026</div>
+        </div>
+
+        <div class="glass chart reveal">
+          <h3>13 projetos no portfólio</h3>
+          <div class="sub">6 entregues e 7 em execução.</div>
+          <div class="stack" role="img" aria-label="6 projetos entregues e 7 em execução">
+            <span style="width: 46.2%; background: var(--chart-a)" data-tip="Entregues: XequeMath, EducaHubPlay, HQ-Lab, InventAI, LabConect, App André Fraga"></span>
+            <span style="width: 53.8%; background: var(--chart-b)" data-tip="Em execução: 5 sistemas da Defesa Civil, Jequié, Centelha 3"></span>
+          </div>
+          <div class="legend"><span><i style="background: var(--chart-a)"></i>6 entregues</span><span><i style="background: var(--chart-b)"></i>7 em execução</span></div>
+          <details open>
+            <summary>Tabela</summary>
+            <table class="data-table">
+              <thead><tr><th>Projeto</th><th>Financiamento</th><th>Situação</th></tr></thead>
+              <tbody>
+                <tr><td>XequeMath, EducaHubPlay, HQ-Lab</td><td>CAPES 003/2025</td><td>Entregues em 10/2026</td></tr>
+                <tr><td>InventAI</td><td>CAPES 003/2025</td><td>Entregue em 11/2026</td></tr>
+                <tr><td>LabConect</td><td>UNEB Proinovação 104/2024</td><td>Entregue</td></tr>
+                <tr><td>App do mandato André Fraga</td><td>Cliente privado</td><td>Nas lojas</td></tr>
+                <tr><td>5 sistemas da Defesa Civil</td><td>FAPESB 014/2025</td><td>Em execução até 03/2027</td></tr>
+                <tr><td>Turismo de Jequié</td><td>FAPESB/SECTI/SAEB 006/2025</td><td>Contemplado, 24 meses</td></tr>
+                <tr><td>Startup do grupo</td><td>FAPESB Centelha 3</td><td>Aprovada, em contratação</td></tr>
+              </tbody>
+            </table>
+          </details>
+        </div>
+
+        <div class="glass chart reveal">
+          <h3>Linha do tempo</h3>
+          <div class="sub">Editais aprovados e entregas.</div>
+          <ul class="tl">
+            <li><div class="when">2020</div><div class="what">Nasce o grupo de empresas baianas de tecnologia.</div></li>
+            <li><div class="when">2024</div><div class="what">UNEB Proinovação 104/2024: LabConect, entregue com código-fonte e titularidade à universidade.</div></li>
+            <li><div class="when">2025</div><div class="what">CAPES InovaEDUCAÇÃO 003/2025: 4 projetos aprovados. FAPESB 014/2025: 5 projetos da Defesa Civil, termos assinados em novembro.</div></li>
+            <li><div class="when">2026</div><div class="what">Cientista no Governo Municipal: projeto de Jequié contemplado. Os 4 projetos CAPES são concluídos e prestam contas.</div></li>
+            <li><div class="when">nov 2026</div><div class="what">Startup do grupo aprovada na fase final do Centelha 3 (FAPESB).</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
 
   <!-- PROJECTS -->
   <section id="projects" class="px-4 md:px-8 lg:px-16 py-16 md:py-24 lg:py-32">
@@ -359,20 +523,86 @@
       <div class="mb-20">
         <div class="eyebrow mb-6 reveal">Vitrine</div>
         <h2 class="reveal max-w-5xl" style="font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.9rem, 5.5vw, 4.2rem); letter-spacing: -0.03em; line-height: 1.05;">
-          Grupo de tecnologia baiano —<br />
-          consolidado desde 2020.
+          Do dado público à decisão —<br />
+          e da sala de aula ao app.
         </h2>
         <p class="max-w-3xl mt-8 text-neutral-300 reveal" style="font-family: 'Instrument Serif', serif; font-size: 1.35rem; line-height: 1.5;">
-          A MVP trabalha em parceria com a <em>Universidade do Estado da Bahia (UNEB)</em> e a <em>Universidade Estadual de Feira de Santana (UEFS)</em>, e integra um grupo de empresas irmãs em consultoria, design e RH. Cada projeto a seguir tem identidade visual própria — porque tecnologia é ferramenta, e o ser humano é o motivo.
+          Grupo baiano de tecnologia, consolidado desde 2020. A MVP trabalha com a <em>Universidade do Estado da Bahia (UNEB)</em> e a <em>Universidade Estadual de Feira de Santana (UEFS)</em> e integra um hub de empresas irmãs em consultoria, gestão de projetos e design. Cada projeto a seguir tem identidade visual própria — porque tecnologia é ferramenta, e o ser humano é o motivo.
         </p>
       </div>
 
+      <div class="group-title reveal">Gestão pública e dados</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
+        <!-- CARD Defesa Civil -->
+        <a href="projects/defesa-civil.html" data-hover class="glass rounded-3xl p-6 md:p-8 lg:p-10 group reveal transition-transform duration-500 md:hover:-translate-y-2 block">
+          <div class="flex items-start justify-between mb-8">
+            <div class="eyebrow">FAPESB · Edital 014/2025</div>
+            <div class="eyebrow opacity-40">01 / 09</div>
+          </div>
+          <div class="aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden mb-6 md:mb-8 relative" style="background: radial-gradient(circle at 70% 30%, #f59e0b 0%, transparent 45%), linear-gradient(135deg, #0b1f33 0%, #12406b 55%, #0e7490 100%);">
+            <svg class="motif opacity-70" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g fill="none" stroke="#e0f2fe" stroke-opacity=".35" stroke-width="1.2">
+                <circle cx="280" cy="80" r="30"/><circle cx="280" cy="80" r="60"/><circle cx="280" cy="80" r="95"/>
+              </g>
+              <polyline points="0,200 40,190 80,196 120,170 160,178 200,140 240,150 280,96 320,120 360,110 400,128" fill="none" stroke="#7cf5c5" stroke-width="3" stroke-linejoin="round"/>
+              <g fill="#fbbf24"><circle cx="280" cy="96" r="5"/><circle cx="200" cy="140" r="4"/><circle cx="120" cy="170" r="4"/></g>
+            </svg>
+            <div class="absolute inset-0 flex items-end p-6">
+              <div class="card-name" style="font-size: clamp(1.6rem, 5vw, 2.8rem);">Defesa Civil · 5 sistemas</div>
+            </div>
+          </div>
+          <h3 class="mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1.35rem, 3.5vw, 1.875rem);">Do alerta à decisão, mesmo sem internet.</h3>
+          <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
+            Cinco sistemas de apoio à decisão para a Defesa Civil da Bahia, com docentes da UNEB e da UEFS: predição e alerta, resiliência territorial, comunidades resilientes, relatos por voz e foto (ClimaCom) e gestão dinâmica de riscos. Quase R$ 1 milhão aprovados; série histórica com mais de 1.300 eventos hidrológicos.
+          </p>
+          <div class="flex flex-wrap gap-2 eyebrow">
+            <span class="px-3 py-1 border border-white/10 rounded-full">Dados abertos</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Mapas</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Offline-first</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">IA supervisionada</span>
+          </div>
+        </a>
+
+        <!-- CARD Jequié -->
+        <a href="projects/jequie.html" data-hover class="glass rounded-3xl p-6 md:p-8 lg:p-10 group reveal transition-transform duration-500 md:hover:-translate-y-2 block">
+          <div class="flex items-start justify-between mb-8">
+            <div class="eyebrow">FAPESB · SECTI · SAEB · 006/2025</div>
+            <div class="eyebrow opacity-40">02 / 09</div>
+          </div>
+          <div class="aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden mb-6 md:mb-8 relative" style="background: linear-gradient(135deg, #3b1d0f 0%, #9a3412 45%, #eab308 100%);">
+            <svg class="motif opacity-75" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g fill="#fff7ed" fill-opacity=".85">
+                <rect x="60" y="150" width="26" height="60" rx="3"/><rect x="96" y="120" width="26" height="90" rx="3"/><rect x="132" y="90" width="26" height="120" rx="3"/><rect x="168" y="105" width="26" height="105" rx="3"/>
+              </g>
+              <g fill="none" stroke="#fff7ed" stroke-opacity=".6" stroke-width="2">
+                <path d="M280 70 c-22 0 -38 17 -38 38 c0 30 38 70 38 70 s38 -40 38 -70 c0 -21 -16 -38 -38 -38z"/>
+                <circle cx="280" cy="108" r="12"/>
+              </g>
+            </svg>
+            <div class="absolute inset-0 flex items-end p-6">
+              <div class="card-name" style="font-size: clamp(1.6rem, 5vw, 2.8rem);">Turismo de Jequié</div>
+            </div>
+          </div>
+          <h3 class="mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1.35rem, 3.5vw, 1.875rem);">A prefeitura sem papel e com números.</h3>
+          <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
+            Cientista no Governo Municipal: implantação do SEI Bahia Municípios na Secretaria de Turismo e uma plataforma de inteligência turística com 25 indicadores, catálogo de 200 empreendimentos e IA rodando na estrutura do município. Quase R$ 250 mil em 24 meses, com a UNEB.
+          </p>
+          <div class="flex flex-wrap gap-2 eyebrow">
+            <span class="px-3 py-1 border border-white/10 rounded-full">Governo digital</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">SEI</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Painéis</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">IA local</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="group-title reveal">Educação e inovação · CAPES InovaEDUCAÇÃO 003/2025</div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
         <!-- CARD 1 XequeMath -->
         <a href="projects/xequemath.html" data-hover class="glass rounded-3xl p-6 md:p-8 lg:p-10 group reveal transition-transform duration-500 md:hover:-translate-y-2 block">
           <div class="flex items-start justify-between mb-8">
             <div class="eyebrow">CAPES · InovaEDUCAÇÃO</div>
-            <div class="eyebrow opacity-40">01 / 05</div>
+            <div class="eyebrow opacity-40">03 / 09</div>
           </div>
           <div class="aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden mb-6 md:mb-8 relative" style="background: linear-gradient(135deg, #0032A0 0%, #7790ED 50%, #C0D31F 100%);">
             <img src="assets/screenshots/xequemath.png" alt="XequeMath" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
@@ -382,7 +612,7 @@
           </div>
           <h3 class="mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1.35rem, 3.5vw, 1.875rem);">Aprenda matemática sem enxergar número.</h3>
           <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
-            Plataforma de jogos educacionais para desestigmatizar matemática. 8 jogos categorizados por conteúdo, sistema de ranking + conquistas e assistente IA.
+            Plataforma de jogos educacionais para desestigmatizar matemática. 8 jogos categorizados por conteúdo, ranking, conquistas e assistente com IA. 16 bolsistas de graduação na equipe.
           </p>
           <div class="flex flex-wrap gap-2 eyebrow">
             <span class="px-3 py-1 border border-white/10 rounded-full">Next.js</span>
@@ -396,7 +626,7 @@
         <a href="projects/educahubplay.html" data-hover class="glass rounded-3xl p-6 md:p-8 lg:p-10 group reveal transition-transform duration-500 md:hover:-translate-y-2 block">
           <div class="flex items-start justify-between mb-8">
             <div class="eyebrow">CAPES · InovaEDUCAÇÃO</div>
-            <div class="eyebrow opacity-40">02 / 05</div>
+            <div class="eyebrow opacity-40">04 / 09</div>
           </div>
           <div class="aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden mb-6 md:mb-8 relative" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 50%, #6bcf7f 100%);">
             <img src="assets/screenshots/educahubplay.png" alt="EducaHubPlay" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
@@ -420,7 +650,7 @@
         <a href="projects/hq-lab.html" data-hover class="glass rounded-3xl p-6 md:p-8 lg:p-10 group reveal transition-transform duration-500 md:hover:-translate-y-2 block">
           <div class="flex items-start justify-between mb-8">
             <div class="eyebrow">CAPES · FAPESB · UNEB</div>
-            <div class="eyebrow opacity-40">03 / 05</div>
+            <div class="eyebrow opacity-40">05 / 09</div>
           </div>
           <div class="aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden mb-6 md:mb-8 relative" style="background: linear-gradient(135deg, #ff006e 0%, #ffbe0b 50%, #8338ec 100%);">
             <img src="assets/screenshots/hq-lab.png" alt="HQ-Lab" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
@@ -430,7 +660,7 @@
           </div>
           <h3 class="mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1.35rem, 3.5vw, 1.875rem);">Quadrinhos digitais na sala de aula.</h3>
           <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
-            Plataforma para criação, publicação e leitura de HQs educacionais. Único projeto MVP com tripé de financiamento: CAPES + FAPESB + UNEB.
+            Plataforma para criação, publicação e leitura de HQs educacionais. Único projeto MVP com tripé de financiamento: CAPES + FAPESB + UNEB. Ganhou também um site público de cartilhas.
           </p>
           <div class="flex flex-wrap gap-2 eyebrow">
             <span class="px-3 py-1 border border-white/10 rounded-full">Next.js</span>
@@ -440,11 +670,39 @@
           </div>
         </a>
 
+        <!-- CARD InventAI -->
+        <a href="projects/inventai.html" data-hover class="glass rounded-3xl p-6 md:p-8 lg:p-10 group reveal transition-transform duration-500 md:hover:-translate-y-2 block">
+          <div class="flex items-start justify-between mb-8">
+            <div class="eyebrow">CAPES · InovaEDUCAÇÃO</div>
+            <div class="eyebrow opacity-40">06 / 09</div>
+          </div>
+          <div class="aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden mb-6 md:mb-8 relative" style="background: linear-gradient(135deg, #1e1b4b 0%, #6d28d9 50%, #22d3ee 100%);">
+            <img src="assets/screenshots/inventai.png" alt="InventAI" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
+            <div class="absolute inset-0 flex items-end p-6">
+              <div class="card-name" style="font-size: clamp(1.6rem, 5vw, 3rem);">InventAI</div>
+            </div>
+          </div>
+          <h3 class="mb-3" style="font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.02em; font-size: clamp(1.35rem, 3.5vw, 1.875rem);">Jogos feitos em equipe, da ideia à impressão 3D.</h3>
+          <p class="text-neutral-400 mb-6" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">
+            Laboratório onde quem ensina com jogos monta um jogo digital ou analógico e recruta o que falta: game design, arte, impressão 3D, música, dublagem, programação. Quarto projeto CAPES InovaEDUCAÇÃO, concluído em novembro de 2026 com 13 bolsistas.
+          </p>
+          <div class="flex flex-wrap gap-2 eyebrow">
+            <span class="px-3 py-1 border border-white/10 rounded-full">Game design</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Estúdios</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Impressão 3D</span>
+            <span class="px-3 py-1 border border-white/10 rounded-full">Vercel</span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="group-title reveal">Universidade e clientes</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
         <!-- CARD 4 LabConect -->
         <a href="projects/labconect.html" data-hover class="glass rounded-3xl p-6 md:p-8 lg:p-10 group reveal transition-transform duration-500 md:hover:-translate-y-2 block">
           <div class="flex items-start justify-between mb-8">
             <div class="eyebrow">UNEB · Proinovação 104/2024</div>
-            <div class="eyebrow opacity-40">04 / 05</div>
+            <div class="eyebrow opacity-40">08 / 09</div>
           </div>
           <div class="aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden mb-6 md:mb-8 relative" style="background: linear-gradient(135deg, #001d3d 0%, #003566 50%, #ffc300 100%);">
             <img src="assets/screenshots/labconect.png" alt="LabConect" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
@@ -468,7 +726,7 @@
         <a href="projects/andre-fraga.html" data-hover class="glass rounded-3xl p-6 md:p-8 lg:p-10 group reveal transition-transform duration-500 md:hover:-translate-y-2 block">
           <div class="flex items-start justify-between mb-8">
             <div class="eyebrow">Cliente privado · CMS</div>
-            <div class="eyebrow opacity-40">05 / 05</div>
+            <div class="eyebrow opacity-40">09 / 09</div>
           </div>
           <div class="aspect-[4/3] md:aspect-[16/10] rounded-2xl overflow-hidden mb-6 md:mb-8 relative" style="background: linear-gradient(135deg, #052e16 0%, #14532d 40%, #059669 100%);">
             <img src="assets/brand-refs/andre-fraga/foto-vereador-app.jpg" alt="Vereador André Fraga" class="w-full h-full object-cover mix-blend-luminosity opacity-80 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700" onerror="this.style.display='none'" />
@@ -487,6 +745,27 @@
             <span class="px-3 py-1 border border-white/10 rounded-full">Play Store</span>
           </div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- COMO TRABALHAMOS -->
+  <section id="como" class="px-4 md:px-8 lg:px-16 py-16 md:py-24 lg:py-28">
+    <div class="max-w-7xl mx-auto">
+      <div class="eyebrow mb-6 reveal">Como trabalhamos</div>
+      <h2 class="reveal max-w-5xl mb-6" style="font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.9rem, 5.5vw, 4.2rem); letter-spacing: -0.03em; line-height: 1.05;">
+        A pesquisa é sua.<br />O resto, a gente segura.
+      </h2>
+      <p class="max-w-3xl mb-12 text-neutral-300 reveal" style="font-family: 'Instrument Serif', serif; font-size: 1.3rem; line-height: 1.5;">
+        Para grupos de pesquisa que querem tirar uma ideia do papel com financiamento público, sem perder o semestre com burocracia.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div class="glass step reveal"><div class="k">01 · PROPOSTA</div><h3>Escrevemos junto</h3><p>Leitura do edital, desenho do projeto, orçamento dentro das regras e toda a papelada até o envio, com conferência dupla de assinaturas.</p></div>
+        <div class="glass step reveal"><div class="k">02 · GESTÃO</div><h3>Cuidamos da execução</h3><p>Termos, aditivos, relatórios e prestação de contas junto à universidade e à agência, com calendário de prazos.</p></div>
+        <div class="glass step reveal"><div class="k">03 · BOLSISTAS</div><h3>Apoiamos a equipe</h3><p>Cadastro, termos e acompanhamento dos bolsistas nos sistemas da FAPESB e da CAPES. Já foram mais de 50 estudantes.</p></div>
+        <div class="glass step reveal"><div class="k">04 · TECNOLOGIA</div><h3>Entregamos o sistema</h3><p>O hub MVP · Mandacaru · DC Consultoria desenvolve o produto, com código, manual e plano de continuidade para quem vai usar.</p></div>
       </div>
     </div>
   </section>
@@ -529,19 +808,19 @@
         <div class="reveal">
           <div class="eyebrow mb-3 opacity-60">Backend</div>
           <ul class="space-y-2" style="font-family: 'Fraunces', serif; font-size: 1.2rem;">
-            <li>Firebase Auth</li>
-            <li>Cloud Firestore</li>
-            <li>Node.js</li>
-            <li>Python 3.12</li>
             <li>PostgreSQL</li>
+            <li>Python 3.12</li>
+            <li>Node.js</li>
+            <li>Firebase · Firestore</li>
+            <li>Dados abertos (S2iD)</li>
           </ul>
         </div>
         <div class="reveal">
-          <div class="eyebrow mb-3 opacity-60">Mobile</div>
+          <div class="eyebrow mb-3 opacity-60">Mobile e campo</div>
           <ul class="space-y-2" style="font-family: 'Fraunces', serif; font-size: 1.2rem;">
             <li>React Native</li>
             <li>Ionic + Capacitor</li>
-            <li>iOS + Android</li>
+            <li>PWA offline-first</li>
             <li>App Store deploy</li>
             <li>Play Store deploy</li>
           </ul>
@@ -549,11 +828,11 @@
         <div class="reveal">
           <div class="eyebrow mb-3 opacity-60">Infra + IA</div>
           <ul class="space-y-2" style="font-family: 'Fraunces', serif; font-size: 1.2rem;">
-            <li>Vercel</li>
-            <li>GitHub Actions</li>
-            <li>OpenAI GPT-4o</li>
-            <li>Anthropic Claude</li>
-            <li>Google Cloud</li>
+            <li>Claude (Anthropic)</li>
+            <li>LLMs abertos rodando local</li>
+            <li>Voz para texto (AssemblyAI)</li>
+            <li>Vercel · GitHub Actions</li>
+            <li>Google Cloud · VPS própria</li>
           </ul>
         </div>
       </div>
@@ -566,6 +845,7 @@
       <div>MVP Consultoria em Tecnologia LTDA · CNPJ 36.390.332/0001-77</div>
       <div>Salvador — Bahia · Brasil</div>
       <div>mvpconsultorialtda@gmail.com</div>
+      <div class="w-full opacity-60" style="letter-spacing:.12em">Números de novembro de 2026, de termos de outorga, do SCBA/CAPES e dos editais. Valores são o orçamento aprovado de cada projeto, executado com as universidades parceiras.</div>
     </div>
   </footer>
 
@@ -595,6 +875,25 @@
     document.querySelectorAll('[data-hover]').forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('hover'));
       el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
+
+    // Tooltip dos gráficos (hover e foco)
+    const tip = document.getElementById('tip');
+    document.querySelectorAll('[data-tip]').forEach(el => {
+      el.setAttribute('tabindex', '0');
+      const show = e => {
+        tip.textContent = el.dataset.tip;
+        tip.style.opacity = 1;
+        const r = el.getBoundingClientRect();
+        const x = e && e.clientX ? e.clientX : r.left + 20;
+        const y = e && e.clientY ? e.clientY : r.top;
+        tip.style.left = Math.min(x + 14, window.innerWidth - 270) + 'px';
+        tip.style.top = (y + 16) + 'px';
+      };
+      el.addEventListener('mousemove', show);
+      el.addEventListener('focus', () => show());
+      el.addEventListener('mouseleave', () => tip.style.opacity = 0);
+      el.addEventListener('blur', () => tip.style.opacity = 0);
     });
 
     // Kinetic type reveal + GSAP timeline
